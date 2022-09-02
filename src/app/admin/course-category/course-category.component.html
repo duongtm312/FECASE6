@@ -1,0 +1,294 @@
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+
+  <!-- Sidebar START -->
+  <nav class="navbar sidebar navbar-expand-xl navbar-dark bg-dark">
+
+    <!-- Navbar brand for xl START -->
+    <div class="d-flex align-items-center">
+      <a class="navbar-brand" href="index-2.html">
+        <img class="navbar-brand-item" src="assets/images/logo-light.svg" alt="">
+      </a>
+    </div>
+    <!-- Navbar brand for xl END -->
+
+    <div class="offcanvas offcanvas-start flex-row custom-scrollbar h-100" data-bs-backdrop="true" tabindex="-1"
+         id="offcanvasSidebar">
+      <div class="offcanvas-body sidebar-content d-flex flex-column bg-dark">
+
+        <!-- Sidebar menu START -->
+        <ul class="navbar-nav flex-column" id="navbar-sidebar">
+
+          <!-- Menu item 1 -->
+          <li class="nav-item"><a href="admin-dashboard.html" class="nav-link"><i class="bi bi-house fa-fw me-2"></i>Dashboard</a>
+          </li>
+
+          <!-- Title -->
+          <li class="nav-item ms-2 my-2">Pages</li>
+
+          <!-- menu item 2 -->
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#collapsepage" role="button" aria-expanded="true"
+               aria-controls="collapsepage">
+              <i class="bi bi-basket fa-fw me-2"></i>Courses
+            </a>
+            <!-- Submenu -->
+            <ul class="nav collapse flex-column show" id="collapsepage" data-bs-parent="#navbar-sidebar">
+              <li class="nav-item"><a class="nav-link" href="admin-course-list.html">All Courses</a></li>
+              <li class="nav-item"><a class="nav-link active" href="admin-course-category.html">Course Category</a></li>
+              <li class="nav-item"><a class="nav-link" href="admin-course-detail.html">Course Detail</a></li>
+            </ul>
+          </li>
+
+          <!-- Menu item 3 -->
+          <li class="nav-item"><a class="nav-link" href="admin-student-list.html"><i
+            class="fas fa-user-graduate fa-fw me-2"></i>Students</a></li>
+
+          <!-- Menu item 4 -->
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#collapseinstructors" role="button"
+               aria-expanded="false" aria-controls="collapseinstructors">
+              <i class="fas fa-user-tie fa-fw me-2"></i>Instructors
+            </a>
+            <!-- Submenu -->
+            <ul class="nav collapse flex-column" id="collapseinstructors" data-bs-parent="#navbar-sidebar">
+              <li class="nav-item"><a class="nav-link" href="admin-instructor-list.html">Instructors</a></li>
+              <li class="nav-item"><a class="nav-link" href="admin-instructor-detail.html">Instructor Detail</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="admin-instructor-request.html">Instructor requests
+                  <span class="badge bg-success text-white rounded-circle ms-2">2</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <!-- Menu item 5 -->
+          <li class="nav-item"><a class="nav-link" href="admin-review.html"><i
+            class="far fa-comment-dots fa-fw me-2"></i>Reviews</a></li>
+
+          <!-- Menu item 6 -->
+          <li class="nav-item"><a class="nav-link" href="admin-earning.html"><i class="far fa-chart-bar fa-fw me-2"></i>Earnings</a>
+          </li>
+
+          <!-- Menu item 7 -->
+          <li class="nav-item"><a class="nav-link" href="admin-setting.html"><i class="fas fa-user-cog fa-fw me-2"></i>Admin
+            Settings</a></li>
+
+          <!-- Menu item 8 -->
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="collapse" href="#collapseauthentication" role="button"
+               aria-expanded="false" aria-controls="collapseauthentication">
+              <i class="bi bi-lock fa-fw me-2"></i>Authentication
+            </a>
+            <!-- Submenu -->
+            <ul class="nav collapse flex-column" id="collapseauthentication" data-bs-parent="#navbar-sidebar">
+              <li class="nav-item"><a class="nav-link" href="sign-up.html">Sign Up</a></li>
+              <li class="nav-item"><a class="nav-link" href="sign-in.html">Sign In</a></li>
+              <li class="nav-item"><a class="nav-link" href="forgot-password.html">Forgot Password</a></li>
+              <li class="nav-item"><a class="nav-link" href="admin-error-404.html">Error 404</a></li>
+            </ul>
+          </li>
+
+          <!-- Title -->
+          <li class="nav-item ms-2 my-2">Documentation</li>
+
+          <!-- Menu item 9 -->
+          <li class="nav-item"><a class="nav-link" href="docs/index.html"><i class="far fa-clipboard fa-fw me-2"></i>Documentation</a>
+          </li>
+
+          <!-- Menu item 10 -->
+          <li class="nav-item"><a class="nav-link" href="docs/changelog.html"><i class="fas fa-sitemap fa-fw me-2"></i>Changelog</a>
+          </li>
+        </ul>
+        <!-- Sidebar menu end -->
+
+        <!-- Sidebar footer START -->
+        <div class="px-3 mt-auto pt-3">
+          <div class="d-flex align-items-center justify-content-between text-primary-hover">
+            <a class="h5 mb-0 text-body" href="admin-setting.html" data-bs-toggle="tooltip" data-bs-placement="top"
+               title="Settings">
+              <i class="bi bi-gear-fill"></i>
+            </a>
+            <a class="h5 mb-0 text-body" href="index-2.html" data-bs-toggle="tooltip" data-bs-placement="top"
+               title="Home">
+              <i class="bi bi-globe"></i>
+            </a>
+            <a class="h5 mb-0 text-body" href="sign-in.html" data-bs-toggle="tooltip" data-bs-placement="top"
+               title="Sign out">
+              <i class="bi bi-power"></i>
+            </a>
+          </div>
+        </div>
+        <!-- Sidebar footer END -->
+      </div>
+    </div>
+  </nav>
+  <!-- Sidebar END -->
+
+  <!-- Page content START -->
+  <div class="page-content">
+
+    <app-navbarleft></app-navbarleft>
+    <app-navbartop></app-navbartop>
+
+    <!-- Page main content START -->
+    <div class="page-content-wrapper border">
+
+      <!-- Title -->
+      <div class="row mb-3">
+        <div class="col-12 d-sm-flex justify-content-between align-items-center">
+          <h1 class="h3 mb-2 mb-sm-0">All Course<span class="badge bg-orange bg-opacity-10 text-orange">245</span></h1>
+          <a href="/admin/createCourse" class="btn btn-sm btn-primary mb-0">Create a Course</a>
+        </div>
+      </div>
+
+      <!-- Card START -->
+      <div class="card bg-transparent border">
+
+        <!-- Card header START -->
+        <div class="card-header bg-light border-bottom">
+          <!-- Search and select START -->
+          <div class="row g-3 align-items-center justify-content-between">
+
+            <!-- Search bar -->
+            <div class="col-md-8">
+              <form class="rounded position-relative">
+                <input class="form-control bg-body" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn bg-transparent px-2 py-0 position-absolute top-50 end-0 translate-middle-y"
+                        type="submit"><i class="fas fa-search fs-6 "></i></button>
+              </form>
+            </div>
+
+          </div>
+          <!-- Search and select END -->
+        </div>
+        <!-- Card header END -->
+
+        <!-- Card body START -->
+        <div class="card-body">
+          <!-- Course table START -->
+          <div class="table-responsive border-0 rounded-3">
+            <!-- Table START -->
+            <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+              <!-- Table head -->
+              <thead>
+              <tr>
+                <th scope="col" class="border-0 rounded-start">Course Name</th>
+                <th scope="col" class="border-0">Instructor</th>
+                <th scope="col" class="border-0">Rating</th>
+                <th scope="col" class="border-0">Enrolled</th>
+                <th scope="col" class="border-0 rounded-end">Action</th>
+              </tr>
+              </thead>
+
+              <!-- Table body START -->
+              <tbody>
+              <!-- ForCourse-->
+              <tr *ngFor="let c of course">
+                <!-- Table data -->
+                <td>
+                  <div class="d-flex align-items-center position-relative">
+                    <!-- Image -->
+                    <div class="w-60px">
+                      <img src="{{c.imgCourse}}" class="rounded" alt="">
+                    </div>
+                    <!-- Title -->
+                    <h6 class="table-responsive-title mb-0 ms-2">
+                      <a *ngIf="c.statusCourse==true" [href]="'/admin/courseDetail/'+c.idCourse" class="stretched-link">{{c.nameCourse}}</a>
+                      <a *ngIf="c.statusCourse==false" style="color: red" [href]="'/admin/courseDetail/'+c.idCourse" class="stretched-link">{{c.nameCourse}}</a>
+                    </h6>
+                  </div>
+                </td>
+
+                <!-- Table data -->
+                <td>
+                  <div class="d-flex align-items-center">
+                    <!-- Avatar -->
+                    <div class="avatar avatar-xs flex-shrink-0">
+                      <img class="avatar-img rounded-circle" src="{{c.instructor.avatarInstructor}}" alt="avatar">
+                    </div>
+                    <!-- Info -->
+                    <div class="ms-2">
+                      <h6 class="mb-0 fw-light">{{c.instructor.nameInstructor}}</h6>
+                    </div>
+                  </div>
+                </td>
+
+                <!-- Table data -->
+                <td>
+                  <ul class="list-inline mb-0">
+                    <li *ngFor='let in of counter(c.numRating) ;let i = index' class="list-inline-item me-0 small"><i
+                      class="fas fa-star text-warning"></i></li>
+                    <li *ngFor="let i of counter(5-c.numRating)" class="list-inline-item me-0 small"><i
+                      class="far fa-star text-warning"></i></li>
+                  </ul>
+                </td>
+
+                <!-- Table data -->
+                <td>{{c.enrolled}}</td>
+
+                <!-- Table data -->
+                <td>
+                  <a [href]="'/admin/editCourse/'+c.idCourse" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">Edit</a>
+                  <button *ngIf="c.statusCourse==true" class="btn btn-sm btn-danger mb-0" (click)="disable(c.idCourse,page.number)">Disable</button>
+                  <button *ngIf="c.statusCourse==false" class="btn btn-sm btn-primary mb-0" (click)="activated(c.idCourse,page.number)">Activated</button>
+                </td>
+              </tr>
+              </tbody>
+              <!-- Table body END -->
+            </table>
+            <!-- Table END -->
+          </div>
+          <!-- Course table END -->
+        </div>
+        <!-- Card body END -->
+
+        <!-- Card footer START -->
+        <div class="card-footer bg-transparent pt-0">
+          <!-- Pagination START -->
+          <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+            <!-- Content -->
+            <p class="mb-0 text-center text-sm-start">Showing 1 to {{page.size}} of {{page.totalElements}} entries</p>
+            <!-- Pagination -->
+            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
+              <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+                <li class="page-item mb-0"><a class="page-link" (click)="getAll(page.number- 1)" tabindex="-1"><i
+                  class="fas fa-angle-left"></i></a></li>
+                <li *ngIf="page.number!=0" class="page-item mb-0"><a class="page-link"
+                                                                     (click)="getAll(page.number-1)">{{page.number}}</a>
+                </li>
+                <li class="page-item mb-0 active"><a class="page-link">{{page.number + 1}}</a></li>
+                <li *ngIf="page.number+2<=page.totalPages" class="page-item mb-0"><a class="page-link"
+                                                                                     (click)="getAll(page.number+1)">{{page.number + 2}}</a>
+                </li>
+                <li class="page-item mb-0"><a class="page-link" (click)="getAll(page.number+1)"><i
+                  class="fas fa-angle-right"></i></a></li>
+              </ul>
+            </nav>
+          </div>
+          <!-- Pagination END -->
+        </div>
+        <!-- Card footer END -->
+      </div>
+      <!-- Card END -->
+    </div>
+    <!-- Page main content END -->
+  </div>
+  <!-- Page content END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+<!-- Back to top -->
+<div class="back-top"><i class="bi bi-arrow-up-short position-absolute top-50 start-50 translate-middle"></i></div>
+
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Vendors -->
+<script src="assets/vendor/choices/js/choices.min.js"></script>
+<script src="assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.html"></script>
+
+<!-- Template Functions -->
+<script src="assets/js/functions.js"></script>
+
