@@ -42,7 +42,19 @@ export class CoursedetailComponent implements OnInit {
     return new Array(i);
   }
   approval(id:number){
-    this.ratingService.approval(id).subscribe()
+    this.ratingService.approval(id).subscribe(()=>{
+      this.ratingService.getAllById(this.idCourse).subscribe((data)=>{
+        this.rating=data
+      })
+    })
+  }
+  disable(id:number){
+    this.ratingService.disable(id).subscribe(()=>{
+      this.ratingService.getAllById(this.idCourse).subscribe((data)=>{
+        this.rating=data
+      })
+    })
+
   }
   deleteRating(id:number){
     this.ratingService.delete(id).subscribe()
