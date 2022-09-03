@@ -46,7 +46,7 @@ export class AdminInstructorComponent implements OnInit {
     emailInstructor: new FormControl(),
     dateOfBirthInstructor: new FormControl(),
     phoneInstructor: new FormControl(),
-    avatarInstructor: new FormControl(),
+    avatarInstructor: new FormControl("123"),
     experience: new FormControl()
 
   })
@@ -92,7 +92,6 @@ export class AdminInstructorComponent implements OnInit {
 
   }
   createInstructor(fileCreate: any) {
-
     for (let file of fileCreate) {
       if (file != null) {
         const filePathCreate = file.name;
