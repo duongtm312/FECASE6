@@ -18,9 +18,10 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
 
   instructor: Instructor[] = []
   course!: Course
-  idCourse:any
-  editForm:any
-  constructor(private script: ScriptService, private courseService: AdminCourseService, private storage: AngularFireStorage, private instructorService: AdminInstructorService, private router: Router,private route: ActivatedRoute) {
+  idCourse: any
+  editForm: any
+
+  constructor(private script: ScriptService, private courseService: AdminCourseService, private storage: AngularFireStorage, private instructorService: AdminInstructorService, private router: Router, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -33,15 +34,15 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
           nameCourse: new FormControl(data.nameCourse),
           priceCourse: new FormControl(data.priceCourse),
           imgCourse: new FormControl(data.imgCourse),
-          enrolled:new FormControl(data.enrolled),
-          shortDescription:new FormControl(data.shortDescription),
+          enrolled: new FormControl(data.enrolled),
+          shortDescription: new FormControl(data.shortDescription),
           descriptionCourse: new FormControl(data.descriptionCourse),
-          timeCourse:new FormControl(data.timeCourse),
-          instructor:new FormControl(data.instructor.idInstructor),
-          quantity:new FormControl(data.quantity),
-          statusCourse:new FormControl(data.statusCourse),
-          numRating:new FormControl(data.numRating),
-          quiz:new FormControl(data.quiz)
+          timeCourse: new FormControl(data.timeCourse),
+          instructor: new FormControl(data.instructor.idInstructor),
+          quantity: new FormControl(data.quantity),
+          statusCourse: new FormControl(data.statusCourse),
+          numRating: new FormControl(data.numRating),
+          quiz: new FormControl(data.quiz)
         })
       })
     })
@@ -59,7 +60,7 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
 
 
   saveCourse(file: any) {
-    if (file[0]==undefined){
+    if (file[0] == undefined) {
       this.editForm.get('instructor')?.setValue({'idInstructor': this.editForm.get('instructor')?.value})
       console.log(this.editForm.value)
       this.courseService.save(this.editForm.value).subscribe((data) => {

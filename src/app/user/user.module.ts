@@ -10,6 +10,7 @@ import { NavbarheadComponent } from './navbarhead/navbarhead.component';
 import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import {ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -23,9 +24,10 @@ import { UserEditComponent } from './user-edit/user-edit.component';
     UserPaymentComponent,
     UserEditComponent
   ],
-  imports: [
-    CommonModule,
-    UserRoutingModule
-  ]
+    imports: [
+        CommonModule,
+        UserRoutingModule,
+        ReactiveFormsModule
+    ]
 })
 export class UserModule { }
