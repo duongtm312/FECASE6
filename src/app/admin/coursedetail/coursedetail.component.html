@@ -306,7 +306,8 @@
 
                     <!-- Table data -->
                     <td>
-                      <a  class="btn btn-sm btn-info-soft mb-0"  (click)="approval(r.idRating)">Approval</a>
+                      <a  class="btn btn-sm btn-info-soft mb-0" *ngIf="r.statusRating==false" (click)="approval(r.idRating)">Approval</a>
+                      <button  class="btn btn-sm btn-danger mb-0" *ngIf="r.statusRating==true" (click)="disable(r.idRating)">Disable</button>
                       <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" (click)="deleteRating(r.idRating)">Delete</button>
                     </td>
                   </tr>
