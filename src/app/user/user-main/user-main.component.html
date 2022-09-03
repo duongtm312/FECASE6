@@ -1,0 +1,31 @@
+<app-navbarhead></app-navbarhead>
+<main>
+  <!-- =======================
+  Page Banner START -->
+  <app-navbartop></app-navbartop>
+  <!-- =======================
+  Page Banner END -->
+
+  <!-- =======================
+  Page content START -->
+  <section class="pt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-3">
+        <!-- Left sidebar START -->
+        <app-navbarleft></app-navbarleft>
+        <!-- Left sidebar END -->
+        </div>
+        <!-- Main content START -->
+        <div class="col-xl-9">
+        <router-outlet></router-outlet>
+        </div>
+        <!-- Row END -->
+      </div>
+    </div>
+  </section>
+
+  <!-- =======================
+  Page content END -->
+
+</main>

@@ -7,6 +7,7 @@ export const ScriptStore: ScriptStore[] = [
   {name: 'bootstrap', src: 'assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js'},
   {name: 'tiny-slider', src: 'assets/vendor/tiny-slider/tiny-slider.js'},
   {name: 'glightbox', src: 'assets/vendor/glightbox/js/glightbox.js'},
+  {name:"glightbox.css", src:"assets/vendor/glightbox/css/glightbox.css"},
   {name: 'purecounter_vanilla', src: 'assets/vendor/purecounterjs/dist/purecounter_vanilla.js'},
   {name: 'functions', src: 'assets/js/functions.js'},
   {name:"overlayscrollbars",src:"assets/vendor/overlay-scrollbar/js/overlayscrollbars.min.html"},

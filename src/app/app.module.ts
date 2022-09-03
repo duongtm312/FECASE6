@@ -12,12 +12,14 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {environment} from "../environments/environment";
 import {HttpClientModule} from "@angular/common/http";
 
+
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     UserLoginComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+
 
   ],
   imports: [

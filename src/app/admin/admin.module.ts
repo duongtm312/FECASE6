@@ -21,27 +21,31 @@ import { CreateLessonComponent } from './create-lesson/create-lesson.component';
 import { AdminLessonEditComponent } from './admin-lesson-edit/admin-lesson-edit.component';
 import { AdminRatingComponent } from './admin-rating/admin-rating.component';
 @NgModule({
-  declarations: [
-    AdminDashbroadComponent,
-    CourseCategoryComponent,
-    NavbarleftComponent,
+    declarations: [
+        AdminDashbroadComponent,
+        CourseCategoryComponent,
+        NavbarleftComponent,
+        NavbartopComponent,
+        CoursedetailComponent,
+        CreateCourseComponent,
+        AdminInstructorComponent,
+        AdminCourseEditComponent,
+        CreateLessonComponent,
+        AdminLessonEditComponent,
+        AdminRatingComponent
+    ],
+  exports: [
     NavbartopComponent,
-    CoursedetailComponent,
-    CreateCourseComponent,
-    AdminInstructorComponent,
-    AdminCourseEditComponent,
-    CreateLessonComponent,
-    AdminLessonEditComponent,
-    AdminRatingComponent
+    NavbarleftComponent
   ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    AngularFireStorageModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-  ]
+    imports: [
+        CommonModule,
+        AdminRoutingModule,
+        HttpClientModule,
+        ReactiveFormsModule,
+        AngularFireStorageModule,
+        AngularFireAuthModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+    ]
 })
 export class AdminModule { }

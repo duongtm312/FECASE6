@@ -43,7 +43,6 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
           numRating:new FormControl(data.numRating),
           quiz:new FormControl(data.quiz)
         })
-
       })
     })
     this.instructorService.getAll().subscribe((data) => {

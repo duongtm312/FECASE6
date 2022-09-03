@@ -12,8 +12,7 @@ export class ShowhomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.script.load('bootstrap', 'tiny-slider',
-      'glightbox', 'purecounter_vanilla', 'functions').then(data => {
+    this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
       console.log('script loaded ', data);
     }).catch(error => console.log(error));
   }
