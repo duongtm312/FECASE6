@@ -46,7 +46,7 @@ export class AdminInstructorComponent implements OnInit {
     emailInstructor: new FormControl(),
     dateOfBirthInstructor: new FormControl(),
     phoneInstructor: new FormControl(),
-    avatarInstructor: new FormControl(),
+    avatarInstructor: new FormControl("123"),
     experience: new FormControl()
 
   })
@@ -92,14 +92,15 @@ export class AdminInstructorComponent implements OnInit {
 
   }
   createInstructor(fileCreate: any) {
-
     for (let file of fileCreate) {
+      console.log(file)
       if (file != null) {
         const filePathCreate = file.name;
         const fileRefCreate = this.storage.ref(filePathCreate);
         this.storage.upload(filePathCreate, file).snapshotChanges().pipe(
           finalize(() => (fileRefCreate.getDownloadURL().subscribe(
             urlCreate => {
+              console.log(urlCreate+"alo")
               this.createForm.get('avatarInstructor')?.setValue(urlCreate)
               console.log(this.createForm.value)
               this.instructorService.save(this.createForm.value).subscribe((data) => {
