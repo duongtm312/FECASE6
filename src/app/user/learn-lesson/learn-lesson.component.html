@@ -7,8 +7,8 @@
         <div class="overflow-hidden fullscreen-video w-100">
           <!-- Full screen video START -->
           <div class="video-player rounded-3">
-            <video controls crossorigin="anonymous" playsinline poster="assets/images/videos/poster.jpg">
-              <source src="https://firebasestorage.googleapis.com/v0/b/coursesalingweb.appspot.com/o/flower.webm?alt=media&token=86fe6e07-935c-4fee-8af1-64ca9486a064" type="video/webm">
+            <video id="video" #video src="{{lesson[0].linkVideo}}"
+                   width="1000" height="800" controls>
             </video>
           </div>
           <!-- Full screen video END -->
@@ -59,7 +59,7 @@
                               <div>
                                 <div class="d-flex justify-content-between align-items-center mb-2">
                                   <div class="position-relative d-flex align-items-center">
-                                    <a href="#" class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
+                                    <a (click)="learn(l.linkVideo)"  class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
                                       <i class="fas fa-play me-0"></i>
                                     </a>
                                     <span class="d-inline-block text-truncate ms-2 mb-0 h6 fw-light w-100px w-sm-200px">{{l.nameLesson}}</span>

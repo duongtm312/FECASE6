@@ -32,6 +32,10 @@ export class LearnLessonComponent implements OnInit {
       })
     })
   }
+  learn(link:any){
+    (<HTMLInputElement>document.getElementById("name")).src = link
+  }
+
 
   }
 
