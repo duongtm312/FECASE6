@@ -17,8 +17,9 @@ export class LearnLessonComponent implements OnInit {
   idCourse:any;
   course!:Course;
   lesson:Lesson[]=[]
+  myCourse:any
   constructor(private route: ActivatedRoute, private courseService: CourceService,private lessonService:AdminLessonService
-  ,@Inject(DOCUMENT) document: Document) { }
+  ,private myCourseService: UserMycourseService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
@@ -30,12 +31,22 @@ export class LearnLessonComponent implements OnInit {
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
         this.lesson=data
       })
+      this.myCourseService.getMyCourseLearn(this.idCourse).subscribe((data) =>{
+        this.myCourse = data
+        console.log(data)
+      })
     })
   }
   learn(link:any){
     document.getElementById('video')?.setAttribute("src",link);
-
   }
+  checkLessonLearn(nameLesson:any): boolean {
+    for (let i = 0; i < this.myCourse.lessonList.length; i++) {
+      if(this.myCourse.lessonList[i].nameLesson == nameLesson) return true
+      break
+    } return false
+  }
+
   }
 
 

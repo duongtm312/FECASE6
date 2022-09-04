@@ -1,6 +1,7 @@
 import {Course} from "./Course";
 import {AppUser} from "./AppUser";
 import {Certificate} from "./Certificate";
+import {Lesson} from "./Lesson";
 
 export class MyCourse {
   idMyCourse!: number
@@ -9,4 +10,5 @@ export class MyCourse {
   exprie!: Date
   statusMyCourse!: boolean
   certificate!: Certificate
+  lessonList!: Lesson[]
 }

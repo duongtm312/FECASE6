@@ -16,4 +16,9 @@ export class UserMycourseService {
   getAllMyCourse(): Observable<MyCourse[]> {
     return this.http.get<MyCourse[]>(API_URL + '/course/myCourse');
   }
+  getMyCourseLearn(idCourse:any): Observable<MyCourse> {
+    return this.http.get<MyCourse>(API_URL + '/course/myCourseLearn/'+idCourse);
+  }
+
+
 }

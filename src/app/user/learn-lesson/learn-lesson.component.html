@@ -7,7 +7,7 @@
         <div class="overflow-hidden fullscreen-video w-100">
           <!-- Full screen video START -->
           <div class="video-player rounded-3">
-            <video id="video"  src="https://firebasestorage.googleapis.com/v0/b/coursesalingweb.appspot.com/o/X2Download.app-B%C6%AF%E1%BB%9AC%20QUA%20M%C3%99A%20C%C3%94%20%C4%90%C6%A0N%20_%20V%C5%A9.%20(Official%20MV).mp4?alt=media&token=345d4303-0107-4e12-8d12-9ff9c49318f8"
+            <video id="video"  src="{{lesson[0].linkVideo}}"
                    width="1000" height="800" controls>
             </video>
           </div>
@@ -71,6 +71,8 @@
                                 <a class="btn btn-xs btn-warning" data-bs-toggle="collapse" href="#addnote-1" role="button" aria-expanded="false" aria-controls="addnote-1">
                                   Done
                                 </a>
+                                <p *ngIf="checkLessonLearn(l.nameLesson) == true"> * Learned </p>
+                                <p *ngIf="checkLessonLearn(l.nameLesson) == false"> * Unlearnen </p>
 
 
                               </div>
