@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {AdminCourseService} from "../../admin/service/admin-course.service";
 import {ActivatedRoute} from "@angular/router";
 import {Course} from "../../model/Course";
@@ -6,6 +6,7 @@ import {Lesson} from "../../model/Lesson";
 import {AdminLessonService} from "../../admin/service/admin-lesson.service";
 import {UserMycourseService} from "../service/user-mycourse.service";
 import {CourceService} from "../service/cource.service";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-learn-lesson',
@@ -16,7 +17,8 @@ export class LearnLessonComponent implements OnInit {
   idCourse:any;
   course!:Course;
   lesson:Lesson[]=[]
-  constructor(private route: ActivatedRoute, private courseService: CourceService,private lessonService:AdminLessonService) { }
+  constructor(private route: ActivatedRoute, private courseService: CourceService,private lessonService:AdminLessonService
+  ,@Inject(DOCUMENT) document: Document) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(paramMap => {
@@ -24,19 +26,16 @@ export class LearnLessonComponent implements OnInit {
       console.log(this.idCourse)
       this.courseService.findById(this.idCourse).subscribe((data)=>{
         this.course = data
-
       })
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
         this.lesson=data
-
       })
     })
   }
   learn(link:any){
-    (<HTMLInputElement>document.getElementById("name")).src = link
+    document.getElementById('video')?.setAttribute("src",link);
+
   }
-
-
   }
 
 
