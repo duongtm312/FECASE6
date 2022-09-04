@@ -5,6 +5,7 @@ import {UserMainComponent} from "./user-main/user-main.component";
 import {UserDeleteComponent} from "./user-delete/user-delete.component";
 import {UserPaymentComponent} from "./user-payment/user-payment.component";
 import {UserEditComponent} from "./user-edit/user-edit.component";
+import {LearnLessonComponent} from "./learn-lesson/learn-lesson.component";
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
       }
     ]
   },
+  {
+    path: "learn/:idCourse",
+    component: LearnLessonComponent
+  }
 ];
 
 @NgModule({

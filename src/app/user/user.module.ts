@@ -11,6 +11,7 @@ import { UserDeleteComponent } from './user-delete/user-delete.component';
 import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import { LearnLessonComponent } from './learn-lesson/learn-lesson.component';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     NavbarheadComponent,
     UserDeleteComponent,
     UserPaymentComponent,
-    UserEditComponent
+    UserEditComponent,
+    LearnLessonComponent
   ],
     imports: [
         CommonModule,

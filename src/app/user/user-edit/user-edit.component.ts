@@ -13,6 +13,7 @@ export class UserEditComponent implements OnInit {
 notiPass:any
   notiProfile:any
   changeProfileUser: any
+  editAvatarForm:any
   constructor(private profileService: UserProfileService,private router:Router) {
   }
 
@@ -29,7 +30,6 @@ notiPass:any
   ngOnInit(): void {
     this.profileService.getProfileFull().subscribe(data => {
       this.changeProfileUser = data
-      console.log(data)
       this.editProfileForm = new FormGroup({
         userName: new FormControl(data.userName),
         fullName: new FormControl(data.fullName),
@@ -41,13 +41,12 @@ notiPass:any
       })
       this.editAvatarForm = new FormGroup(
         {
-          avatarSrc : new FormControl(data.avatarSrc)
+          avatarSrcc : new FormControl(data.avatarSrc)
         }
       )
     })
   }
   editProfile(){
-    console.log("alo")
     this.profileService.saveProfile(this.editProfileForm.value).subscribe(data=>{
       if(data != null){
         this.notiProfile = "Change profile succes !"
@@ -71,9 +70,6 @@ notiPass:any
   })
 
   }
-  editAvatarForm = new FormGroup({
-  avatarSrc : new FormControl()
-  })
 
   editAvatar(file: any){
     console.log(file)
