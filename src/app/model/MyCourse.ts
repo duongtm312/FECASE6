@@ -11,4 +11,5 @@ export class MyCourse {
   statusMyCourse!: boolean
   certificate!: Certificate
   lessonList!: Lesson[]
+  completionProgress!:number
 }

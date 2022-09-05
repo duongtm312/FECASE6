@@ -20,6 +20,8 @@ export class LearnLessonComponent implements OnInit {
   lesson:Lesson[]=[]
   myCourse:any
   idMyCourse:any
+  completionProgress:any
+  totalLesson:any
   constructor(private route: ActivatedRoute, private courseService: CourceService,private lessonService:AdminLessonService
   ,private myCourseService: UserMycourseService) { }
 
@@ -32,11 +34,12 @@ export class LearnLessonComponent implements OnInit {
       })
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
         this.lesson=data
+        this.totalLesson = data.length
       })
       this.myCourseService.getMyCourseLearn(this.idCourse).subscribe((data) =>{
         this.myCourse = data
         this.idMyCourse = data.idMyCourse
-        console.log(data)
+        this.completionProgress = data.lessonList.length
       })
     })
   }
@@ -56,6 +59,8 @@ export class LearnLessonComponent implements OnInit {
       console.log(data)
     })
   }
+
+
   }
 
 
