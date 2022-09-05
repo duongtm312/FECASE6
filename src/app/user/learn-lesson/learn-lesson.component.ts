@@ -7,6 +7,7 @@ import {AdminLessonService} from "../../admin/service/admin-lesson.service";
 import {UserMycourseService} from "../service/user-mycourse.service";
 import {CourceService} from "../service/cource.service";
 import {DOCUMENT} from "@angular/common";
+import {LessonLearned} from "../../model/LessonLearned";
 
 @Component({
   selector: 'app-learn-lesson',
@@ -18,6 +19,7 @@ export class LearnLessonComponent implements OnInit {
   course!:Course;
   lesson:Lesson[]=[]
   myCourse:any
+  idMyCourse:any
   constructor(private route: ActivatedRoute, private courseService: CourceService,private lessonService:AdminLessonService
   ,private myCourseService: UserMycourseService) { }
 
@@ -33,6 +35,7 @@ export class LearnLessonComponent implements OnInit {
       })
       this.myCourseService.getMyCourseLearn(this.idCourse).subscribe((data) =>{
         this.myCourse = data
+        this.idMyCourse = data.idMyCourse
         console.log(data)
       })
     })
@@ -42,11 +45,17 @@ export class LearnLessonComponent implements OnInit {
   }
   checkLessonLearn(nameLesson:any): boolean {
     for (let i = 0; i < this.myCourse.lessonList.length; i++) {
-      if(this.myCourse.lessonList[i].nameLesson == nameLesson) return true
-      break
+      if(this.myCourse.lessonList[i].nameLesson == nameLesson){ return true
+      break}
     } return false
   }
 
+  lessonLearned(idLesson:any){
+    let lessonLearned:LessonLearned = new LessonLearned(this.idMyCourse,idLesson)
+    this.myCourseService.lessonLearned(lessonLearned).subscribe(data=>{
+      console.log(data)
+    })
+  }
   }
 
 

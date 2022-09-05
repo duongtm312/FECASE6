@@ -100,7 +100,6 @@ export class AdminInstructorComponent implements OnInit {
         this.storage.upload(filePathCreate, file).snapshotChanges().pipe(
           finalize(() => (fileRefCreate.getDownloadURL().subscribe(
             urlCreate => {
-              console.log(urlCreate+"alo")
               this.createForm.get('avatarInstructor')?.setValue(urlCreate)
               console.log(this.createForm.value)
               this.instructorService.save(this.createForm.value).subscribe((data) => {
