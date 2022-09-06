@@ -11,6 +11,9 @@ export class CourceService {
 
   constructor(private http:HttpClient) { }
   findById(id:number):Observable<Course>{
-    return this.http.get<Course>(`${API_URL}/admin/find/${id}`)
+    return this.http.get<Course>(`${API_URL}/course/find/${id}`)
+  }
+  getTrendingCourse ():Observable<Course[]>{
+    return this.http.get<Course[]>(`${API_URL}/course/trendingCourse`)
   }
 }
