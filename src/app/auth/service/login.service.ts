@@ -30,5 +30,6 @@ export class LoginService {
   getUserToken(): UserToken{
     return JSON.parse(<string>localStorage.getItem("userToken"));
   }
+
 }
 

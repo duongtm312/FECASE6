@@ -20,7 +20,6 @@ export class UserMycourseService {
   getMyCourseLearn(idCourse:any): Observable<MyCourse> {
     return this.http.get<MyCourse>(API_URL + '/course/myCourseLearn/'+idCourse);
   }
-
   lessonLearned(lessonLearned:any):Observable<LessonLearned>{
     return this.http.post<LessonLearned>(API_URL + '/course/learned',lessonLearned);
   }

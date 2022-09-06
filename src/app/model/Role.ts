@@ -1,4 +1,4 @@
 export class Role {
   idRole!:number
-  role!:string
+  nameRole!:string
 }
