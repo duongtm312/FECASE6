@@ -31,17 +31,22 @@ export class LearnLessonComponent implements OnInit {
       this.idCourse = paramMap.get('idCourse');
       console.log(this.idCourse)
       this.courseService.findById(this.idCourse).subscribe((data)=>{
-
+        console.log("course")
+        console.log(data)
         this.course = data
       })
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
         this.lesson=data
         this.totalLesson = data.length
+        console.log("lesson")
+        console.log(data)
       })
       this.myCourseService.getMyCourseLearn(this.idCourse).subscribe((data) =>{
         this.myCourse = data
         this.idMyCourse = data.idMyCourse
         this.completionProgress = data.lessonList.length
+        console.log("learn")
+        console.log(data)
       })
     })
   }

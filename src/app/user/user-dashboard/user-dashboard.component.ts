@@ -23,24 +23,4 @@ export class UserDashboardComponent implements OnInit {
 
   }
 
-  // getCompletionProgress(idMyCours:any,idCourse:any){
-  //   let completionProgress:any
-  //   let totalLesson:any
-  //   let lessonLearn:any
-  //   this.lessonService.getAllById(idCourse).subscribe((data)=>{
-  //     totalLesson = data.length
-  //
-  //   })
-  //  this.myCourseService.getMyCourseLearn(idCourse).subscribe((data) =>{
-  //     lessonLearn = data.lessonList.length
-  //    completionProgress = lessonLearn/totalLesson
-  //
-  //    return (completionProgress*100).toString();
-  //   })
-  // }
-  //
-  // display(idMyCourse:any,idCourse:any){
-  //   document.getElementById('abc')?.setAttribute("aria-valuenow",this.getCompletionProgress(idMyCourse,idCourse))
-  // }
-
 }
