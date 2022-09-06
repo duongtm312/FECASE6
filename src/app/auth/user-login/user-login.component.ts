@@ -23,10 +23,9 @@ this.loginService.login(this.loginForm.value).subscribe(data =>{
   if(data!=null){
     this.loginService.setUserToken(data);
     this.loginService.setToken(data.token);
-    console.log(data)
+    console.log(data.token)
     this.router.navigate([""])
   } else this.noti = "Login fail, check your user name or password"
-
 })
 }
 
