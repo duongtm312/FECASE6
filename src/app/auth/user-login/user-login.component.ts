@@ -28,7 +28,11 @@ export class UserLoginComponent implements OnInit {
         this.loginService.setUserToken(data);
         this.loginService.setToken(data.token);
         console.log(data.token)
-        this.router.navigate([""])
+        if(this.loginService.getUserToken().roles[0].nameRole == "ROLE_ADMIN"){
+          this.router.navigate(["/admin"])
+        } else {
+          this.router.navigate([""])
+        }
       } else this.noti = "Login fail, check your user name or password"
     })
   }

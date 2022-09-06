@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {UserLoginComponent} from "./auth/user-login/user-login.component";
 import {UserRegisterComponent} from "./auth/user-register/user-register.component";
 import {CoursedetailComponent} from "./admin/coursedetail/coursedetail.component";
+import {CourseDetailComponent} from "./home/course-detail/course-detail.component";
 
 const routes: Routes = [
   {
@@ -23,10 +24,6 @@ const routes: Routes = [
     path:"register",
     component: UserRegisterComponent
   },
-  {
-    path: "course-detail/:idCourse",
-    component:CoursedetailComponent
-  }
 ];
 
 @NgModule({
