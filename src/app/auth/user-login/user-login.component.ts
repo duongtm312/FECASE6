@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../service/login.service";
 import {Router} from "@angular/router";
 
@@ -15,8 +15,8 @@ export class UserLoginComponent implements OnInit {
   ngOnInit(): void {
   }
   loginForm = new FormGroup({
-    userName : new FormControl,
-    password: new FormControl
+    userName : new FormControl("",Validators.required),
+    password: new FormControl("",Validators.required)
   })
 login(){
 this.loginService.login(this.loginForm.value).subscribe(data =>{
