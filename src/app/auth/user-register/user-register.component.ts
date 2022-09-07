@@ -9,6 +9,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-register.component.css']
 })
 export class UserRegisterComponent implements OnInit {
+
+  checkDuplicateMail:boolean = true;
+  checkDuplicateUsername:boolean = true;
+
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
@@ -21,9 +25,14 @@ export class UserRegisterComponent implements OnInit {
     confirmPassword: new FormControl("", [Validators.required, Validators.minLength(6)])
   })
 
-  register() {
-    this.loginService.register(this.registerForm.value).subscribe((data) => {
-        this.router.navigate(["login"])
+  register(){
+    this.loginService.register(this.registerForm.value).subscribe((data)=>{
+      console.log(data)
+      this.checkDuplicateUsername=data[0];
+      this.checkDuplicateMail=data[1];
+      if (data[0]&&data[1]){
+        this.router.navigate(["/login"])
+      }
     });
   }
 }
