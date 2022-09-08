@@ -8,6 +8,7 @@ import {UserMycourseService} from "../service/user-mycourse.service";
 import {CourceService} from "../service/cource.service";
 import {DOCUMENT} from "@angular/common";
 import {LessonLearned} from "../../model/LessonLearned";
+import {LessonService} from "../service/lessonService";
 
 @Component({
   selector: 'app-learn-lesson',
@@ -22,7 +23,7 @@ export class LearnLessonComponent implements OnInit {
   idMyCourse:any
   completionProgress:any
   totalLesson:any
-  constructor(private route: ActivatedRoute, private courseService: CourceService,private lessonService:AdminLessonService
+  constructor(private route: ActivatedRoute, private courseService: CourceService,private lessonService:LessonService
   ,private myCourseService: UserMycourseService) { }
 
   ngOnInit(): void {
@@ -30,21 +31,28 @@ export class LearnLessonComponent implements OnInit {
       this.idCourse = paramMap.get('idCourse');
       console.log(this.idCourse)
       this.courseService.findById(this.idCourse).subscribe((data)=>{
+        console.log("course")
+        console.log(data)
         this.course = data
       })
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
         this.lesson=data
         this.totalLesson = data.length
+        console.log("lesson")
+        console.log(data)
       })
       this.myCourseService.getMyCourseLearn(this.idCourse).subscribe((data) =>{
         this.myCourse = data
         this.idMyCourse = data.idMyCourse
         this.completionProgress = data.lessonList.length
+        console.log("learn")
+        console.log(data)
       })
     })
   }
   learn(link:any){
     document.getElementById('video')?.setAttribute("src",link);
+
   }
   checkLessonLearn(nameLesson:any): boolean {
     for (let i = 0; i < this.myCourse.lessonList.length; i++) {
@@ -56,7 +64,11 @@ export class LearnLessonComponent implements OnInit {
   lessonLearned(idLesson:any){
     let lessonLearned:LessonLearned = new LessonLearned(this.idMyCourse,idLesson)
     this.myCourseService.lessonLearned(lessonLearned).subscribe(data=>{
-      console.log(data)
+      this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
+        this.lesson=data
+        console.log(data)
+        this.totalLesson = data.length
+      })
     })
   }
 

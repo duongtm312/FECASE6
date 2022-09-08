@@ -4,5 +4,5 @@ export class UserToken {
   idUser!: number
   userName!: string
   token!: string
-  role!: Role[]
+  roles!: Role[]
 }

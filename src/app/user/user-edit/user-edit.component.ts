@@ -30,6 +30,7 @@ notiPass:any
   ngOnInit(): void {
     this.profileService.getProfileFull().subscribe(data => {
       this.changeProfileUser = data
+      console.log(data.avatarSrc)
       this.editProfileForm = new FormGroup({
         userName: new FormControl(data.userName),
         fullName: new FormControl(data.fullName),

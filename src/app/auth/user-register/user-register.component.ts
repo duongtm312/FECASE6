@@ -10,8 +10,8 @@ import {Router} from "@angular/router";
 })
 export class UserRegisterComponent implements OnInit {
 
-  checkDuplicateMail:boolean = true;
-  checkDuplicateUsername:boolean = true;
+  checkDuplicateMail:boolean = true
+  checkDuplicateUsername:boolean = true
 
   constructor(private loginService: LoginService, private router: Router) { }
 
@@ -27,7 +27,6 @@ export class UserRegisterComponent implements OnInit {
 
   register(){
     this.loginService.register(this.registerForm.value).subscribe((data)=>{
-      console.log(data)
       this.checkDuplicateUsername=data[0];
       this.checkDuplicateMail=data[1];
       if (data[0]&&data[1]){
