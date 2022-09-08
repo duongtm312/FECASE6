@@ -26,6 +26,7 @@ export class UserRegisterComponent implements OnInit {
   })
 
   register(){
+    console.log("alo")
     this.loginService.register(this.registerForm.value).subscribe((data)=>{
       this.checkDuplicateUsername=data[0];
       this.checkDuplicateMail=data[1];
