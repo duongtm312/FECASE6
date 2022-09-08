@@ -12,6 +12,7 @@ import { UserPaymentComponent } from './user-payment/user-payment.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { LearnLessonComponent } from './learn-lesson/learn-lesson.component';
+import { CertificateComponent } from './certificate/certificate.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { LearnLessonComponent } from './learn-lesson/learn-lesson.component';
     UserDeleteComponent,
     UserPaymentComponent,
     UserEditComponent,
-    LearnLessonComponent
+    LearnLessonComponent,
+    CertificateComponent
   ],
     imports: [
         CommonModule,
