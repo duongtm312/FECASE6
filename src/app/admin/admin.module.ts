@@ -20,6 +20,7 @@ import { AdminCourseEditComponent } from './admin-course-edit/admin-course-edit.
 import { CreateLessonComponent } from './create-lesson/create-lesson.component';
 import { AdminLessonEditComponent } from './admin-lesson-edit/admin-lesson-edit.component';
 import { AdminRatingComponent } from './admin-rating/admin-rating.component';
+import { AdminQuizdetailComponent } from './admin-quizdetail/admin-quizdetail.component';
 @NgModule({
     declarations: [
         AdminDashbroadComponent,
@@ -32,7 +33,8 @@ import { AdminRatingComponent } from './admin-rating/admin-rating.component';
         AdminCourseEditComponent,
         CreateLessonComponent,
         AdminLessonEditComponent,
-        AdminRatingComponent
+        AdminRatingComponent,
+        AdminQuizdetailComponent
     ],
   exports: [
     NavbartopComponent,

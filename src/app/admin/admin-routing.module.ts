@@ -10,6 +10,7 @@ import {CreateLessonComponent} from "./create-lesson/create-lesson.component";
 import {AdminLessonEditComponent} from "./admin-lesson-edit/admin-lesson-edit.component";
 import {AdminRatingComponent} from "./admin-rating/admin-rating.component";
 import {AdminInstructorComponent} from "./admin-instructor/admin-instructor.component";
+import {AdminQuizdetailComponent} from "./admin-quizdetail/admin-quizdetail.component";
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   ,{
     path:'instructor',
     component:AdminInstructorComponent
+  }
+  ,{
+    path:'quiz/:idCourse',
+    component:AdminQuizdetailComponent
   }
 
 ];

@@ -71,7 +71,7 @@
                     <!-- dropdown button -->
                     <ul class="dropdown-menu dropdown-w-sm dropdown-menu-end min-w-auto shadow rounded" aria-labelledby="dropdownShare1">
                       <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#editInstructor" (click)="setInst(i)"><i class="bi bi-pencil-square fa-fw me-2"  ></i>Edit</a></li>
-                      <li><a class="dropdown-item" (click)="delete(i.idInstructor)"><i class="bi bi-trash fa-fw me-2"></i>Remove</a></li>
+<!--                      <li><a class="dropdown-item" (click)="delete(i.idInstructor)"><i class="bi bi-trash fa-fw me-2"></i>Remove</a></li>-->
                     </ul>
                   </div>
                 </div>
@@ -173,22 +173,27 @@
               <div class="col-12" >
                 <label class="form-label">Instructor Name</label>
                 <input class="form-control" type="text" placeholder="Enter Instructor name" formControlName="nameInstructor">
+                <p *ngIf="editForm.get('nameInstructor')?.errors && editForm.get('nameInstructor')?.touched" style="color: red">Not required</p>
               </div>
             <div class="col-12" >
               <label class="form-label">Instructor Phone</label>
               <input class="form-control" type="text" placeholder="Enter Instructor Phone" formControlName="phoneInstructor">
+              <p *ngIf="editForm.get('phoneInstructor')?.errors && editForm.get('phoneInstructor')?.touched" style="color: red">Not required</p>
             </div>
             <div class="col-12" >
               <label class="form-label">Instructor Mail</label>
               <input class="form-control" type="mail" placeholder="Enter Instructor Mail" formControlName="emailInstructor">
+              <p *ngIf="editForm.get('emailInstructor')?.errors && editForm.get('emailInstructor')?.touched" style="color: red">Wrong email format</p>
             </div>
             <div class="col-12" >
               <label class="form-label">Instructor Date Of Birth</label>
               <input class="form-control" type="date" placeholder="Enter Instructor Birth" formControlName="dateOfBirthInstructor">
+              <p *ngIf="editForm.get('dateOfBirthInstructor')?.errors && editForm.get('dateOfBirthInstructor')?.touched" style="color: red">Not required</p>
             </div>
             <div class="col-12" >
               <label class="form-label">Instructor Experience</label>
               <input class="form-control" type="text" placeholder="Enter Instructor experience" formControlName="experience">
+              <p *ngIf="editForm.get('experience')?.errors && editForm.get('experience')?.touched" style="color: red">Not required</p>
             </div>
               <div class="col-12" >
                 <label class="form-label">Instructor Avatar</label>
@@ -221,30 +226,30 @@
           <div class="modal-body">
             <div class="d-md-flex">
               <div class="row g-4">
-                <!-- Avatar -->
-                <div class="col-12"hidden >
-                  <label class="form-label">Instructor Name</label>
-                  <input class="form-control" type="text" placeholder="Enter Instructor name" formControlName="idInstructor">
-                </div>
                 <div class="col-12" >
                   <label class="form-label">Instructor Name</label>
                   <input class="form-control" type="text" placeholder="Enter Instructor name" formControlName="nameInstructor">
+                  <p *ngIf="createForm.get('nameInstructor')?.errors && createForm.get('nameInstructor')?.touched" style="color: red">Not required</p>
                 </div>
                 <div class="col-12" >
                   <label class="form-label">Instructor Phone</label>
                   <input class="form-control" type="text" placeholder="Enter Instructor Phone" formControlName="phoneInstructor">
+                  <p *ngIf="createForm.get('phoneInstructor')?.errors && createForm.get('phoneInstructor')?.touched" style="color: red">Not required</p>
                 </div>
                 <div class="col-12" >
                   <label class="form-label">Instructor Mail</label>
                   <input class="form-control" type="email" placeholder="Enter Instructor Mail" formControlName="emailInstructor">
+                  <p *ngIf="createForm.get('emailInstructor')?.errors && createForm.get('emailInstructor')?.touched" style="color: red">Wrong email format</p>
                 </div>
                 <div class="col-12" >
                   <label class="form-label">Instructor Date Of Birth</label>
                   <input class="form-control" type="date" placeholder="Enter Instructor Birth" formControlName="dateOfBirthInstructor">
+                  <p *ngIf="createForm.get('dateOfBirthInstructor')?.errors && createForm.get('dateOfBirthInstructor')?.touched" style="color: red">Not required</p>
                 </div>
                 <div class="col-12" >
                   <label class="form-label">Instructor Experience</label>
                   <input class="form-control" type="text" placeholder="Enter Instructor experience" formControlName="experience">
+                  <p *ngIf="createForm.get('experience')?.errors && createForm.get('experience')?.touched" style="color: red">Not required</p>
                 </div>
                 <div class="col-12" >
                   <label class="form-label">Instructor Avatar</label>

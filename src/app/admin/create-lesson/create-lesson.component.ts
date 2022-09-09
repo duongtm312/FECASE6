@@ -1,6 +1,6 @@
 import {Component, OnInit, SimpleChanges} from '@angular/core';
 import {ScriptService} from "../../script.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
@@ -28,15 +28,15 @@ export class CreateLessonComponent implements OnInit {
     }).catch(error => console.log(error));
   }
   createForm = new FormGroup({
-    nameLesson: new FormControl(),
-    contentLesson: new FormControl(),
+    nameLesson: new FormControl("",[Validators.required]),
+    contentLesson: new FormControl("",[Validators.required]),
     linkVideo: new FormControl,
-    timeLesson: new FormControl(),
+    timeLesson: new FormControl("",[Validators.required]),
     course: new FormControl(),
 
   })
   saveLesson(file: any) {
-    console.log(file)
+    if (this.createForm.valid){
     for (let f of file) {
       if (f != null) {
         const filePath = f.name;
@@ -54,6 +54,7 @@ export class CreateLessonComponent implements OnInit {
 
         });
       }
+    }
     }
 
   }

@@ -240,6 +240,61 @@
               <!-- Table END -->
             </div>
             <!-- Card body END -->
+            <div class="card-header bg-light border-bottom">
+              <h5 class="mb-0">Quiz of course</h5>
+            </div>
+            <!-- Card header END -->
+
+            <!-- Card body START -->
+            <div class="card-body pb-0">
+              <!-- Table START -->
+              <div class="table-responsive border-0">
+                <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+                  <!-- Table head -->
+                  <thead>
+                  <tr>
+                    <th scope="col" class="border-0 rounded-start">Name Quiz</th>
+                    <th scope="col" class="border-0">Number of Quiz</th>
+                    <th scope="col" class="border-0">Time Quiz</th>
+                    <th scope="col" class="border-0">Setting Quiz</th>
+                  </tr>
+                  </thead>
+
+                  <!-- Table body START -->
+                  <tbody>
+                  <!-- Student Comment -->
+                  <tr >
+                    <!-- Table data -->
+                    <td>
+                      <div class="d-flex align-items-center position-relative">
+                        <!-- Image -->
+                        <div class="mb-0 ms-2">
+                          <!-- Title -->
+                          <h6 class="mb-0"><a [href]="'/admin/quiz/'+course.idCourse" class="stretched-link">{{course.quiz.nameQuiz}}</a></h6>
+                        </div>
+                      </div>
+                    </td>
+
+                    <!-- Table data -->
+                    <td class="text-center text-sm-start">
+                      <h6 class="mb-0">{{course.quiz.numberOfQuiz}}</h6>
+                    </td>
+                    <td class="text-center text-sm-start">
+                      <h6 class="mb-0">{{course.quiz.timeQuiz}}'</h6>
+                    </td>
+                    <td class="text-center text-sm-start">
+                      <a  class="btn btn-sm btn-primary-soft mb-0" data-bs-toggle="modal" data-bs-target="#setQuiz">Setting Quiz</a>
+                    </td>
+
+                  </tr>
+
+                  </tbody>
+                  <!-- Table body END -->
+                </table>
+              </div>
+              <!-- Table END -->
+            </div>
+            <!-- Card body END -->
 
             <!-- Card footer START -->
             <!-- Card footer END -->
@@ -350,7 +405,38 @@
 
   </div>
   <!-- Page content END -->
+  <div class="modal fade" id="setQuiz" tabindex="-1" aria-labelledby="addQuizLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-dark">
+          <h5 class="modal-title text-white" >Set Quiz</h5>
+          <button type="button" class="btn btn-sm btn-light mb-0" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="modal-body">
+          <form class="row text-start g-3"[formGroup]="editFormQuiz" (ngSubmit)="saveEditQuiz()">
+            <input class="form-control" type="text" formControlName="idQuiz" hidden>
+            <!-- Question -->
+            <div class="col-12">
+              <label class="form-label">Name Quiz</label>
+              <input class="form-control" type="text" formControlName="nameQuiz">
+              <p *ngIf="editFormQuiz.get('nameQuiz')?.errors && editFormQuiz.get('nameQuiz')?.touched" style="color: red">Not required</p>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Time Quiz</label>
+              <input class="form-control" type="number" formControlName="timeQuiz">
+              <p *ngIf="editFormQuiz.get('timeQuiz')?.errors && editFormQuiz.get('timeQuiz')?.touched" style="color: red">Not required</p>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success my-0" data-bs-dismiss="modal" >Save Quiz</button>
+              <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
+            </div>
+            <!-- Answer options END -->
+          </form>
+        </div>
 
+      </div>
+    </div>
+  </div>
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
 <!-- Back to top -->

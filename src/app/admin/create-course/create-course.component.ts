@@ -1,7 +1,7 @@
 import {Component, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {AdminCourseService} from "../service/admin-course.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validator, Validators} from "@angular/forms";
 import {AngularFireStorage} from '@angular/fire/compat/storage';
 import {finalize} from "rxjs";
 import {Instructor} from "../../model/Instructor";
@@ -33,30 +33,32 @@ export class CreateCourseComponent implements OnInit, OnChanges {
   }
 
   createForm = new FormGroup({
-    nameCourse: new FormControl(""),
-    shortDescription: new FormControl(""),
-    imgCourse: new FormControl,
-    priceCourse: new FormControl(""),
-    timeCourse: new FormControl(""),
+    nameCourse: new FormControl("",[Validators.required]),
+    shortDescription: new FormControl("",[Validators.required]),
+    imgCourse: new FormControl(),
+    priceCourse: new FormControl("",[Validators.required]),
+    timeCourse: new FormControl("",[Validators.required]),
     instructor: new FormControl(),
-    descriptionCourse: new FormControl()
+    descriptionCourse: new FormControl("",[Validators.required])
   })
 
   saveCourse(file: any) {
-    for (let f of file) {
-      if (f != null) {
-        const filePath = f.name;
-        const fileRef = this.storage.ref(filePath);
-        this.storage.upload(filePath, f).snapshotChanges().pipe(
-          finalize(() => (fileRef.getDownloadURL().subscribe(
-            url => {
-              this.createForm.get('imgCourse')?.setValue(url)
-             this.createForm.get('instructor')?.setValue({'idInstructor':this.createForm.get('instructor')?.value})
-              this.courseService.save(this.createForm.value).subscribe( (data)=>{ this.router.navigate(["/admin/courseCategory"])})
+    if (this.createForm.valid){
+      for (let f of file) {
+        if (f != null) {
+          const filePath = f.name;
+          const fileRef = this.storage.ref(filePath);
+          this.storage.upload(filePath, f).snapshotChanges().pipe(
+            finalize(() => (fileRef.getDownloadURL().subscribe(
+              url => {
+                this.createForm.get('imgCourse')?.setValue(url)
+                this.createForm.get('instructor')?.setValue({'idInstructor':this.createForm.get('instructor')?.value})
+                this.courseService.save(this.createForm.value).subscribe( (data)=>{ this.router.navigate(["/admin/courseCategory"])})
               })))
-        ).subscribe((data) => {
+          ).subscribe((data) => {
 
-        });
+          });
+        }
       }
     }
 

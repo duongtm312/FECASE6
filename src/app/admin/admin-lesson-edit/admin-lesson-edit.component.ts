@@ -3,7 +3,7 @@ import {ScriptService} from "../../script.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AdminLessonService} from "../service/admin-lesson.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {finalize} from "rxjs";
 import {Lesson} from "../../model/Lesson";
 
@@ -32,10 +32,10 @@ export class AdminLessonEditComponent implements OnInit {
       this.idCourse = data.course.idCourse
       this.editForm = new FormGroup({
         idLesson: new FormControl(data.idLesson),
-        nameLesson: new FormControl(data.nameLesson),
-        contentLesson: new FormControl(data.contentLesson),
+        nameLesson: new FormControl(data.nameLesson, [Validators.required]),
+        contentLesson: new FormControl(data.contentLesson, [Validators.required]),
         linkVideo: new FormControl(data.linkVideo),
-        timeLesson: new FormControl(data.timeLesson),
+        timeLesson: new FormControl(data.timeLesson, [Validators.required]),
         course: new FormControl(data.course)
       })
     })
@@ -49,26 +49,28 @@ export class AdminLessonEditComponent implements OnInit {
   }
 
   editLesson(file: any) {
-    if (file[0] == undefined) {
-      this.lessonService.save(this.idCourse, this.editForm.value).subscribe((data) => {
-        this.router.navigate(["/admin/courseDetail/"+this.idCourse])
-      })
-    }
-    for (let f of file) {
-      if (f != null) {
-        const filePath = f.name;
-        const fileRef = this.storage.ref(filePath);
-        this.storage.upload(filePath, f).snapshotChanges().pipe(
-          finalize(() => (fileRef.getDownloadURL().subscribe(
-            url => {
-              this.editForm.get('linkVideo')?.setValue(url)
-              this.lessonService.save(this.idCourse, this.editForm.value).subscribe((data) => {
-                this.router.navigate(["/admin/courseDetail/"+this.idCourse])
-              })
-            })))
-        ).subscribe((data) => {
+    if (this.editForm.valid) {
+      if (file[0] == undefined) {
+        this.lessonService.save(this.idCourse, this.editForm.value).subscribe((data) => {
+          this.router.navigate(["/admin/courseDetail/" + this.idCourse])
+        })
+      }
+      for (let f of file) {
+        if (f != null) {
+          const filePath = f.name;
+          const fileRef = this.storage.ref(filePath);
+          this.storage.upload(filePath, f).snapshotChanges().pipe(
+            finalize(() => (fileRef.getDownloadURL().subscribe(
+              url => {
+                this.editForm.get('linkVideo')?.setValue(url)
+                this.lessonService.save(this.idCourse, this.editForm.value).subscribe((data) => {
+                  this.router.navigate(["/admin/courseDetail/" + this.idCourse])
+                })
+              })))
+          ).subscribe((data) => {
 
-        });
+          });
+        }
       }
     }
 

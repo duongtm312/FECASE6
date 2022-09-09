@@ -15,7 +15,6 @@ export class AdminLessonService {
     return this.http.get<Lesson[]>(API_URL+"/admin/lesson/"+id)
   }
   save(id:number,lesson:any):Observable<Lesson>{
-    console.log(lesson)
     return this.http.post<Lesson>(API_URL+"/admin/lesson/"+id,lesson)
   }
   delete(id:number):Observable<Lesson>{

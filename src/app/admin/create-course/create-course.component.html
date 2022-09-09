@@ -54,12 +54,14 @@
                     <div class="col-12">
                       <label class="form-label">Course Name</label>
                       <input class="form-control" placeholder="Enter course title" formControlName="nameCourse">
+                      <p *ngIf="createForm.get('nameCourse')?.errors && createForm.get('nameCourse')?.touched" style="color: red">Not required</p>
                     </div>
 
                     <!-- Short description -->
                     <div class="col-12">
                       <label class="form-label">Short description</label>
                       <textarea class="form-control" rows="2" placeholder="Enter keywords" formControlName="shortDescription"></textarea>
+                      <p *ngIf="createForm.get('shortDescription')?.errors && createForm.get('shortDescription')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course Img -->
                     <div class="col-md-6">
@@ -70,11 +72,13 @@
                     <div class="col-md-6">
                       <label class="form-label">Course price</label>
                       <input type="number" class="form-control" placeholder="Enter course price" formControlName="priceCourse">
+                      <p *ngIf="createForm.get('priceCourse')?.errors && createForm.get('priceCourse')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course time -->
                     <div class="col-md-6">
                       <label class="form-label">Course time</label>
                       <input class="form-control" type="text" placeholder="Enter course time" formControlName="timeCourse">
+                      <p *ngIf="createForm.get('timeCourse')?.errors && createForm.get('timeCourse')?.touched" style="color: red">Not required</p>
                     </div>
 <!--                    CourseInstructor-->
                     <div class="col-md-6" >
@@ -90,6 +94,7 @@
                       <!-- Editor toolbar -->
                      <div>
                        <textarea  class="form-control" rows="3" formControlName="descriptionCourse"></textarea>
+                       <p *ngIf="createForm.get('descriptionCourse')?.errors && createForm.get('descriptionCourse')?.touched" style="color: red">Not required</p>
                      </div>
                       <!-- Main toolbar -->
 
