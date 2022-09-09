@@ -31,19 +31,5 @@ export class ShowhomeComponent implements OnInit,OnChanges {
       console.log('script loaded ', data);
     }).catch(error => console.log(error));
   }
-  signOut(){
-    this.loginService.setToken("");
-    localStorage.setItem("userToken","")
-    this.router.navigate(["/login"])
-  }
-  checkProfile(){
-    console.log(this.loginService.getUserToken().roles[0].nameRole)
-    if(this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_ADMIN")) {
-      this.router.navigate(["/admin"])
-    } else {
-      this.router.navigate(["/user"])
-    }
 
-
-  }
 }
