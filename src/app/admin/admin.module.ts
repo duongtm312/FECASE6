@@ -21,6 +21,7 @@ import { CreateLessonComponent } from './create-lesson/create-lesson.component';
 import { AdminLessonEditComponent } from './admin-lesson-edit/admin-lesson-edit.component';
 import { AdminRatingComponent } from './admin-rating/admin-rating.component';
 import { AdminEarningComponent } from './admin-earning/admin-earning.component';
+import { AdminQuizdetailComponent } from './admin-quizdetail/admin-quizdetail.component';
 @NgModule({
     declarations: [
         AdminDashbroadComponent,
@@ -33,8 +34,9 @@ import { AdminEarningComponent } from './admin-earning/admin-earning.component';
         AdminCourseEditComponent,
         CreateLessonComponent,
         AdminLessonEditComponent,
+        AdminEarningComponent,
         AdminRatingComponent,
-        AdminEarningComponent
+        AdminQuizdetailComponent
     ],
   exports: [
     NavbartopComponent,

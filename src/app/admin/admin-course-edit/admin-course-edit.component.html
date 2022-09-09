@@ -51,19 +51,21 @@
                   <!-- Basic information START -->
                   <div class="row g-4">
                     <div class="col-12" hidden>
-                      <label class="form-label">Course Name</label>
-                      <input class="form-control" type="text" placeholder="Enter course title" formControlName="idCourse">
+                      <label class="form-label">IdCourse</label>
+                      <input class="form-control" type="text" formControlName="idCourse">
                     </div>
                     <!-- Course title -->
                     <div class="col-12">
                       <label class="form-label">Course Name</label>
                       <input class="form-control" type="text" placeholder="Enter course title" formControlName="nameCourse">
+                      <p *ngIf="editForm.get('nameCourse')?.errors && editForm.get('nameCourse')?.touched" style="color: red">Not required</p>
                     </div>
 
                     <!-- Short description -->
                     <div class="col-12">
                       <label class="form-label">Short description</label>
                       <textarea class="form-control" rows="2" placeholder="Enter keywords" formControlName="shortDescription"></textarea>
+                      <p *ngIf="editForm.get('shortDescription')?.errors && editForm.get('shortDescription')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course Img -->
                     <div class="col-md-6">
@@ -74,11 +76,13 @@
                     <div class="col-md-6">
                       <label class="form-label">Course price</label>
                       <input type="number" class="form-control" placeholder="Enter course price" formControlName="priceCourse">
+                      <p *ngIf="editForm.get('priceCourse')?.errors && editForm.get('priceCourse')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course time -->
                     <div class="col-md-6">
                       <label class="form-label">Course time</label>
                       <input class="form-control" type="text" placeholder="Enter course time" formControlName="timeCourse">
+                      <p *ngIf="editForm.get('timeCourse')?.errors && editForm.get('timeCourse')?.touched" style="color: red">Not required</p>
                     </div>
                     <!--                    CourseInstructor-->
                     <div class="col-md-6" >
@@ -94,10 +98,11 @@
                       <!-- Editor toolbar -->
                       <div>
                         <textarea  class="form-control" rows="3" formControlName="descriptionCourse"></textarea>
+                        <p *ngIf="editForm.get('descriptionCourse')?.errors && editForm.get('descriptionCourse')?.touched" style="color: red">Not required</p>
                       </div>
                       <!-- Main toolbar -->
-
                     </div>
+
 
                     <!-- Step 1 button -->
                     <div class="d-flex justify-content-end mt-3">

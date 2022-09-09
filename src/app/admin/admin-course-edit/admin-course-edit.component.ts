@@ -5,7 +5,7 @@ import {AdminCourseService} from "../service/admin-course.service";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AdminInstructorService} from "../service/admin-instructor.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {finalize} from "rxjs";
 import {Course} from "../../model/Course";
 
@@ -31,13 +31,13 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
         this.course = data
         this.editForm = new FormGroup({
           idCourse: new FormControl(data.idCourse),
-          nameCourse: new FormControl(data.nameCourse),
-          priceCourse: new FormControl(data.priceCourse),
+          nameCourse: new FormControl(data.nameCourse, [Validators.required]),
+          priceCourse: new FormControl(data.priceCourse, Validators.required),
           imgCourse: new FormControl(data.imgCourse),
           enrolled: new FormControl(data.enrolled),
-          shortDescription: new FormControl(data.shortDescription),
-          descriptionCourse: new FormControl(data.descriptionCourse),
-          timeCourse: new FormControl(data.timeCourse),
+          shortDescription: new FormControl(data.shortDescription, [Validators.required]),
+          descriptionCourse: new FormControl(data.descriptionCourse, [Validators.required]),
+          timeCourse: new FormControl(data.timeCourse, [Validators.required]),
           instructor: new FormControl(data.instructor.idInstructor),
           quantity: new FormControl(data.quantity),
           statusCourse: new FormControl(data.statusCourse),
@@ -60,35 +60,37 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
 
 
   saveCourse(file: any) {
-    if (file[0] == undefined) {
-      this.editForm.get('instructor')?.setValue({'idInstructor': this.editForm.get('instructor')?.value})
-      console.log(this.editForm.value)
-      this.courseService.save(this.editForm.value).subscribe((data) => {
-        this.router.navigate(["/admin/courseCategory"])
-      })
-    }
-    for (let f of file) {
-      if (f != null) {
-        const filePath = f.name;
-        const fileRef = this.storage.ref(filePath);
-        this.storage.upload(filePath, f).snapshotChanges().pipe(
-          finalize(() => (fileRef.getDownloadURL().subscribe(
-            url => {
-              this.editForm.get('imgCourse')?.setValue(url)
-              this.editForm.get('instructor')?.setValue({'idInstructor': this.editForm.get('instructor')?.value})
-              console.log(this.editForm.value)
-              this.courseService.save(this.editForm.value).subscribe((data) => {
-                this.router.navigate(["/admin/courseCategory"])
-              })
-            })))
-        ).subscribe((data) => {
+    if (this.editForm.valid) {
+      if (file[0] == undefined) {
+        this.editForm.get('instructor')?.setValue({'idInstructor': this.editForm.get('instructor')?.value})
+        console.log(this.editForm.value)
+        this.courseService.save(this.editForm.value).subscribe((data) => {
+          this.router.navigate(["/admin/courseCategory"])
+        })
+      }
+      for (let f of file) {
+        if (f != null) {
+          const filePath = f.name;
+          const fileRef = this.storage.ref(filePath);
+          this.storage.upload(filePath, f).snapshotChanges().pipe(
+            finalize(() => (fileRef.getDownloadURL().subscribe(
+              url => {
+                this.editForm.get('imgCourse')?.setValue(url)
+                this.editForm.get('instructor')?.setValue({'idInstructor': this.editForm.get('instructor')?.value})
+                console.log(this.editForm.value)
+                this.courseService.save(this.editForm.value).subscribe((data) => {
+                  this.router.navigate(["/admin/courseCategory"])
+                })
+              })))
+          ).subscribe((data) => {
 
-        });
+          });
+        }
+
       }
 
+
     }
-
-
   }
 
 }

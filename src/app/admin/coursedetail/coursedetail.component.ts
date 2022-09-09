@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {AdminCourseService} from "../service/admin-course.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -7,6 +7,8 @@ import {Rating} from "../../model/Rating";
 import {AdminCommentService} from "../service/admin-comment.service";
 import {Lesson} from "../../model/Lesson";
 import {AdminLessonService} from "../service/admin-lesson.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {QuizService} from "../service/quiz.service";
 import {Bill} from "../../model/Bill";
 import {AdminBillService} from "../service/admin-bill.service";
 
@@ -22,7 +24,8 @@ export class CoursedetailComponent implements OnInit {
   lesson:Lesson[]=[]
   totalCourseEarning:any
   enrollment:any
-  constructor(private script: ScriptService, private courseService: AdminCourseService,private route: ActivatedRoute,private ratingService:AdminCommentService,private lessonService:AdminLessonService,private router: Router,private billService:AdminBillService) {
+  editFormQuiz: any
+  constructor(private script: ScriptService, private courseService: AdminCourseService,private route: ActivatedRoute,private ratingService:AdminCommentService,private lessonService:AdminLessonService,private router: Router,private billService:AdminBillService,private quizService: QuizService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +37,12 @@ export class CoursedetailComponent implements OnInit {
       this.courseService.findById(this.idCourse).subscribe((data)=>{
         this.course = data
         this.enrollment = data.enrolled
+        this.editFormQuiz = new FormGroup({
+          idQuiz: new FormControl(this.course.quiz.idQuiz),
+          nameQuiz: new FormControl(this.course.quiz.nameQuiz,[Validators.required]),
+          numberOfQuiz: new FormControl(this.course.quiz.numberOfQuiz),
+          timeQuiz: new FormControl(this.course.quiz.timeQuiz,[Validators.required])
+        })
       })
       this.ratingService.getAllById(this.idCourse).subscribe((data)=>{
         this.rating=data
@@ -49,6 +58,7 @@ export class CoursedetailComponent implements OnInit {
       }
     })
   }
+
   counter(i: number) {
     return new Array(i);
   }
@@ -79,5 +89,16 @@ export class CoursedetailComponent implements OnInit {
         })
       }
     )
+  }
+
+  saveEditQuiz() {
+    if (this.editFormQuiz.valid){
+    this.quizService.save(this.editFormQuiz.value, this.course.quiz.idQuiz).subscribe(() => {
+        this.courseService.findById(this.idCourse).subscribe((data) => {
+          this.course = data
+        })
+      }
+    )
+    }
   }
 }

@@ -58,12 +58,14 @@
                     <div class="col-12">
                       <label class="form-label">Lesson Name</label>
                       <input class="form-control" placeholder="Enter lesson title" formControlName="nameLesson">
+                      <p *ngIf="editForm.get('nameLesson')?.errors && editForm.get('nameLesson')?.touched" style="color: red">Not required</p>
                     </div>
 
                     <!-- Short description -->
                     <div class="col-12">
                       <label class="form-label">Lesson description</label>
                       <textarea class="form-control" rows="2" placeholder="Enter keywords" formControlName="contentLesson"></textarea>
+                      <p *ngIf="editForm.get('contentLesson')?.errors && editForm.get('contentLesson')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course Img -->
                     <div class="col-md-6">
@@ -74,6 +76,7 @@
                     <div class="col-md-6">
                       <label class="form-label">Time Lesson</label>
                       <input type="text" class="form-control" placeholder="Enter time lesson" formControlName="timeLesson">
+                      <p *ngIf="editForm.get('timeLesson')?.errors && editForm.get('timeLesson')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course time -->
                     <h5 class="mt-4">Video preview</h5>
