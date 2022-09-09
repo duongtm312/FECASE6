@@ -16,17 +16,21 @@ import { CertificateComponent } from './certificate/certificate.component';
 
 
 @NgModule({
-  declarations: [
-    UserDashboardComponent,
-    UserMainComponent,
+    declarations: [
+        UserDashboardComponent,
+        UserMainComponent,
+        NavbartopComponent,
+        NavbarleftComponent,
+        NavbarheadComponent,
+        UserDeleteComponent,
+        UserPaymentComponent,
+        UserEditComponent,
+        LearnLessonComponent,
+        CertificateComponent
+    ],
+  exports: [
     NavbartopComponent,
-    NavbarleftComponent,
-    NavbarheadComponent,
-    UserDeleteComponent,
-    UserPaymentComponent,
-    UserEditComponent,
-    LearnLessonComponent,
-    CertificateComponent
+    NavbarleftComponent
   ],
     imports: [
         CommonModule,

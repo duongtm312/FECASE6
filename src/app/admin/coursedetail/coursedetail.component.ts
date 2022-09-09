@@ -7,6 +7,8 @@ import {Rating} from "../../model/Rating";
 import {AdminCommentService} from "../service/admin-comment.service";
 import {Lesson} from "../../model/Lesson";
 import {AdminLessonService} from "../service/admin-lesson.service";
+import {Bill} from "../../model/Bill";
+import {AdminBillService} from "../service/admin-bill.service";
 
 @Component({
   selector: 'app-coursedetail',
@@ -18,7 +20,9 @@ export class CoursedetailComponent implements OnInit {
   course!:Course;
   rating:any[]=[]
   lesson:Lesson[]=[]
-  constructor(private script: ScriptService, private courseService: AdminCourseService,private route: ActivatedRoute,private ratingService:AdminCommentService,private lessonService:AdminLessonService,private router: Router) {
+  totalCourseEarning:any
+  enrollment:any
+  constructor(private script: ScriptService, private courseService: AdminCourseService,private route: ActivatedRoute,private ratingService:AdminCommentService,private lessonService:AdminLessonService,private router: Router,private billService:AdminBillService) {
   }
 
   ngOnInit(): void {
@@ -29,6 +33,7 @@ export class CoursedetailComponent implements OnInit {
       this.idCourse = paramMap.get('idCourse');
       this.courseService.findById(this.idCourse).subscribe((data)=>{
         this.course = data
+        this.enrollment = data.enrolled
       })
       this.ratingService.getAllById(this.idCourse).subscribe((data)=>{
         this.rating=data
@@ -36,6 +41,12 @@ export class CoursedetailComponent implements OnInit {
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
         this.lesson=data
       })
+    })
+    this.billService.getAllByIdCourse(this.idCourse).subscribe((data)=>{
+      this.totalCourseEarning = 0
+      for (let i = 0; i < data.length; i++) {
+        this.totalCourseEarning += data[i].totalBill
+      }
     })
   }
   counter(i: number) {
