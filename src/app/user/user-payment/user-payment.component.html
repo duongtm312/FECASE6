@@ -63,20 +63,25 @@
         </h6>
         <div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordioncircle">
           <!-- Accordion body -->
-          <div class="accordion-body">
+          <div class="accordion-body ">
             <!-- Form START -->
-            <form class="row text-start g-3">
-              <p class="mb-1">In order to complete your transaction, we will transfer you over to Eduport secure servers.</p>
-              <p class="my-0">Select your bank from the drop-down list and click proceed to continue with your payment.</p>
-              <!-- Select bank -->
-              <div class="col-md-6">
-                <select class="form-select form-select-sm js-choice border-0" aria-label=".form-select-sm">
-                  <option value="">Please choose one</option>
-                  <option>Bank of America</option>
-                  <option>Bank of India</option>
-                  <option>Bank of London</option>
-                </select>
-              </div>
+            <form class="row text-start g-3" [formGroup]="rechargeForm" (ngSubmit)="reqRecharge()">
+              <table>
+                <th style="color:red;">{{noti}}</th>
+                <td>
+                  <div>
+                    <label class="form-label">Enter the money to recharge</label>
+                    <div class="input-group">
+                      <input style="width: 200px" type="number" class="form-control"  placeholder="Enter money" formControlName="money">
+                    </div>
+                  </div>
+                </td>
+
+                <td>
+                  <button style="margin-top: 80px;margin-left: 20px" class="btn btn-primary-soft me-1 mb-1 mb-md-0" type="submit" > Send </button>
+                </td>
+              </table>
+
             </form>
             <!-- Form END -->
           </div>
@@ -89,58 +94,6 @@
 </div>
 <!-- Payment method END -->
 
-<!-- Billing address START -->
-<div class="card bg-transparent border rounded-3 mb-4">
-  <!-- Card header START -->
-  <div class="card-header bg-transparent d-sm-flex justify-content-sm-between align-items-center border-bottom">
-    <h3 class="mb-2 mb-sm-0">Billing address</h3>
-    <a href="#" class="btn btn-sm btn-primary-soft mb-0">Add new address</a>
-  </div>
-  <!-- Card header END -->
-
-  <!-- Card body START -->
-  <div class="card-body">
-    <!-- Address 1 START -->
-    <div class="bg-body border border-1 p-3 rounded-3 d-sm-flex justify-content-sm-between align-items-center mb-4">
-
-      <!-- Radio button button -->
-      <div class="form-check">
-        <input class="form-check-input mb-1" type="radio" name="address" id="address1" checked>
-        <label class="form-check-label mb-0 h5" for="address1">Address-1</label>
-        <p class="mb-0">2492 Centennial NW, Acworth, GA, 30102</p>
-      </div>
-
-      <!-- Button -->
-      <div>
-        <a href="#" class="btn btn-sm btn-success mb-0">Edit</a>
-        <button class="btn btn-sm btn-danger mb-0">Delete</button>
-      </div>
-
-    </div>
-    <!-- Address 1 END -->
-
-    <!-- Address 2 START -->
-    <div class="bg-body border border-1 p-3 rounded-3 d-sm-flex justify-content-sm-between align-items-center mb-4">
-
-      <!-- Radio button button -->
-      <div class="form-check">
-        <input class="form-check-input mb-1" type="radio" name="address" id="address2">
-        <label class="form-check-label mb-0 h5" for="address2">Address-2</label>
-        <p class="mb-0">2002 Horton Ford Rd, Eidson, TN, 37731</p>
-      </div>
-
-      <!-- Button -->
-      <div>
-        <a href="#" class="btn btn-sm btn-success mb-0">Edit</a>
-        <button class="btn btn-sm btn-danger mb-0">Delete</button>
-      </div>
-
-    </div>
-    <!-- Address 2 END -->
-  </div>
-  <!-- Card body START -->
-</div>
-<!-- Billing address END -->
 
 <!-- Billing history START -->
 <div class="card bg-transparent border rounded-3">

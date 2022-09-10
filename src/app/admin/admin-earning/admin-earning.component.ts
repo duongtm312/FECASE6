@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminBillService} from "../service/admin-bill.service";
 import {Bill} from "../../model/Bill";
+import {ReqRechargeService} from "../service/req-recharge.service";
+import {Recharge} from "../../model/Recharge";
 
 @Component({
   selector: 'app-admin-earning',
@@ -12,9 +14,10 @@ bill:Bill[] =[]
   totalEarning:any
   totalRecharge:any
   totalBillInMonth:any
+  reqRecharges:any
 
 
-  constructor(private billService:AdminBillService) { }
+  constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService ) { }
 
   ngOnInit(): void {
     this.billService.getAll().subscribe((data)=>{
@@ -33,6 +36,21 @@ bill:Bill[] =[]
     this.billService.getTotalBillInMonth().subscribe((data)=>{
       this.totalBillInMonth = data.totalBillInMonth
       console.log(data)
+      this.reqRechargeService.getAll().subscribe((data)=>{
+        this.reqRecharges = data
+      })
+    })
+  }
+
+  reChargeUser(money:any,idUser:any,idReq:any){
+    let recharge:Recharge = new Recharge(money,idUser,idReq)
+    this.reqRechargeService.reCharge(recharge).subscribe((data)=>{
+      this.reqRechargeService.getAll().subscribe((data)=>{
+        this.reqRecharges = data
+        this.billService.getAll().subscribe((data)=>{
+          this.bill = data
+        })
+      })
     })
   }
 
