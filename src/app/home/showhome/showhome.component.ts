@@ -5,6 +5,8 @@ import {Router} from "@angular/router";
 import {CourceService} from "../../user/service/cource.service";
 import {data} from "jquery";
 import {Course} from "../../model/Course";
+import {AdminInstructorService} from "../../admin/service/admin-instructor.service";
+import {Instructor} from "../../model/Instructor";
 
 @Component({
   selector: 'app-showhome',
@@ -13,17 +15,23 @@ import {Course} from "../../model/Course";
 })
 export class ShowhomeComponent implements OnInit,OnChanges {
  course: Course[] = []
-  constructor(private script:ScriptService,private loginService:LoginService,private router:Router,private courseService: CourceService) {
+  instructors: Instructor[]=[]
+  constructor(private script:ScriptService,private loginService:LoginService,private router:Router,private courseService: CourceService,private instructorService:AdminInstructorService) {
   }
 
   ngOnInit(): void {
-  //   this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
-  //   console.log('script loaded ', data);
-  // }).catch(error => console.log(error));
+    this.instructorService.getAllUser().subscribe((data)=>{
+      this.instructors = data
+      console.log(data)
+      this.script.load( 'bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla','functions','tiny-slider').then(data => {
+        console.log('script loaded ', data);
+      }).catch(error => console.log(error));
+    })
+
     this.courseService.getTrendingCourse().subscribe((data) =>{
       this.course = data
-      console.log(data)
-    } )
+    })
+
   }
 
   ngOnChanges(changes: SimpleChanges): void {

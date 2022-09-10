@@ -23,4 +23,7 @@ export class AdminInstructorService {
   delete(id:any):Observable<Instructor> {
     return this.http.get<Instructor>(API_URL + '/admin/instructor/delete/'+id);
   }
+  getAllUser():Observable<Instructor[]> {
+    return this.http.get<Instructor[]>(API_URL + '/user/instructor')
+  }
 }
