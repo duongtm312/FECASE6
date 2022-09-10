@@ -66,7 +66,7 @@
                     <!-- Course Img -->
                     <div class="col-md-6">
                       <label class="form-label">Lesson Video</label>
-                      <input type="file" #uploadFile1 class="form-control" placeholder="Enter lesson video" >
+                      <input type="file" #uploadFile1 class="form-control" (change)="preview(uploadFile1.value)" placeholder="Enter lesson video" >
                     </div>
                     <!-- Course price -->
                     <div class="col-md-6">
@@ -78,13 +78,10 @@
                     <h5 class="mt-4">Video preview</h5>
                     <div class="position-relative">
                       <!-- Image -->
-                      <img src="assets/images/about/04.jpg" class="rounded-4" alt="">
-                      <div class="position-absolute top-50 start-50 translate-middle">
-                        <!-- Video link -->
-                        <a href="https://www.youtube.com/embed/tXHviS-4ygo" class="btn btn-lg text-danger btn-round btn-white-shadow mb-0" data-glightbox="" data-gallery="video-tour">
-                          <i class="fas fa-play"></i>
-                        </a>
-                      </div>
+                      <video id="video"  src=""
+                             width="700" height="700" controls>
+                      </video>
+
                     </div>
                     </div>
 
