@@ -15,6 +15,7 @@ import {Page} from "../../model/Page";
 export class AdminRatingComponent implements OnInit {
   page!: Page
   ratings: Rating[] = []
+  // @ts-ignore
   rate: Rating=new Rating()
 
   constructor(private script: ScriptService, private router: Router, private ratingService: AdminCommentService) {

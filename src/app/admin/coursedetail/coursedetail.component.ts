@@ -7,6 +7,7 @@ import {Rating} from "../../model/Rating";
 import {AdminCommentService} from "../service/admin-comment.service";
 import {Lesson} from "../../model/Lesson";
 import {AdminLessonService} from "../service/admin-lesson.service";
+import {FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-coursedetail',
@@ -69,4 +70,5 @@ export class CoursedetailComponent implements OnInit {
       }
     )
   }
+
 }
