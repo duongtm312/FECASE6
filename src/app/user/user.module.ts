@@ -13,6 +13,7 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { LearnLessonComponent } from './learn-lesson/learn-lesson.component';
 import { CertificateComponent } from './certificate/certificate.component';
+import { UserQuizComponent } from './user-quiz/user-quiz.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { CertificateComponent } from './certificate/certificate.component';
         UserPaymentComponent,
         UserEditComponent,
         LearnLessonComponent,
-        CertificateComponent
+        CertificateComponent,
+      UserQuizComponent
     ],
   exports: [
     NavbartopComponent,

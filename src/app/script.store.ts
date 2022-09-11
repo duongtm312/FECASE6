@@ -21,7 +21,10 @@ export const ScriptStore: ScriptStore[] = [
   name:"choices",src:"assets/vendor/choices/css/choices.min.css"
   },
   {name:'quill',src:"assets/vendor/quill/css/quill.snow.css"},{
-  name:"stepper",src:"assets/vendor/stepper/css/bs-stepper.min.css"
+  name:"stepperJs",src:"https://cdn.jsdelivr.net/npm/bs-stepper/dist/js/bs-stepper.min.js"
+  },
+  {
+    name:"stepperScc",src:"https://cdn.jsdelivr.net/npm/bs-stepper/dist/css/bs-stepper.min.css"
   },{
   name:'aos',src:'assets/vendor/aos/aos.css'
   },{

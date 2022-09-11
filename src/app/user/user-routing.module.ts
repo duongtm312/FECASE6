@@ -6,6 +6,7 @@ import {UserDeleteComponent} from "./user-delete/user-delete.component";
 import {UserPaymentComponent} from "./user-payment/user-payment.component";
 import {UserEditComponent} from "./user-edit/user-edit.component";
 import {LearnLessonComponent} from "./learn-lesson/learn-lesson.component";
+import {UserQuizComponent} from "./user-quiz/user-quiz.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
       {
         path:"edit",
         component: UserEditComponent
+      },
+      {
+        path:"quiz/:idCourse",
+        component:UserQuizComponent
       }
     ]
   },

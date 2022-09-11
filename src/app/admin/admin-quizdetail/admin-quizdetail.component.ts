@@ -7,7 +7,6 @@ import {Question} from "../../model/Question";
 import {QuestionService} from "../service/question.service";
 import {QuizService} from "../service/quiz.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Quiz} from "../../model/Quiz";
 import {ScoreQuizService} from "../service/score-quiz.service";
 import {ScoreQuiz} from "../../model/ScoreQuiz";
 

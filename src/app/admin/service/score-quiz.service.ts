@@ -13,4 +13,7 @@ export class ScoreQuizService {
   getAllById(id:number):Observable<ScoreQuiz[]>{
     return this.http.get<ScoreQuiz[]>(API_URL+"/admin/scorequiz/"+id)
   }
+  save(score:any):Observable<ScoreQuiz>{
+    return this.http.post<ScoreQuiz>(API_URL+"/scorequiz/save",score)
+  }
 }
