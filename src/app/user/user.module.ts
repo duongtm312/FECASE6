@@ -17,18 +17,22 @@ import { UserQuizComponent } from './user-quiz/user-quiz.component';
 
 
 @NgModule({
-  declarations: [
-    UserDashboardComponent,
-    UserMainComponent,
+    declarations: [
+        UserDashboardComponent,
+        UserMainComponent,
+        NavbartopComponent,
+        NavbarleftComponent,
+        NavbarheadComponent,
+        UserDeleteComponent,
+        UserPaymentComponent,
+        UserEditComponent,
+        LearnLessonComponent,
+        CertificateComponent,
+      UserQuizComponent
+    ],
+  exports: [
     NavbartopComponent,
-    NavbarleftComponent,
-    NavbarheadComponent,
-    UserDeleteComponent,
-    UserPaymentComponent,
-    UserEditComponent,
-    LearnLessonComponent,
-    CertificateComponent,
-    UserQuizComponent
+    NavbarleftComponent
   ],
     imports: [
         CommonModule,

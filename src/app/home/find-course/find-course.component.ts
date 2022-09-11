@@ -23,16 +23,18 @@ export class FindCourseComponent implements OnInit {
     })
   }
   findForm = new FormGroup({
-    nameCourse: new FormControl(),
-    from: new FormControl(),
-    to: new FormControl,
-    experience: new FormControl(),
-    nameInstructor: new FormControl(),
-    rating: new FormControl(),
+    nameCourse: new FormControl(""),
+    from: new FormControl(0),
+    to: new FormControl(400),
+    experience: new FormControl("0"),
+    nameInstructor: new FormControl(""),
+    rating: new FormControl("0"),
   })
 
   findCourse(){
+    console.log(this.findForm.value)
     this.courseService.getAllCourseByCriteria(this.findForm.value).subscribe((data)=>{
+      console.log(data)
       this.courses = data
     })
   }

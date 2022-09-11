@@ -29,7 +29,7 @@ const routes: Routes = [
         component: UserEditComponent
       },
       {
-        path:"quiz",
+        path:"quiz/:idCourse",
         component:UserQuizComponent
       }
     ]
