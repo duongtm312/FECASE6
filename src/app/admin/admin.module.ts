@@ -22,6 +22,8 @@ import { AdminLessonEditComponent } from './admin-lesson-edit/admin-lesson-edit.
 import { AdminRatingComponent } from './admin-rating/admin-rating.component';
 import { AdminEarningComponent } from './admin-earning/admin-earning.component';
 import { AdminQuizdetailComponent } from './admin-quizdetail/admin-quizdetail.component';
+import { ShowUserComponent } from './show-user/show-user.component';
+import {NgxPaginationModule} from "ngx-pagination";
 @NgModule({
     declarations: [
         AdminDashbroadComponent,
@@ -36,7 +38,10 @@ import { AdminQuizdetailComponent } from './admin-quizdetail/admin-quizdetail.co
         AdminLessonEditComponent,
         AdminEarningComponent,
         AdminRatingComponent,
-        AdminQuizdetailComponent
+        AdminQuizdetailComponent,
+        AdminRatingComponent,
+        ShowUserComponent
+
     ],
   exports: [
     NavbartopComponent,
@@ -50,6 +55,7 @@ import { AdminQuizdetailComponent } from './admin-quizdetail/admin-quizdetail.co
         AngularFireStorageModule,
         AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
+        NgxPaginationModule,
     ]
 })
 export class AdminModule { }

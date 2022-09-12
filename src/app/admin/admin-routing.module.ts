@@ -12,6 +12,7 @@ import {AdminRatingComponent} from "./admin-rating/admin-rating.component";
 import {AdminInstructorComponent} from "./admin-instructor/admin-instructor.component";
 import {AdminQuizdetailComponent} from "./admin-quizdetail/admin-quizdetail.component";
 import {AdminEarningComponent} from "./admin-earning/admin-earning.component";
+import {ShowUserComponent} from "./show-user/show-user.component";
 
 const routes: Routes = [
   {
@@ -49,6 +50,10 @@ const routes: Routes = [
   ,{
     path:'quiz/:idCourse',
     component:AdminQuizdetailComponent
+  },
+  {
+    path:'showuser',
+    component:ShowUserComponent
   }
 
 ];
