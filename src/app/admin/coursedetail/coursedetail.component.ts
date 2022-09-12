@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {AdminCourseService} from "../service/admin-course.service";
 import {ActivatedRoute, Router} from "@angular/router";
