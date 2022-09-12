@@ -7,7 +7,7 @@
         <div class="overflow-hidden fullscreen-video w-100">
           <!-- Full screen video START -->
           <div class="video-player rounded-3">
-            <video (play)="play()" (pause)="pause()"   id="video"  src="{{lesson[0]?.linkVideo}}"
+            <video (play)="play(videoElement.duration)" (pause)="pause()" #videoElement  id="video"  src="{{lesson[0]?.linkVideo}}"
                    width="1000" height="800" controls>
             </video>
           </div>

@@ -11,8 +11,8 @@ import {Recharge} from "../../model/Recharge";
 })
 export class AdminEarningComponent implements OnInit {
 bill:Bill[] =[]
-  totalEarning:any
-  totalRecharge:any
+  totalEarning:number = 0
+  totalRecharge: number = 0
   totalBillInMonth:any
   reqRecharges:any
 
@@ -22,8 +22,6 @@ bill:Bill[] =[]
   ngOnInit(): void {
     this.billService.getAll().subscribe((data)=>{
       this.bill = data
-      this.totalEarning = 0
-      this.totalRecharge = 0
       for (const b of data) {
         if(b.status == true){
           this.totalEarning += b.totalBill
