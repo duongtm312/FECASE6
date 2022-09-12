@@ -14,7 +14,6 @@ export class AdminDashbroadComponent implements OnInit {
     this.script.load('bootstrap', 'tiny-slider',
       'glightbox', 'purecounter_vanilla', 'functions',"overlayscrollbars",
       "OverlayScrollbars.css").then(data => {
-      console.log('script loaded ', data);
     }).catch(error => console.log(error));
   }
 
