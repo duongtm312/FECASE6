@@ -5,6 +5,7 @@ import {CourceService} from "../../user/service/cource.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Comment} from "../../model/Comment";
 import {Rating} from "../../model/Rating";
+import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-course-detail',
@@ -12,12 +13,15 @@ import {Rating} from "../../model/Rating";
   styleUrls: ['./course-detail.component.css']
 })
 export class CourseDetailComponent implements OnInit, OnChanges {
+
   comments: Comment[] = []
   ratings: Rating[] = []
+  rate!: Rating
   idCmt: any
   idCourse: any
   course: any
   noti: any
+  numRate:number=0
   editForm: FormGroup = new FormGroup({
     contentCmt: new FormControl(""),
     timeCmt: new FormControl(),
@@ -28,6 +32,18 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       idCourse: new FormControl()
     })
   })
+  numRating:number = 0
+  num1star:number = 0
+  num2star:number = 0
+  num3star:number = 0
+  num4star:number = 0
+  num5star:number = 0
+  star1:any
+  star2:any
+  star3:any
+  star4:any
+  star5:any
+  ratingCourse:any
 
   constructor(private script: ScriptService, private route: ActivatedRoute, private courseService: CourceService, private router: Router) {
   }
@@ -38,6 +54,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.idCourse = paramMap.get('idCourse');
       this.courseService.findById(this.idCourse).subscribe((data) => {
         this.course = data
+        this.ratingCourse = data.numRating
       })
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
         this.comments = data
@@ -45,6 +62,35 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.courseService.getAllRating(this.idCourse).subscribe((data) =>{
         console.log(data)
         this.ratings = data
+        this.numRating = data.length
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].numStar == 1) {
+            this.num1star ++
+            console.log("1")
+          }
+          if (data[i].numStar == 2) {
+            this.num2star ++
+            console.log("2")
+          }
+          if (data[i].numStar == 3) {
+            this.num3star ++
+            console.log("3")
+          }
+          if (data[i].numStar == 4) {
+            this.num4star ++
+            console.log("4")
+          }
+          if (data[i].numStar == 5) {
+            this.num5star ++
+            console.log("5")
+          }
+        }
+        console.log(this.num1star,this.num2star,this.num3star,this.num4star,this.num5star,this.numRating)
+        this.star1 = this.num1star / this.numRating * 100
+        this.star2 = this.num2star / this.numRating * 100
+        this.star3 = this.num3star / this.numRating * 100
+        this.star4 = this.num4star / this.numRating * 100
+        this.star5 = this.num5star / this.numRating * 100
       })
     })
   }
@@ -90,7 +136,6 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   }
 
   setCmt(comment: Comment) {
-    console.log(comment)
     this.idCmt = comment.idComment
     this.editForm = new FormGroup({
       contentCmt: new FormControl(comment.contentCmt),
@@ -112,22 +157,33 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       })
 
     })
-    console.log(this.editForm.value)
   }
 
   ratingForm : FormGroup = new FormGroup({
     contentRating: new FormControl(""),
+    numStar: new FormControl(),
+    appUser: new FormGroup({
+      idUser: new FormControl()
+    }),
+    course: new FormControl()
   })
-
-  saveRating(){
-    this.courseService.saveRating(this.idCourse, this.ratingForm).subscribe((data) =>{
+  counter(s: number) {
+    return new Array(s);
+  }
+  setNumRate(rate:number){
+    this.numRate=rate
+    this.ratingForm.controls["numStar"]?.setValue(rate)
+  }
+ saveRating(){
+    this.courseService.saveRating(this.idCourse,this.ratingForm.value).subscribe((data) =>{
       this.ratingForm.reset()
+      console.log(data)
+    this.rate = data;
       this.courseService.getAllRating(this.idCourse).subscribe((data) =>{
         this.ratings = data
-
       })
     })
-  }
+ }
 
 
 

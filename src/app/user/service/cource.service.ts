@@ -46,9 +46,9 @@ export class CourceService {
     return this.http.get<Rating[]>(`${API_URL}/user/getALlRating/`+idCourse);
   }
 
-  saveRating(idCourse: number,rating: any):Observable<Rating>{
+  saveRating(idCourse: number,rating: Rating):Observable<Rating>{
     console.log(rating)
-    return this.http.post<Rating>(`${API_URL}/comment/createCmt/`+ idCourse, rating)
+    return this.http.post<Rating>(`${API_URL}/user/createRating/`+idCourse,rating)
   }
 
 
