@@ -94,8 +94,10 @@
                         <!-- Info -->
                         <div class="ms-0 ms-sm-2 mt-2 mt-sm-0">
 
-                          <h5><a href="#aboutModal" class="mb-0" data-bs-toggle="modal" data-bs-target="#myModal"
-                                 (click)="setInst(t)">{{t.fullName}}</a></h5>
+                          <h5 *ngIf="t.status == true "><a href="#aboutModal" class="mb-0" data-bs-toggle="modal" data-bs-target="#myModal"
+                                 (click)="setInst(t)">{{t.fullName}} </a></h5>
+                          <h5 *ngIf="t.status == false "><a style="color:red;" href="#aboutModal" class="mb-0" data-bs-toggle="modal" data-bs-target="#myModal"
+                                 (click)="setInst(t)">{{t.fullName}} </a></h5>
                           <span class="text-body small"><i
                             class="fas fa-fw fa-map-marker-alt me-1 mt-1"></i>{{t.address}}</span>
                         </div>

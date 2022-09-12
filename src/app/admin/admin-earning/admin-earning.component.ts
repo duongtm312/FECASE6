@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AdminBillService} from "../service/admin-bill.service";
 import {Bill} from "../../model/Bill";
 import {ReqRechargeService} from "../service/req-recharge.service";
 import {Recharge} from "../../model/Recharge";
+import {ScriptService} from "../../script.service";
 
 @Component({
   selector: 'app-admin-earning',
   templateUrl: './admin-earning.component.html',
   styleUrls: ['./admin-earning.component.css']
 })
-export class AdminEarningComponent implements OnInit {
+export class AdminEarningComponent implements OnInit,OnChanges {
 bill:Bill[] =[]
   totalEarning:number = 0
   totalRecharge: number = 0
@@ -17,7 +18,7 @@ bill:Bill[] =[]
   reqRecharges:any
 
 
-  constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService ) { }
+  constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService,private script:ScriptService) { }
 
   ngOnInit(): void {
     this.billService.getAll().subscribe((data)=>{
@@ -31,6 +32,7 @@ bill:Bill[] =[]
         }
       }
     })
+
     this.billService.getTotalBillInMonth().subscribe((data)=>{
       this.totalBillInMonth = data.totalBillInMonth
 
@@ -38,6 +40,9 @@ bill:Bill[] =[]
     this.reqRechargeService.getAll().subscribe((data)=>{
       this.reqRecharges = data
     })
+    this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
+      console.log('script loaded ', data);
+    }).catch(error => console.log(error));
   }
 
   reChargeUser(money:any,idUser:any,idReq:any){
@@ -50,6 +55,10 @@ bill:Bill[] =[]
         })
       })
     })
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+
   }
 
 }

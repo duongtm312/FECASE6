@@ -24,8 +24,8 @@ export class NavbartopComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.script.load('bootstrap', 'tiny-slider',
-      'glightbox', 'purecounter_vanilla', 'functions').then(data => {
+    this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
+      console.log('script loaded ', data);
     }).catch(error => console.log(error));
   }
 
