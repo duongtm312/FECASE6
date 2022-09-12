@@ -4,6 +4,8 @@ import {ActivatedRoute, Route, Router} from "@angular/router";
 import {CourceService} from "../../user/service/cource.service";
 import * as http from "http";
 import {Stomp} from "@stomp/stompjs";
+import {UserProfileService} from "../../user/service/user-profile.service";
+import {ChangeProfileUser} from "../../model/ChangeProfileUser";
 
 @Component({
   selector: 'app-course-detail',
@@ -15,8 +17,8 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   idCourse: any
   course: any
   noti: any
-
-  constructor(private script: ScriptService, private route: ActivatedRoute, private courseService: CourceService, private router: Router) {
+proFile!:ChangeProfileUser
+  constructor(private script: ScriptService, private route: ActivatedRoute, private courseService: CourceService, private router: Router,private userService:UserProfileService) {
   }
 
   ngOnInit(): void {
@@ -27,6 +29,9 @@ export class CourseDetailComponent implements OnInit, OnChanges {
         this.course = data
         console.log(data)
       })
+    })
+    this.userService.getProfileFull().subscribe(data=>{
+      this.proFile=data
     })
   }
 
@@ -66,7 +71,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       '/app/notification.send',
       {},
       // Dữ liệu được gửi đi
-      JSON.stringify({'idNotification':0,'title':'Bought the course' , 'timeNotification': new Date(),'appUser':{},'status':false})
+      JSON.stringify({'idNotification':0,'title':'Bought the course' , 'timeNotification': new Date(),'appUser':this.proFile,'status':false})
     );
   }
 }
