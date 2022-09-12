@@ -10,6 +10,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Comment} from "../../model/Comment";
 import {Rating} from "../../model/Rating";
 import {AppUser} from "../../model/AppUser";
+import {LoginService} from "../../auth/service/login.service";
 
 @Component({
   selector: 'app-course-detail',
@@ -18,7 +19,7 @@ import {AppUser} from "../../model/AppUser";
 })
 export class CourseDetailComponent implements OnInit, OnChanges {
   private stompClient: any;
-
+  isUser = false
   comments: Comment[] = []
   ratings: Rating[] = []
   rate!: Rating
@@ -27,7 +28,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   course: any
   noti: any
 proFile!:ChangeProfileUser
-  constructor(private script: ScriptService, private route: ActivatedRoute, private courseService: CourceService, private router: Router,private userService:UserProfileService) {}
+  constructor(private script: ScriptService, private route: ActivatedRoute, private courseService: CourceService, private router: Router,private userService:UserProfileService, private loginService: LoginService) {}
   numRating:number = 0
   num1star:number = 0
   num2star:number = 0
@@ -103,6 +104,12 @@ proFile!:ChangeProfileUser
     this.userService.getProfileFull().subscribe(data=>{
       this.proFile=data
     })
+    if (this.loginService.getUserToken()){
+      console.log("sssssssssss")
+      console.log(this.isUser)
+      console.log(this.loginService.getUserToken())
+      this.isUser = true;
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -217,6 +224,9 @@ proFile!:ChangeProfileUser
       })
     })
  }
+
+
+
 
 
 

@@ -1086,8 +1086,8 @@
                                 <!-- Comment react -->
                                 <ul class="nav nav-divider py-2 small">
                                   <li class="nav-item"><p>{{cmt.timeCmt}}</p></li>
-                                  <li class="nav-item"> <a class="text-primary-hover" data-bs-toggle="modal" data-bs-target="#editCmt" (click)="setCmt(cmt)"> Edit</a> </li>
-                                  <li class="nav-item"> <a class="text-primary-hover" (click)="delete(cmt.idComment)"> Delete</a> </li>
+                                  <li class="nav-item"> <a class="text-primary-hover" data-bs-toggle="modal" data-bs-target="#editCmt" (click)="setCmt(cmt)" *ngIf="!isUser"> Edit</a> </li>
+                                  <li class="nav-item"> <a class="text-primary-hover" (click)="delete(cmt.idComment)" *ngIf="!isUser"> Delete</a> </li>
                                 </ul>
                               </div>
                             </div>

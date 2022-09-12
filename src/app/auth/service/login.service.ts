@@ -26,6 +26,7 @@ export class LoginService {
   getToken(){
     return localStorage.getItem("token");
   }
+
   setUserToken(userToken: UserToken){
     localStorage.setItem("userToken",JSON.stringify(userToken));
   }
