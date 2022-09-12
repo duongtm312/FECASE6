@@ -1,15 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AdminCommentService} from "../../admin/service/admin-comment.service";
 import {Question} from "../../model/Question";
-import {AdminCourseService} from "../../admin/service/admin-course.service";
 import {Course} from "../../model/Course";
 import {QuestionService} from "../../admin/service/question.service";
-import {QuizService} from "../../admin/service/quiz.service";
 import {ScoreQuizService} from "../../admin/service/score-quiz.service";
 import {interval} from "rxjs";
-import {FormControl, FormGroup} from "@angular/forms";
+import {CourceService} from "../service/cource.service";
 
 @Component({
   selector: 'app-user-quiz',
@@ -32,7 +29,7 @@ export class UserQuizComponent implements OnInit {
   inCorrectAnswer=0;
 
   constructor(private script: ScriptService, private router: Router, private route: ActivatedRoute,
-              private courseService: AdminCourseService, private questionService: QuestionService, private quizService: QuizService, private scoreQuizService: ScoreQuizService) {
+              private courseService: CourceService, private questionService: QuestionService, private scoreQuizService: ScoreQuizService) {
   }
 
   ngOnInit(): void {
@@ -45,7 +42,7 @@ export class UserQuizComponent implements OnInit {
         this.course = data
         this.idQuiz = this.course.quiz.idQuiz
         this.time = this.course.quiz.timeQuiz * 60
-        this.questionService.getAllById(this.course.quiz.idQuiz).subscribe(data => {
+        this.questionService.getAllByIdUser(this.course.quiz.idQuiz).subscribe(data => {
           this.questionList = data
         })
       })

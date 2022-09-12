@@ -35,10 +35,10 @@ bill:Bill[] =[]
     })
     this.billService.getTotalBillInMonth().subscribe((data)=>{
       this.totalBillInMonth = data.totalBillInMonth
-      console.log(data)
-      this.reqRechargeService.getAll().subscribe((data)=>{
-        this.reqRecharges = data
-      })
+
+    })
+    this.reqRechargeService.getAll().subscribe((data)=>{
+      this.reqRecharges = data
     })
   }
 

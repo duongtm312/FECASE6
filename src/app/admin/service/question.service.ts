@@ -13,6 +13,9 @@ export class QuestionService {
   getAllById(id:number):Observable<Question[]>{
     return this.http.get<Question[]>(API_URL+"/admin/question/"+id)
   }
+  getAllByIdUser(id:number):Observable<Question[]>{
+    return this.http.get<Question[]>(API_URL+"/user/question/"+id)
+  }
   save(question:any,id:number):Observable<Question>{
     return this.http.post<Question>(API_URL+"/admin/question/"+id,question)
   }
