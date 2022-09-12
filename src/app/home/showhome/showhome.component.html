@@ -866,7 +866,9 @@
   <!-- =======================
   Instructor START -->
   <section>
-    <div class="container">
+    <!--    *ngFor=" let t of instructor"-->
+    <div class="container" >
+
       <!-- Title -->
       <div class="row mb-4">
         <div class="col-12">
@@ -888,14 +890,15 @@
 
       <div class="row">
         <!-- Slider START -->
-        <div class="tiny-slider arrow-round arrow-creative arrow-blur" >
+        <div class="tiny-slider arrow-round arrow-creative arrow-blur">
           <div class="tiny-slider-inner" data-autoplay="true" data-arrow="true" data-dots="false" data-items="4" data-items-lg="3" data-items-md="2" data-items-xs="1">
 
             <!-- Card item START -->
-            <div class="card bg-transparent" *ngFor="let i of instructors">
+            <div class="card bg-transparent" *ngFor=" let t of instructor">
               <div class="position-relative">
                 <!-- Image -->
-                <img style="width: 388px;height: 300px" src="{{i.avatarInstructor}}" class="card-img" alt="course image">
+                <img src="{{t.avatarInstructor}}"style="width: 300px; height: 300px" class="card-img" alt="course image">
+
                 <!-- Overlay -->
                 <div class="card-img-overlay d-flex flex-column p-3">
                   <div class="w-100 mt-auto text-end">
@@ -908,23 +911,25 @@
               <!-- Card body -->
               <div class="card-body text-center">
                 <!-- Title -->
-                <h5 class="card-title" ><a href="#">{{i.nameInstructor}}</a></h5>
-                <p class="mb-2">Computer Teacher</p>
+                <h5 class="card-title"><a href="#">{{t.nameInstructor}}</a></h5>
+                <h5 class="card-title"><a href="#">{{t.emailInstructor}}</a></h5>
+                <h5 class="card-title"><a href="#">{{t.dateOfBirthInstructor}}</a></h5>
+                <h5 class="card-title"><a href="#">{{t.phoneInstructor}}</a></h5>
+                <h5 class="card-title"><a href="#">{{t.experience}}</a></h5>
+                <!--                <h5 class="card-title"><a href="#">{{t.avatarInstructor}}</a></h5>-->
+                <p class="mb-2"></p>
                 <!-- Rating -->
-                <p class="list-inline-item ms-2 h6 fw-light mb-0"> Experience: {{i.experience}} years</p>
                 <ul class="list-inline hstack justify-content-center">
-
+                  <li class="list-inline-item ms-2 h6 fw-light mb-0">4.5/5.0</li>
                   <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
                   <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
                   <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
                   <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                  <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-
+                  <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
                 </ul>
               </div>
             </div>
             <!-- Card item END -->
-
 
           </div>
         </div>

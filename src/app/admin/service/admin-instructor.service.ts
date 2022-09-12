@@ -12,7 +12,7 @@ export class AdminInstructorService {
 
   constructor(private http:HttpClient) { }
   getAll(): Observable<Instructor[]> {
-    return this.http.get<Instructor[]>(API_URL + '/admin/instructor');
+    return this.http.get<Instructor[]>( 'http://localhost:8080/instructors');
   }
   getAllPage(page:any):Observable<Page> {
     return this.http.get<Page>(API_URL + '/admin/instructor/'+page);
@@ -26,4 +26,7 @@ export class AdminInstructorService {
   getAllUser():Observable<Instructor[]> {
     return this.http.get<Instructor[]>(API_URL + '/user/instructor')
   }
+
+
+
 }
