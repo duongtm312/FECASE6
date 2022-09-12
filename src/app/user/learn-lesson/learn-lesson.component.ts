@@ -84,14 +84,13 @@ export class LearnLessonComponent implements OnInit {
     this.time = 0
   }
 
-  play() {
+  play(videoDuration:any) {
     this.isPause = false
     if (this.isFirstPlay) {
       let inserval = setInterval(() => {
         if (!this.isPause) {
           this.time++
-          console.log(this.time)
-          if (this.time == 3) {
+          if (this.time >= videoDuration - 1) {
             this.lessonLearned(this.idLesson);
             this.isFirstPlay = true
             clearInterval(inserval)
