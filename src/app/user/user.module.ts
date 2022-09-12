@@ -15,16 +15,20 @@ import { LearnLessonComponent } from './learn-lesson/learn-lesson.component';
 
 
 @NgModule({
-  declarations: [
-    UserDashboardComponent,
-    UserMainComponent,
-    NavbartopComponent,
+    declarations: [
+        UserDashboardComponent,
+        UserMainComponent,
+        NavbartopComponent,
+        NavbarleftComponent,
+        NavbarheadComponent,
+        UserDeleteComponent,
+        UserPaymentComponent,
+        UserEditComponent,
+        LearnLessonComponent
+    ],
+  exports: [
     NavbarleftComponent,
-    NavbarheadComponent,
-    UserDeleteComponent,
-    UserPaymentComponent,
-    UserEditComponent,
-    LearnLessonComponent
+    NavbartopComponent
   ],
     imports: [
         CommonModule,

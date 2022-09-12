@@ -20,6 +20,8 @@ import { AdminCourseEditComponent } from './admin-course-edit/admin-course-edit.
 import { CreateLessonComponent } from './create-lesson/create-lesson.component';
 import { AdminLessonEditComponent } from './admin-lesson-edit/admin-lesson-edit.component';
 import { AdminRatingComponent } from './admin-rating/admin-rating.component';
+import { ShowUserComponent } from './show-user/show-user.component';
+import {NgxPaginationModule} from "ngx-pagination";
 @NgModule({
     declarations: [
         AdminDashbroadComponent,
@@ -32,7 +34,9 @@ import { AdminRatingComponent } from './admin-rating/admin-rating.component';
         AdminCourseEditComponent,
         CreateLessonComponent,
         AdminLessonEditComponent,
-        AdminRatingComponent
+        AdminRatingComponent,
+        ShowUserComponent
+
     ],
   exports: [
     NavbartopComponent,
@@ -46,6 +50,7 @@ import { AdminRatingComponent } from './admin-rating/admin-rating.component';
         AngularFireStorageModule,
         AngularFireAuthModule,
         AngularFireModule.initializeApp(environment.firebaseConfig),
+        NgxPaginationModule,
     ]
 })
 export class AdminModule { }
