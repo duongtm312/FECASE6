@@ -46,7 +46,6 @@ export class UserQuizComponent implements OnInit {
           this.questionList = data
         })
       })
-
     })
     this.startCounter()
   }
