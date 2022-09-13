@@ -30,6 +30,7 @@ export class FindCourseComponent implements OnInit {
     nameInstructor: new FormControl(""),
     rating: new FormControl("0"),
   })
+  p: any;
 
   findCourse(){
     console.log(this.findForm.value)

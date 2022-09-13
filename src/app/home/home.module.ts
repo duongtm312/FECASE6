@@ -7,6 +7,7 @@ import { CourseDetailComponent } from './course-detail/course-detail.component';
 import { FindCourseComponent } from './find-course/find-course.component';
 import { NavbartopHomeComponent } from './navbartop-home/navbartop-home.component';
 import {ReactiveFormsModule} from "@angular/forms";
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import {ReactiveFormsModule} from "@angular/forms";
     imports: [
         CommonModule,
         HomeRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPaginationModule
     ]
 })
 export class HomeModule { }
