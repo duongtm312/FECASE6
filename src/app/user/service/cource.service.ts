@@ -5,6 +5,9 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {MyCourse} from "../../model/MyCourse";
 import {Instructor} from "../../model/Instructor";
+import {Comment} from "../../model/Comment";
+import {CommentCourse} from "../../model/CommentCourse";
+import {Rating} from "../../model/Rating";
 const API_URL = `${environment.apiUrl}`;
 @Injectable({
   providedIn: 'root'
@@ -30,4 +33,36 @@ export class CourceService {
   getAllInstructor():Observable<Instructor[]>{
     return this.http.get<Instructor[]>(`${API_URL}/user/allInstructor`)
   }
+
+  saveCmt(id: number,cmtCourse:any):Observable<Comment>{
+    console.log(id)
+    return this.http.post<Comment>(`${API_URL}/comment/createCmt/`+ id, cmtCourse)
+  }
+
+  editCmt(idCmt:number, comment: Comment):Observable<Comment>{
+    return this.http.post<Comment>(`${API_URL}/comment/editCmt/`+idCmt, comment)
+  }
+
+  deleteCmt(id:number):Observable<Comment>{
+    console.log(id)
+    return this.http.get<Comment>(`${API_URL}/comment/deleteCmt/` + id)
+  }
+
+  getAllCmt(idCourse: number): Observable<Comment[]> {
+    return this.http.get<Comment[]>(`${API_URL}/comment/getAllCmt/`+idCourse);
+  }
+
+  getAllRating(idCourse: number): Observable<Rating[]> {
+    return this.http.get<Rating[]>(`${API_URL}/user/getALlRating/`+idCourse);
+  }
+
+  saveRating(idCourse: number,rating: Rating):Observable<Rating>{
+    console.log(rating)
+    return this.http.post<Rating>(`${API_URL}/user/createRating/`+idCourse,rating)
+  }
+
+
+
+
+
 }

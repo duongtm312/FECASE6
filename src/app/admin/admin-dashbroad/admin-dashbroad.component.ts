@@ -12,8 +12,7 @@ export class AdminDashbroadComponent implements OnInit {
 
   ngOnInit(): void {
     this.script.load('bootstrap', 'tiny-slider',
-      'glightbox', 'purecounter_vanilla', 'functions',"overlayscrollbars",
-      "OverlayScrollbars.css").then(data => {
+      'glightbox', 'purecounter_vanilla', 'functions',"overlayscrollbars").then(data => {
     }).catch(error => console.log(error));
   }
 

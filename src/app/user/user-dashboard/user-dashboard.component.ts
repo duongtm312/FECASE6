@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserMycourseService} from "../service/user-mycourse.service";
 import {MyCourse} from "../../model/MyCourse";
 import {AdminLessonService} from "../../admin/service/admin-lesson.service";
@@ -13,13 +13,18 @@ import {
 })
 export class UserDashboardComponent implements OnInit {
   myCourse: MyCourse[] = []
-  constructor(private myCourseService:UserMycourseService,private lessonService:AdminLessonService) { }
+
+  constructor(private myCourseService: UserMycourseService, private lessonService: AdminLessonService) {
+  }
 
   ngOnInit(): void {
-    this.myCourseService.getAllMyCourse().subscribe((data) =>{
+    this.myCourseService.getAllMyCourse().subscribe((data) => {
       this.myCourse = data
       console.log(data)
+
+      // document.getElementById("12")?.setAttribute("data-purecounter-end",data.length.toString())
     })
+    this.myCourseService.checkExpire().subscribe()
 
   }
 

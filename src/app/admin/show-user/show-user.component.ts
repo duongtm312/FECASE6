@@ -8,72 +8,74 @@ import {ScriptService} from "../../script.service";
   templateUrl: './show-user.component.html',
   styleUrls: ['./show-user.component.css']
 })
-export class ShowUserComponent implements OnInit,OnChanges {
-  appUsers: AppUser[]=[]
-  // page!: Page
+export class ShowUserComponent implements OnInit, OnChanges {
+  appUsers: AppUser[] = []
   p: any;
   form: any;
-  profileUser:any
+  profileUser: any
   page: any;
 
 
-  constructor(private userProfileService: UserProfileService,private script:ScriptService) { }
+  constructor(private userProfileService: UserProfileService, private script: ScriptService) {
+  }
 
   ngOnInit(): void {
-    this.userProfileService.getProfiles(this.page).subscribe((data)=>{
-      this.appUsers=data
-      console.log(data)
-    })
-  }
-  setInst(appUser: AppUser) {
-    this.profileUser = appUser
-  }
+    this.userProfileService.getProfiles(this.page).subscribe((data) => {
+      this.appUsers = data
 
-  ngOnChanges(changes: SimpleChanges): void {
+    })
     this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
       console.log('script loaded ', data);
     }).catch(error => console.log(error));
   }
 
-  disableUser(idUser: number){
-    this.userProfileService.disableUser(idUser).subscribe(()=>{
-      this.userProfileService.getProfiles(this.page).subscribe((data)=>{
+  setInst(appUser: AppUser) {
+    this.profileUser = appUser
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
+    //   console.log('script loaded ', data);
+    // }).catch(error => console.log(error));
+  }
+
+  disableUser(idUser: number) {
+    this.userProfileService.disableUser(idUser).subscribe((data) => {
+      this.userProfileService.getProfiles(this.page).subscribe((data) => {
         this.page = data
-        this.appUsers=this.page.content
-        this.userProfileService.getProfiles(this.page).subscribe((data)=>{
-          this.appUsers=data
-          console.log(data)
+        this.appUsers = this.page.content
+        this.userProfileService.getProfiles(this.page).subscribe((data) => {
+          this.appUsers = data
         })
-     })
+      })
     })
 
   }
 
 
-  activatedUser(idUser: number){
-    this.userProfileService.activatedUser(idUser).subscribe(()=>{
+  activatedUser(idUser: number) {
+    this.userProfileService.activatedUser(idUser).subscribe(() => {
       this.userProfileService.getProfiles(this.page).subscribe((data) => {
         this.page = data
         this.appUsers = this.page.content
-        this.userProfileService.getProfiles(this.page).subscribe((data)=>{
-          this.appUsers=data
-          console.log(data)
+        this.userProfileService.getProfiles(this.page).subscribe((data) => {
+          this.appUsers = data
         })
       })
     })
   }
+
   search(input: any) {
     this.userProfileService.getProfiles(this.page).subscribe((data) => {
-      let usersSearch:AppUser[]=[]
+      let usersSearch: AppUser[] = []
       for (const d of data) {
-        if (d.fullName.toLowerCase().normalize('NFD') .replace(/[\u0300-\u036f]/g, '')
-          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD') .replace(/[\u0300-\u036f]/g, '')
-            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))){
+        if (d.fullName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
           usersSearch.push(d)
         }
       }
-      console.log(usersSearch)
-      this.appUsers=usersSearch;
+      this.appUsers = usersSearch;
     })
   }
 

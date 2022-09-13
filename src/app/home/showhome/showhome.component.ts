@@ -23,7 +23,7 @@ export class ShowhomeComponent implements OnInit,OnChanges {
     this.instructorService.getAllUser().subscribe((data)=>{
       this.instructors = data
       console.log(data)
-      this.script.load( 'bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla','functions').then(data => {
+      this.script.load( 'functions','purecounter_vanilla').then(data => {
         console.log('script loaded ', data);
       }).catch(error => console.log(error));
     })
