@@ -19,7 +19,10 @@ export class UserDashboardComponent implements OnInit {
     this.myCourseService.getAllMyCourse().subscribe((data) =>{
       this.myCourse = data
       console.log(data)
+
+      // document.getElementById("12")?.setAttribute("data-purecounter-end",data.length.toString())
     })
+    this.myCourseService.checkExpire().subscribe()
 
   }
 
