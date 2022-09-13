@@ -16,6 +16,7 @@ bill:Bill[] =[]
   totalRecharge: number = 0
   totalBillInMonth:any
   reqRecharges:any
+  billFail:number = 0
 
 
   constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService,private script:ScriptService) { }
@@ -25,16 +26,15 @@ bill:Bill[] =[]
       this.bill = data
       for (const b of data) {
         if(b.status == true){
-          this.totalEarning += b.totalBill
           if(b.contentBill == "Recharge"){
             this.totalRecharge += b.totalBill
-          }
+          } else this.totalEarning += b.totalBill
         }
+        if(b.status == false) this.billFail += b.totalBill
       }
+      this.billService.getTotalBillInMonth().subscribe((data)=>{
+        this.totalBillInMonth = data.totalBillInMonth - this.totalRecharge - this.billFail
     })
-
-    this.billService.getTotalBillInMonth().subscribe((data)=>{
-      this.totalBillInMonth = data.totalBillInMonth
 
     })
     this.reqRechargeService.getAll().subscribe((data)=>{

@@ -22,11 +22,8 @@ export class NavbartopHomeComponent implements OnInit {
 
     if(this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_ADMIN")) {
       this.router.navigate(["/admin"])
-    } else {
+    } else if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_USER")) {
       this.router.navigate(["/user"])
+    } else this.router.navigate(["login"])
     }
-
-
-  }
-
 }

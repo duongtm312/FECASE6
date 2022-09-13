@@ -23,5 +23,8 @@ export class UserMycourseService {
   lessonLearned(lessonLearned:any):Observable<LessonLearned>{
     return this.http.post<LessonLearned>(API_URL + '/course/learned',lessonLearned);
   }
+  checkExpire():Observable<any>{
+    return this.http.get<any>(API_URL + '/course/checkExpire');
+  }
 
 }
