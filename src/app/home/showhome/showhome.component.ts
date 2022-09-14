@@ -13,23 +13,29 @@ import {Instructor} from "../../model/Instructor";
   templateUrl: './showhome.component.html',
   styleUrls: ['./showhome.component.css']
 })
-export class ShowhomeComponent implements OnInit,OnChanges {
- course: Course[] = []
-  instructors: Instructor[]=[]
-  constructor(private script:ScriptService,private loginService:LoginService,private router:Router,private courseService: CourceService,private instructorService:AdminInstructorService) {
+export class ShowhomeComponent implements OnInit, OnChanges {
+  course: Course[] = []
+  instructors: Instructor[] = []
+  courseNew: any
+
+  constructor(private script: ScriptService, private loginService: LoginService, private router: Router, private courseService: CourceService, private instructorService: AdminInstructorService) {
   }
 
   ngOnInit(): void {
-    this.instructorService.getAllUser().subscribe((data)=>{
+    this.instructorService.getAllUser().subscribe((data) => {
       this.instructors = data
       console.log(data)
-      this.script.load( 'functions','purecounter_vanilla').then(data => {
+      this.script.load('functions', 'purecounter_vanilla').then(data => {
         console.log('script loaded ', data);
       }).catch(error => console.log(error));
     })
-
-    this.courseService.getTrendingCourse().subscribe((data) =>{
+    this.courseService.getCourseNew().subscribe((data) => {
+      this.courseNew = data
+      data.nameCourse
+    })
+    this.courseService.getTrendingCourse().subscribe((data) => {
       this.course = data
+
     })
 
   }
@@ -38,6 +44,9 @@ export class ShowhomeComponent implements OnInit,OnChanges {
     this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
       console.log('script loaded ', data);
     }).catch(error => console.log(error));
+  }
+  counter(s: number) {
+    return new Array(s);
   }
 
 }

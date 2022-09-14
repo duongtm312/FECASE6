@@ -21,6 +21,9 @@ export class CourceService {
   getTrendingCourse ():Observable<Course[]>{
     return this.http.get<Course[]>(`${API_URL}/course/trendingCourse`)
   }
+  getCourseNew ():Observable<Course>{
+    return this.http.get<Course>(`${API_URL}/user/courseNew`)
+  }
   buyCourse(idCourse:number):Observable<MyCourse>{
     return this.http.get<MyCourse>(`${API_URL}/course/buyCourse/${idCourse}`)
   }
