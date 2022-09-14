@@ -9,6 +9,8 @@ export class Rating{
   statusRating!:boolean
   appUser!:AppUser
   course!:Course
+  fullName!: string;
+
 
 
 }

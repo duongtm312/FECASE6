@@ -1,3 +1,5 @@
+import {AppUser} from "./AppUser";
+
 export class Page{
   content!:any
   size!:number

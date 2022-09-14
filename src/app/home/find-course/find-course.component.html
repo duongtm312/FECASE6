@@ -118,7 +118,7 @@
           <div class="row g-4">
 
             <!-- Card item START -->
-            <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let c of courses">
+            <div class="col-sm-6 col-lg-4 col-xl-3" *ngFor="let c of courses | paginate: {itemsPerPage: 4, currentPage: p}">
               <div class="card shadow h-100">
                 <!-- Image -->
                 <img src="{{c.imgCourse}}" class="card-img-top" alt="course image">
@@ -157,18 +157,8 @@
           <!-- Course Grid END -->
 
           <!-- Pagination START -->
-          <div class="col-12">
-            <nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
-              <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-double-left"></i></a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#">..</a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#">6</a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-double-right"></i></a></li>
-              </ul>
-            </nav>
-          </div>
+          <pagination-controls class="btn btn-sm btn-outline-primary" class="myPagination" (pageChange)="p = $event">
+          </pagination-controls>
           <!-- Pagination END -->
         </div>
         <!-- Main content END -->

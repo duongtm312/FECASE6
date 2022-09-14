@@ -6,6 +6,7 @@ import {AdminCommentService} from "../service/admin-comment.service";
 import {AdminLessonService} from "../service/admin-lesson.service";
 import {Rating} from "../../model/Rating";
 import {Page} from "../../model/Page";
+import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-admin-rating',
@@ -66,4 +67,19 @@ export class AdminRatingComponent implements OnInit {
     })
 
   }
+  search(input:any){
+    this.ratingService.getAlls(this.page).subscribe((ratings)=>{
+      let rateSearch: Rating[] = []
+      for(const d of ratings){
+        if (d.appUser.fullName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
+          rateSearch.push(d)
+        }
+      }
+      this.ratings = rateSearch;
+    })
+
+      }
+
 }

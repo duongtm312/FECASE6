@@ -4,6 +4,7 @@ import {Bill} from "../../model/Bill";
 import {ReqRechargeService} from "../service/req-recharge.service";
 import {Recharge} from "../../model/Recharge";
 import {ScriptService} from "../../script.service";
+import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-admin-earning',
@@ -17,6 +18,9 @@ bill:Bill[] =[]
   totalBillInMonth:any
   reqRecharges:any
   billFail:number = 0
+  p: any;
+  g: any;
+  profileBill: any;
 
 
   constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService,private script:ScriptService) { }
@@ -59,6 +63,9 @@ bill:Bill[] =[]
 
   ngOnChanges(changes: SimpleChanges): void {
 
+  }
+  setInst(bill: Bill) {
+    this.profileBill = bill
   }
 
 }
