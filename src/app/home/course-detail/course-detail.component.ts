@@ -19,7 +19,6 @@ import {LoginService} from "../../auth/service/login.service";
 })
 export class CourseDetailComponent implements OnInit, OnChanges {
   private stompClient: any;
-
   comments: Comment[] = []
   ratings: Rating[] = []
   rate!: Rating
@@ -27,23 +26,28 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   idCourse: any
   course: any
   noti: any
-proFile!:ChangeProfileUser
+  notiRating: any
+  isUser: boolean = false
+  proFile!: ChangeProfileUser
+
   constructor(private script: ScriptService, private route: ActivatedRoute,
               private courseService: CourceService, private router: Router,
-              private userService:UserProfileService,private loginService:LoginService) {}
-  numRating:number = 0
-  num1star:number = 0
-  num2star:number = 0
-  num3star:number = 0
-  num4star:number = 0
-  num5star:number = 0
-  star1:any
-  star2:any
-  star3:any
-  star4:any
-  star5:any
-  ratingCourse:any
-  numRate:number=0
+              private userService: UserProfileService, private loginService: LoginService) {
+  }
+
+  numRating: number = 0
+  num1star: number = 0
+  num2star: number = 0
+  num3star: number = 0
+  num4star: number = 0
+  num5star: number = 0
+  star1: any
+  star2: any
+  star3: any
+  star4: any
+  star5: any
+  ratingCourse: any
+  numRate: number = 0
   editForm: FormGroup = new FormGroup({
     contentCmt: new FormControl(""),
     timeCmt: new FormControl(),
@@ -54,7 +58,6 @@ proFile!:ChangeProfileUser
       idCourse: new FormControl()
     })
   })
-
 
 
   ngOnInit(): void {
@@ -69,33 +72,33 @@ proFile!:ChangeProfileUser
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
         this.comments = data
       })
-      this.courseService.getAllRating(this.idCourse).subscribe((data) =>{
+      this.courseService.getAllRating(this.idCourse).subscribe((data) => {
         console.log(data)
         this.ratings = data
         this.numRating = data.length
         for (let i = 0; i < data.length; i++) {
           if (data[i].numStar == 1) {
-            this.num1star ++
+            this.num1star++
             console.log("1")
           }
           if (data[i].numStar == 2) {
-            this.num2star ++
+            this.num2star++
             console.log("2")
           }
           if (data[i].numStar == 3) {
-            this.num3star ++
+            this.num3star++
             console.log("3")
           }
           if (data[i].numStar == 4) {
-            this.num4star ++
+            this.num4star++
             console.log("4")
           }
           if (data[i].numStar == 5) {
-            this.num5star ++
+            this.num5star++
             console.log("5")
           }
         }
-        console.log(this.num1star,this.num2star,this.num3star,this.num4star,this.num5star,this.numRating)
+        console.log(this.num1star, this.num2star, this.num3star, this.num4star, this.num5star, this.numRating)
         this.star1 = this.num1star / this.numRating * 100
         this.star2 = this.num2star / this.numRating * 100
         this.star3 = this.num3star / this.numRating * 100
@@ -103,8 +106,8 @@ proFile!:ChangeProfileUser
         this.star5 = this.num5star / this.numRating * 100
       })
     })
-    this.userService.getProfileFull().subscribe(data=>{
-      this.proFile=data
+    this.userService.getProfileFull().subscribe(data => {
+      this.proFile = data
     })
   }
 
@@ -115,7 +118,7 @@ proFile!:ChangeProfileUser
   }
 
   buyCourse(idCourse: any) {
-    if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_ADMIN")){
+    if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_ADMIN")) {
       this.noti = "* Admin thì mua cái gì"
     } else if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_USER")) {
       this.courseService.buyCourse(idCourse).subscribe((data) => {
@@ -146,14 +149,22 @@ proFile!:ChangeProfileUser
       // });
     });
   }
+
   sendNotification() {
     this.stompClient.send(
       '/app/notification.send',
       {},
       // Dữ liệu được gửi đi
-      JSON.stringify({'idNotification':0,'title':'Bought the course' , 'timeNotification': new Date(),'appUser':this.proFile,'status':false})
+      JSON.stringify({
+        'idNotification': 0,
+        'title': 'Bought the course',
+        'timeNotification': new Date(),
+        'appUser': this.proFile,
+        'status': false
+      })
     );
   }
+
   commentForm: FormGroup = new FormGroup({
     contentCmt: new FormControl(""),
     timeCmt: new FormControl(""),
@@ -202,7 +213,7 @@ proFile!:ChangeProfileUser
     })
   }
 
-  ratingForm : FormGroup = new FormGroup({
+  ratingForm: FormGroup = new FormGroup({
     contentRating: new FormControl(""),
     numStar: new FormControl(),
     appUser: new FormGroup({
@@ -210,45 +221,53 @@ proFile!:ChangeProfileUser
     }),
     course: new FormControl()
   })
+
   counter(s: number) {
     return new Array(s);
   }
-  setNumRate(rate:number){
-    this.numRate=rate
+
+  setNumRate(rate: number) {
+    this.numRate = rate
     this.ratingForm.controls["numStar"]?.setValue(rate)
   }
- saveRating(){
-    this.courseService.saveRating(this.idCourse,this.ratingForm.value).subscribe((data) =>{
+
+  saveRating() {
+    this.courseService.saveRating(this.idCourse, this.ratingForm.value).subscribe((data) => {
+      if (data != null) {
+        this.notiRating = "Rating success !"
+      } else {
+        this.notiRating = "Reviewed account!"
+      }
       this.ratingForm.reset()
-      console.log(data)
-    this.rate = data;
-      this.courseService.getAllRating(this.idCourse).subscribe((data) =>{
+      this.rate = data;
+      this.numRate = 0
+      this.courseService.getAllRating(this.idCourse).subscribe((data) => {
         console.log(data)
         this.ratings = data
         this.numRating = data.length
         for (let i = 0; i < data.length; i++) {
           if (data[i].numStar == 1) {
-            this.num1star ++
+            this.num1star++
             console.log("1")
           }
           if (data[i].numStar == 2) {
-            this.num2star ++
+            this.num2star++
             console.log("2")
           }
           if (data[i].numStar == 3) {
-            this.num3star ++
+            this.num3star++
             console.log("3")
           }
           if (data[i].numStar == 4) {
-            this.num4star ++
+            this.num4star++
             console.log("4")
           }
           if (data[i].numStar == 5) {
-            this.num5star ++
+            this.num5star++
             console.log("5")
           }
         }
-        console.log(this.num1star,this.num2star,this.num3star,this.num4star,this.num5star,this.numRating)
+        console.log(this.num1star, this.num2star, this.num3star, this.num4star, this.num5star, this.numRating)
         this.star1 = this.num1star / this.numRating * 100
         this.star2 = this.num2star / this.numRating * 100
         this.star3 = this.num3star / this.numRating * 100
@@ -256,10 +275,15 @@ proFile!:ChangeProfileUser
         this.star5 = this.num5star / this.numRating * 100
       })
     })
- }
+  }
 
+  checkName(name: any) {
 
+    if (this.proFile.email == name) {
+      return true
+    } else return false
 
+  }
 
 
 }

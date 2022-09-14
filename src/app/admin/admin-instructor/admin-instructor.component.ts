@@ -7,6 +7,8 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {Router} from "@angular/router";
+import {AppUser} from "../../model/AppUser";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-admin-instructor',
@@ -68,7 +70,12 @@ export class AdminInstructorComponent implements OnInit {
     if (this.editForm.valid) {
       if (file[0] == undefined) {
         this.instructorService.save(this.editForm.value).subscribe((data) => {
-          window.location.reload();
+          this.messageEdit()
+          this.instructorService.getAllPage(0).subscribe((data) => {
+            this.page = data
+            this.instructor = this.page.content
+            this.setInst(this.instructor[0])
+          })
         })
       }
       for (let f of file) {
@@ -80,7 +87,12 @@ export class AdminInstructorComponent implements OnInit {
               url => {
                 this.editForm.get('avatarInstructor')?.setValue(url)
                 this.instructorService.save(this.editForm.value).subscribe((data) => {
-                  window.location.reload();
+                  this.messageEdit()
+                  this.instructorService.getAllPage(0).subscribe((data) => {
+                    this.page = data
+                    this.instructor = this.page.content
+                    this.setInst(this.instructor[0])
+                  })
                 })
               })))
           ).subscribe((data) => {
@@ -106,7 +118,12 @@ export class AdminInstructorComponent implements OnInit {
                 this.createForm.get('avatarInstructor')?.setValue(urlCreate)
                 console.log(this.createForm.value)
                 this.instructorService.save(this.createForm.value).subscribe((data) => {
-                  window.location.reload();
+                  this.messageCreate();
+                  this.instructorService.getAllPage(0).subscribe((data) => {
+                    this.page = data
+                    this.instructor = this.page.content
+                    this.setInst(this.instructor[0])
+                  })
                 })
               })))
           ).subscribe((data) => {
@@ -116,12 +133,43 @@ export class AdminInstructorComponent implements OnInit {
       }
     }
 
-
+  }
+  messageCreate (){
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your instructor has been saved',
+        showConfirmButton: false,
+        timer: 1500
+    })
+  }
+  messageEdit(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your instructor has been updated',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
   delete(id: number) {
     this.instructorService.delete(id).subscribe(data => {
       window.location.reload();
+    })
+  }
+
+  search(input: any) {
+    this.instructorService.getAllUser().subscribe((data) => {
+      let usersSearch: Instructor[] = []
+      for (const d of data) {
+        if (d.nameInstructor.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
+          usersSearch.push(d)
+        }
+      }
+      this.instructor = usersSearch;
     })
   }
 }

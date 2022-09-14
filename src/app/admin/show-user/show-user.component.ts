@@ -49,7 +49,6 @@ export class ShowUserComponent implements OnInit, OnChanges {
         })
       })
     })
-
   }
 
 
@@ -78,5 +77,4 @@ export class ShowUserComponent implements OnInit, OnChanges {
       this.appUsers = usersSearch;
     })
   }
-
 }
