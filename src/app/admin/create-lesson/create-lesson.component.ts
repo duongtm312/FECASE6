@@ -67,4 +67,10 @@ export class CreateLessonComponent implements OnInit {
   preview(file:any){
     document.getElementById('video')?.setAttribute("src", file);
   }
+  clickMethod(fullName: string) {
+    // @ts-ignore
+    if (confirm("Tạo " + fullName)) {
+      console.log("Tạo")}
+
+  }
 }

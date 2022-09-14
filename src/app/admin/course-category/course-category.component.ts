@@ -64,4 +64,10 @@ export class CourseCategoryComponent implements OnInit {
     })
 
   }
+
+  clickMethod(fullName: string) {
+    // @ts-ignore
+    if (confirm("Sửa " + fullName)) {
+      console.log("Sửa")}
+  }
 }

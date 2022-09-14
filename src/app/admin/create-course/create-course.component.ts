@@ -33,17 +33,17 @@ export class CreateCourseComponent implements OnInit, OnChanges {
   }
 
   createForm = new FormGroup({
-    nameCourse: new FormControl("",[Validators.required]),
-    shortDescription: new FormControl("",[Validators.required]),
+    nameCourse: new FormControl("", [Validators.required]),
+    shortDescription: new FormControl("", [Validators.required]),
     imgCourse: new FormControl(),
-    priceCourse: new FormControl("",[Validators.required]),
-    timeCourse: new FormControl("",[Validators.required]),
+    priceCourse: new FormControl("", [Validators.required]),
+    timeCourse: new FormControl("", [Validators.required]),
     instructor: new FormControl(),
-    descriptionCourse: new FormControl("",[Validators.required])
+    descriptionCourse: new FormControl("", [Validators.required])
   })
 
   saveCourse(file: any) {
-    if (this.createForm.valid){
+    if (this.createForm.valid) {
       for (let f of file) {
         if (f != null) {
           const filePath = f.name;
@@ -52,8 +52,10 @@ export class CreateCourseComponent implements OnInit, OnChanges {
             finalize(() => (fileRef.getDownloadURL().subscribe(
               url => {
                 this.createForm.get('imgCourse')?.setValue(url)
-                this.createForm.get('instructor')?.setValue({'idInstructor':this.createForm.get('instructor')?.value})
-                this.courseService.save(this.createForm.value).subscribe( (data)=>{ this.router.navigate(["/admin/courseCategory"])})
+                this.createForm.get('instructor')?.setValue({'idInstructor': this.createForm.get('instructor')?.value})
+                this.courseService.save(this.createForm.value).subscribe((data) => {
+                  this.router.navigate(["/admin/courseCategory"])
+                })
               })))
           ).subscribe((data) => {
 
@@ -63,4 +65,14 @@ export class CreateCourseComponent implements OnInit, OnChanges {
     }
 
   }
+
+  clickMethod(fullName: string) {
+    // @ts-ignore
+    if (confirm("Tạo " + fullName)) {
+      console.log("Tạo")
+    }
+  }
+
+
+
 }

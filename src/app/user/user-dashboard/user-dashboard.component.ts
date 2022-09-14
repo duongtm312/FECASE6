@@ -13,6 +13,7 @@ import {
 })
 export class UserDashboardComponent implements OnInit {
   myCourse: MyCourse[] = []
+  p: any;
 
   constructor(private myCourseService: UserMycourseService, private lessonService: AdminLessonService) {
   }

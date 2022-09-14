@@ -18,6 +18,7 @@ export class AdminLessonEditComponent implements OnInit {
   idCourse: any
   lesson!: Lesson
   editForm: any
+  private toast: any;
 
   constructor(private script: ScriptService, private route: ActivatedRoute, private storage: AngularFireStorage, private router: Router,
               private lessonService: AdminLessonService) {
@@ -64,6 +65,7 @@ export class AdminLessonEditComponent implements OnInit {
               url => {
                 this.editForm.get('linkVideo')?.setValue(url)
                 this.lessonService.save(this.idCourse, this.editForm.value).subscribe((data) => {
+                  this.toast.success({detail: "THÔNG BÁO", summary: "Sửa thành công", duration: 3000})
                   this.router.navigate(["/admin/courseDetail/" + this.idCourse])
                 })
               })))
@@ -74,5 +76,11 @@ export class AdminLessonEditComponent implements OnInit {
       }
     }
 
+  }
+
+  clickMethod(fullName: string) {
+    if (confirm("Sửa " + fullName)) {
+      console.log("Sửa")
+    }
   }
 }

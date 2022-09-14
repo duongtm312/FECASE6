@@ -77,4 +77,10 @@ notiPass:any
 
   }
 
+  clickMethod(fullName: string) {
+    // @ts-ignore
+    if (confirm("Sửa" + fullName)) {
+      console.log("Sửa")}
+
+  }
 }

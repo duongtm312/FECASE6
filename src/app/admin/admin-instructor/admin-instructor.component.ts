@@ -53,13 +53,13 @@ export class AdminInstructorComponent implements OnInit {
 
   setInst(instructor: Instructor) {
     this.editForm = new FormGroup({
-      idInstructor: new FormControl(instructor.idInstructor,[Validators.required]),
-      nameInstructor: new FormControl(instructor.nameInstructor,[Validators.required]),
-      emailInstructor: new FormControl(instructor.emailInstructor,[Validators.email]),
-      dateOfBirthInstructor: new FormControl(instructor.dateOfBirthInstructor,[Validators.required]),
-      phoneInstructor: new FormControl(instructor.phoneInstructor,[Validators.required]),
+      idInstructor: new FormControl(instructor.idInstructor, [Validators.required]),
+      nameInstructor: new FormControl(instructor.nameInstructor, [Validators.required]),
+      emailInstructor: new FormControl(instructor.emailInstructor, [Validators.email]),
+      dateOfBirthInstructor: new FormControl(instructor.dateOfBirthInstructor, [Validators.required]),
+      phoneInstructor: new FormControl(instructor.phoneInstructor, [Validators.required]),
       avatarInstructor: new FormControl(instructor.avatarInstructor),
-      experience: new FormControl(instructor.experience,[Validators.required])
+      experience: new FormControl(instructor.experience, [Validators.required])
 
     })
   }
