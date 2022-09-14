@@ -9,6 +9,7 @@ import {QuizService} from "../service/quiz.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ScoreQuizService} from "../service/score-quiz.service";
 import {ScoreQuiz} from "../../model/ScoreQuiz";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-admin-quizdetail',
@@ -66,6 +67,7 @@ export class AdminQuizdetailComponent implements OnInit {
     if (this.createForm.valid) {
       this.questionService.save(this.createForm.value, this.idQuiz).subscribe(() => {
           this.createForm.reset()
+        this.messageSaveQuiz()
           this.questionService.getAllById(this.idQuiz).subscribe(data => {
             this.question = data
           })
@@ -91,6 +93,7 @@ export class AdminQuizdetailComponent implements OnInit {
   editQuestion() {
     if (this.editForm.valid) {
       this.questionService.save(this.editForm.value, this.idQuiz).subscribe(() => {
+        this.messageEditQuiz()
           this.questionService.getAllById(this.idQuiz).subscribe(data => {
             this.question = data
           })
@@ -110,5 +113,36 @@ export class AdminQuizdetailComponent implements OnInit {
         })
       }
     )
+  }
+  confirmDelete(){
+    Swal.fire({
+      title: 'Do you want to delete quiz?',
+      showDenyButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.deleteQuestion();
+        Swal.fire('Rating has been deleted!', '', 'success')
+      }
+    })
+  }
+  messageSaveQuiz(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your question has been saved ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  messageEditQuiz(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your question has been updated ',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }

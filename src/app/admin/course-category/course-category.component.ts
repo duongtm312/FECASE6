@@ -4,6 +4,7 @@ import {Course} from "../../model/Course";
 import {AdminCourseService} from "../service/admin-course.service";
 import {Page} from "../../model/Page";
 import {getAll} from "@angular/fire/remote-config";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-course-category',
@@ -48,6 +49,7 @@ export class CourseCategoryComponent implements OnInit {
   }
   disable(id:number,page:any){
     this.courseService.disable(id).subscribe(()=>{
+      this.messageDisable()
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
         this.course = this.page.content
@@ -57,12 +59,31 @@ export class CourseCategoryComponent implements OnInit {
   }
   activated(id:number,page:any){
     this.courseService.activated(id).subscribe(()=>{
+      this.messageActivated()
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
         this.course = this.page.content
       })
     })
 
+  }
+  messageDisable (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your course has been disabled',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  messageActivated (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your course has been activated ',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }

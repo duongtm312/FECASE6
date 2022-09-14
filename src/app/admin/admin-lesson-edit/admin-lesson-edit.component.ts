@@ -6,6 +6,7 @@ import {AdminLessonService} from "../service/admin-lesson.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {finalize} from "rxjs";
 import {Lesson} from "../../model/Lesson";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-admin-lesson-edit',
@@ -52,6 +53,7 @@ export class AdminLessonEditComponent implements OnInit {
     if (this.editForm.valid) {
       if (file[0] == undefined) {
         this.lessonService.save(this.idCourse, this.editForm.value).subscribe((data) => {
+          this.messageEdit()
           this.router.navigate(["/admin/courseDetail/" + this.idCourse])
         })
       }
@@ -64,6 +66,7 @@ export class AdminLessonEditComponent implements OnInit {
               url => {
                 this.editForm.get('linkVideo')?.setValue(url)
                 this.lessonService.save(this.idCourse, this.editForm.value).subscribe((data) => {
+                  this.messageEdit()
                   this.router.navigate(["/admin/courseDetail/" + this.idCourse])
                 })
               })))
@@ -74,5 +77,16 @@ export class AdminLessonEditComponent implements OnInit {
       }
     }
 
+
   }
+  messageEdit (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your lesson has been updated',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
 }
