@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { LoginService } from '../service/login.service';
 import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-user-register',
@@ -30,9 +31,19 @@ export class UserRegisterComponent implements OnInit {
       this.checkDuplicateUsername=data[0];
       this.checkDuplicateMail=data[1];
       if (data[0]&&data[1]){
+        this.message()
         this.router.navigate(["/login"])
       }
     });
+  }
+  message (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Register account success ',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }
 
