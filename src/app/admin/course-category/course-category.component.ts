@@ -5,6 +5,7 @@ import {AdminCourseService} from "../service/admin-course.service";
 import {Page} from "../../model/Page";
 import {getAll} from "@angular/fire/remote-config";
 import {Rating} from "../../model/Rating";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-course-category',
@@ -17,7 +18,7 @@ export class CourseCategoryComponent implements OnInit {
   }
 
   page!: Page
-  courses: Rating[] = []
+  course: Rating[] = []
 
   ngOnInit(): void {
     this.script.load('bootstrap', 'tiny-slider',
@@ -25,7 +26,7 @@ export class CourseCategoryComponent implements OnInit {
     }).catch(error => console.log(error));
     this.courseService.getAll(0).subscribe((data) => {
       this.page = data
-      this.courses = this.page.content
+      this.course = this.page.content
     })
   }
 
@@ -33,7 +34,7 @@ export class CourseCategoryComponent implements OnInit {
     if (page >= 0 && page < this.page.totalPages) {
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
-        this.courses = this.page.content
+        this.course = this.page.content
       })
     }
   }
@@ -42,26 +43,18 @@ export class CourseCategoryComponent implements OnInit {
     return new Array(i);
   }
 
-  search(input: any) {
-    this.courseService.search(input).subscribe((data) => {
-      let courseSearch: Rating[] = []
-
-      for (const d of data) {
-        if (d.nameCourse.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
-          courseSearch.push()
-        }
-      }
-      this.courses =courseSearch ;
-    })
+  search(input: string) {
+    // this.courseService.search(input).subscribe((data) => {
+    //   this.course = data
+    // })
   }
 
   disable(id: string, page: any){
     this.courseService.disable(id).subscribe(()=>{
+      this.messageDisable()
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
-        this.courses = this.page.content
+        this.course = this.page.content
       })
     })
 
@@ -69,12 +62,31 @@ export class CourseCategoryComponent implements OnInit {
 
   activated(id: string, page: any){
     this.courseService.activated(id).subscribe(()=>{
+      this.messageActivated()
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
-        this.courses = this.page.content
+        this.course = this.page.content
       })
     })
 
+  }
+  messageDisable (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your course has been disabled',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  messageActivated (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your course has been activated ',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }

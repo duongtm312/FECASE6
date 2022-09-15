@@ -19,7 +19,7 @@ export class UserProfileService {
     return this.http.get<AppUser>(`${API_URL}/user`)
   }
 
-  getProfiles():Observable<AppUser[]>{
+  getProfiles(page:any):Observable<AppUser[]>{
     return this.http.get<AppUser[]>(`${API_URL}/course/showUser`)
   }
   getProfileFull(): Observable<ChangeProfileUser>{

@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AdminCommentService} from "../service/admin-comment.service";
 import {Rating} from "../../model/Rating";
 import {Page} from "../../model/Page";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-admin-rating',
@@ -49,11 +50,13 @@ export class AdminRatingComponent implements OnInit {
   }
   disable(id:number,page:any){
     this.ratingService.disable(id).subscribe(()=>{
+      this.messageDisable()
       this.getAll(page)
     })
 
   }
   approval(id:number,page:any){
+    this.messageApproval()
     this.ratingService.approval(id).subscribe(()=>{
       this.getAll(page)
     })
@@ -65,19 +68,36 @@ export class AdminRatingComponent implements OnInit {
     })
 
   }
-  search(input: any) {
-    this.ratingService.getAll(this.page).subscribe((data) => {
-      let usersSearch: Rating[] = []
 
-      // @ts-ignore
-      for (const d of data) {
-        if (d.appUser.fullName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
-          usersSearch.push(d)
-        }
+  messageApproval(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your student has been approvaled ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  messageDisable (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your student has been disabled ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  confirmDelete(id:number,page:any){
+    Swal.fire({
+      title: 'Do you want to delete rating?',
+      showDenyButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.delete(id,page)
+        Swal.fire('Rating has been deleted!', '', 'success')
       }
-      this.ratings = usersSearch;
     })
   }
 }

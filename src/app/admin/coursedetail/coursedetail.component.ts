@@ -11,6 +11,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuizService} from "../service/quiz.service";
 import {Bill} from "../../model/Bill";
 import {AdminBillService} from "../service/admin-bill.service";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-coursedetail',
@@ -64,6 +65,7 @@ export class CoursedetailComponent implements OnInit {
   }
   approval(id:number){
     this.ratingService.approval(id).subscribe(()=>{
+      this.messageApproval()
       this.ratingService.getAllById(this.idCourse).subscribe((data)=>{
         this.rating=data
       })
@@ -71,6 +73,7 @@ export class CoursedetailComponent implements OnInit {
   }
   disable(id:number){
     this.ratingService.disable(id).subscribe(()=>{
+      this.messageDisable()
       this.ratingService.getAllById(this.idCourse).subscribe((data)=>{
         this.rating=data
       })
@@ -94,11 +97,54 @@ export class CoursedetailComponent implements OnInit {
   saveEditQuiz() {
     if (this.editFormQuiz.valid){
     this.quizService.save(this.editFormQuiz.value, this.course.quiz.idQuiz).subscribe(() => {
+      this.messageSaveQuiz()
         this.courseService.findById(this.idCourse).subscribe((data) => {
           this.course = data
         })
       }
     )
     }
+  }
+  messageDisable (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Rating has been disabled ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  messageApproval(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Rating has been approvaled ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  messageSaveQuiz(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your quiz setting has been saved ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  confirmDelete(id:number){
+    Swal.fire({
+      title: 'Do you want to delete lesson?',
+      showDenyButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.deleteLesson(id)
+        Swal.fire('Lesson has been deleted!', '', 'success')
+      }
+    })
   }
 }

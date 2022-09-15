@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {finalize} from "rxjs";
 import {Course} from "../../model/Course";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-admin-course-edit',
@@ -65,6 +66,7 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
         this.editForm.get('instructor')?.setValue({'idInstructor': this.editForm.get('instructor')?.value})
         console.log(this.editForm.value)
         this.courseService.save(this.editForm.value).subscribe((data) => {
+          this.messageEdit()
           this.router.navigate(["/admin/courseCategory"])
         })
       }
@@ -79,6 +81,7 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
                 this.editForm.get('instructor')?.setValue({'idInstructor': this.editForm.get('instructor')?.value})
                 console.log(this.editForm.value)
                 this.courseService.save(this.editForm.value).subscribe((data) => {
+                  this.messageEdit()
                   this.router.navigate(["/admin/courseCategory"])
                 })
               })))
@@ -91,6 +94,15 @@ export class AdminCourseEditComponent implements OnInit, OnChanges {
 
 
     }
+  }
+  messageEdit (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your course has been edited ',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }
