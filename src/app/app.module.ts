@@ -17,19 +17,12 @@ import {AuthInterceptor} from "./auth.interceptor";
 
 
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     UserLoginComponent,
     UserRegisterComponent,
-
-
-
 
 
 
@@ -41,7 +34,8 @@ import {AuthInterceptor} from "./auth.interceptor";
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+
   ],
   providers: [
     {

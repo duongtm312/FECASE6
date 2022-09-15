@@ -63,6 +63,9 @@ export class CourceService {
     console.log(rating)
     return this.http.post<Rating>(`${API_URL}/user/createRating/`+idCourse,rating)
   }
+  checkBuyCourse(idCourse:any):Observable<any>{
+    return this.http.get<any>(`${API_URL}/course/checkBuy/`+idCourse)
+  }
 
 
 

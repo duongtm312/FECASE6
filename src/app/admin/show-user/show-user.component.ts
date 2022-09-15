@@ -56,6 +56,7 @@ export class ShowUserComponent implements OnInit, OnChanges {
 
   activatedUser(idUser: number) {
     this.userProfileService.activatedUser(idUser).subscribe(() => {
+      this.userProfileService.getProfiles(this.page).subscribe((data) => {
       this.messageActivated()
       this.userProfileService.getProfiles(this.page).subscribe((data) => {
         this.page = data
@@ -65,6 +66,7 @@ export class ShowUserComponent implements OnInit, OnChanges {
         })
       })
     })
+  })
   }
 
   search(input: any) {

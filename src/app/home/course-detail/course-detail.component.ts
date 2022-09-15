@@ -1,22 +1,25 @@
-import {Component, ElementRef, OnChanges, OnInit, Pipe, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {CourceService} from "../../user/service/cource.service";
+import * as http from "http";
 import {Stomp} from "@stomp/stompjs";
 import {UserProfileService} from "../../user/service/user-profile.service";
 import {ChangeProfileUser} from "../../model/ChangeProfileUser";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Comment} from "../../model/Comment";
 import {Rating} from "../../model/Rating";
+import {AppUser} from "../../model/AppUser";
 import {LoginService} from "../../auth/service/login.service";
+import Swal from "sweetalert2";
+import {Lesson} from "../../model/Lesson";
+import {LessonService} from "../../user/service/lessonService";
 
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.css']
 })
-
-
 export class CourseDetailComponent implements OnInit, OnChanges {
   private stompClient: any;
   comments: Comment[] = []
@@ -29,12 +32,13 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   notiRating: any
   isUser: boolean = false
   proFile!: ChangeProfileUser
-
+  lessons: Lesson[]=[]
+  checkBuyCourse:any
 
   constructor(private script: ScriptService, private route: ActivatedRoute,
               private courseService: CourceService, private router: Router,
-              private userService: UserProfileService, private loginService: LoginService) {
-
+              private userService: UserProfileService, private loginService: LoginService,
+              private lessonService: LessonService) {
   }
 
   numRating: number = 0
@@ -68,11 +72,18 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.idCourse = paramMap.get('idCourse');
       this.courseService.findById(this.idCourse).subscribe((data) => {
         this.course = data
+
         this.ratingCourse = data.numRating
-        console.log(this.ratingCourse)
+
       })
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
         this.comments = data
+      })
+      this.courseService.checkBuyCourse(this.idCourse).subscribe((data)=>{
+        this.checkBuyCourse = data
+      })
+      this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
+        this.lessons = data
       })
       this.courseService.getAllRating(this.idCourse).subscribe((data) => {
         console.log(data)
@@ -81,11 +92,11 @@ export class CourseDetailComponent implements OnInit, OnChanges {
         for (let i = 0; i < data.length; i++) {
           if (data[i].numStar == 1) {
             this.num1star++
-            console.log("1")
+
           }
           if (data[i].numStar == 2) {
             this.num2star++
-            console.log("2")
+
           }
           if (data[i].numStar == 3) {
             this.num3star++
@@ -93,11 +104,10 @@ export class CourseDetailComponent implements OnInit, OnChanges {
           }
           if (data[i].numStar == 4) {
             this.num4star++
-            console.log("4")
+
           }
           if (data[i].numStar == 5) {
             this.num5star++
-            console.log("5")
           }
         }
         console.log(this.num1star, this.num2star, this.num3star, this.num4star, this.num5star, this.numRating)
@@ -111,8 +121,6 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     this.userService.getProfileFull().subscribe(data => {
       this.proFile = data
     })
-
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -122,22 +130,19 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   }
 
   buyCourse(idCourse: any) {
-    if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_ADMIN")) {
-      this.noti = "* Admin thì mua cái gì"
-    } else if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_USER")) {
+    if(this.loginService.getToken() == ""){
+      this.confirmLogIn()
+    }else
+      if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_USER")) {
       this.courseService.buyCourse(idCourse).subscribe((data) => {
-        console.log(data)
         if (data != null) {
-          this.noti = "buy success"
+          this.messageBuySuccess()
           this.sendNotification()
         } else {
-          this.noti = "* Your money not enough"
+          this.messageBuyFail()
         }
       })
-    } else {
-      this.router.navigate(["/login"])
     }
-
   }
 
   connect() {
@@ -171,18 +176,18 @@ export class CourseDetailComponent implements OnInit, OnChanges {
 
   commentForm: FormGroup = new FormGroup({
     contentCmt: new FormControl(""),
-    timeCmt: new FormControl(),
+    timeCmt: new FormControl(""),
   })
 
   saveCmt() {
-    this.courseService.saveCmt(this.idCourse, this.commentForm.value).subscribe((data) => {
-      this.commentForm.reset();
-      this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
-        this.comments = data;
+      this.courseService.saveCmt(this.idCourse, this.commentForm.value).subscribe((data) => {
+        this.commentForm.reset();
+        this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
+          this.comments = data;
+        })
       })
-    })
+    }
 
-  }
 
   delete(id: number) {
     this.courseService.deleteCmt(id).subscribe((data) => {
@@ -219,6 +224,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
 
   ratingForm: FormGroup = new FormGroup({
     contentRating: new FormControl(""),
+    timeRating: new FormControl(),
     numStar: new FormControl(),
     appUser: new FormGroup({
       idUser: new FormControl()
@@ -246,65 +252,113 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.rate = data;
       this.numRate = 0
       this.courseService.getAllRating(this.idCourse).subscribe((data) => {
-        console.log(data)
         this.ratings = data
         this.numRating = data.length
         for (let i = 0; i < data.length; i++) {
           if (data[i].numStar == 1) {
             this.num1star++
-            console.log("1")
+
           }
           if (data[i].numStar == 2) {
             this.num2star++
-            console.log("2")
+
           }
           if (data[i].numStar == 3) {
             this.num3star++
-            console.log("3")
+
           }
           if (data[i].numStar == 4) {
             this.num4star++
-            console.log("4")
+
           }
           if (data[i].numStar == 5) {
             this.num5star++
-            console.log("5")
+
           }
         }
-        console.log(this.num1star, this.num2star, this.num3star, this.num4star, this.num5star, this.numRating)
         this.star1 = this.num1star / this.numRating * 100
         this.star2 = this.num2star / this.numRating * 100
         this.star3 = this.num3star / this.numRating * 100
         this.star4 = this.num4star / this.numRating * 100
         this.star5 = this.num5star / this.numRating * 100
       })
+      this.courseService.findById(this.idCourse).subscribe((data) => {
+        this.course = data
+        this.ratingCourse = data.numRating
+      })
     })
   }
 
   checkName(name: any) {
 
-    if (this.proFile.email == name) {
+    if (this.proFile?.email == name) {
       return true
     } else return false
 
   }
 
-
-  showTime() {
-    const el = document.querySelector("li.nav-item p.a");
-    console.log(el)
-    // let dates = document.querySelectorAll(".small >li > span")
-    // // for (let i = 0; i < dates.length; i++) {
-    // //   let d = dates[i]
-    // //   d.innerHTML = moment(d.innerHTML).fromNow()
-    // // }
-    // console.log(dates)
+  confirmLogIn(){
+    Swal.fire({
+      title: 'You are not sign in. Are you want to login to purchase the course?',
+      showCancelButton: true,
+      confirmButtonText: 'Sign in',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(["/login"])
+      }
+    })
+  }
+  confirmLogInCmt(){
+    Swal.fire({
+      title: 'You are not sign in. Are you want to login to purchase the course?',
+      showCancelButton: true,
+      confirmButtonText: 'Sign in',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(["/login"])
+      }
+    })
   }
 
+  messageBuySuccess(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'buy successful course',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  messageBuyFail(){
+    Swal.fire({
+      title: "Buy failed course, you don't have enough money? Are you want to recharge? " ,
+      showCancelButton: true,
+      confirmButtonText: 'Recharge',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.router.navigate(["/user/payment"])
+      }
+    })
+  }
+  checkLogIn(){
+    if (this.loginService.getToken() == ""){
+      return false
+    } else return true
+  }
 
-
-
-
-
-
+  confirmBuy(idCourse:any){
+    Swal.fire({
+      title: 'Are you sure to buy this course?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.buyCourse(this.idCourse)
+      }
+    })
+  }
 }

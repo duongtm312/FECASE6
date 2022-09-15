@@ -3,6 +3,7 @@ import {CourceService} from "../../user/service/cource.service";
 import {Course} from "../../model/Course";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Instructor} from "../../model/Instructor";
+import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-find-course',
@@ -12,6 +13,7 @@ import {Instructor} from "../../model/Instructor";
 export class FindCourseComponent implements OnInit {
   courses: Course[] = []
   instructors:Instructor[] = []
+  private page: any;
   constructor(private courseService:CourceService) { }
 
   ngOnInit(): void {
@@ -30,12 +32,26 @@ export class FindCourseComponent implements OnInit {
     nameInstructor: new FormControl(""),
     rating: new FormControl("0"),
   })
+  p: any;
 
   findCourse(){
     console.log(this.findForm.value)
     this.courseService.getAllCourseByCriteria(this.findForm.value).subscribe((data)=>{
       console.log(data)
       this.courses = data
+    })
+  }
+  searchs(input: any) {
+    this.courseService.getAllCourseByCriteria(this.page).subscribe((data) => {
+      let usersSearch: Course[] = []
+      for (const d of data) {
+        if (d.nameCourse.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
+          usersSearch.push(d)
+        }
+      }
+      this.courses = usersSearch;
     })
   }
 }

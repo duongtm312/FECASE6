@@ -4,6 +4,8 @@ import {Bill} from "../../model/Bill";
 import {ReqRechargeService} from "../service/req-recharge.service";
 import {Recharge} from "../../model/Recharge";
 import {ScriptService} from "../../script.service";
+import {AppUser} from "../../model/AppUser";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-admin-earning',
@@ -17,6 +19,9 @@ bill:Bill[] =[]
   totalBillInMonth:any
   reqRecharges:any
   billFail:number = 0
+  p: any;
+  g: any;
+  profileBill: any;
 
 
   constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService,private script:ScriptService) { }
@@ -47,6 +52,7 @@ bill:Bill[] =[]
 
   reChargeUser(money:any,idUser:any,idReq:any){
     let recharge:Recharge = new Recharge(money,idUser,idReq)
+    this.messageComfig()
     this.reqRechargeService.reCharge(recharge).subscribe((data)=>{
       this.reqRechargeService.getAll().subscribe((data)=>{
         this.reqRecharges = data
@@ -59,6 +65,18 @@ bill:Bill[] =[]
 
   ngOnChanges(changes: SimpleChanges): void {
 
+  }
+  setInst(bill: Bill) {
+    this.profileBill = bill
+  }
+  messageComfig(){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your instructor has been Confirm',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 
 }

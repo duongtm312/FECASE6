@@ -4,6 +4,7 @@ import {Course} from "../../model/Course";
 import {AdminCourseService} from "../service/admin-course.service";
 import {Page} from "../../model/Page";
 import {getAll} from "@angular/fire/remote-config";
+import {Rating} from "../../model/Rating";
 import Swal from "sweetalert2";
 
 @Component({
@@ -17,7 +18,7 @@ export class CourseCategoryComponent implements OnInit {
   }
 
   page!: Page
-  course: Course[] = []
+  course: Rating[] = []
 
   ngOnInit(): void {
     this.script.load('bootstrap', 'tiny-slider',
@@ -47,7 +48,8 @@ export class CourseCategoryComponent implements OnInit {
     //   this.course = data
     // })
   }
-  disable(id:number,page:any){
+
+  disable(id: string, page: any){
     this.courseService.disable(id).subscribe(()=>{
       this.messageDisable()
       this.courseService.getAll(page).subscribe((data) => {
@@ -57,7 +59,8 @@ export class CourseCategoryComponent implements OnInit {
     })
 
   }
-  activated(id:number,page:any){
+
+  activated(id: string, page: any){
     this.courseService.activated(id).subscribe(()=>{
       this.messageActivated()
       this.courseService.getAll(page).subscribe((data) => {

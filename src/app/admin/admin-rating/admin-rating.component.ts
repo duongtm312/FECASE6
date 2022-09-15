@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ScriptService} from "../../script.service";
-import {AdminCourseService} from "../service/admin-course.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AdminCommentService} from "../service/admin-comment.service";
-import {AdminLessonService} from "../service/admin-lesson.service";
 import {Rating} from "../../model/Rating";
 import {Page} from "../../model/Page";
 import Swal from "sweetalert2";
@@ -15,8 +13,7 @@ import Swal from "sweetalert2";
 })
 export class AdminRatingComponent implements OnInit {
   page!: Page
-  ratings: Rating[] = []
-  // @ts-ignore
+  ratings: any[] = []
   rate: Rating=new Rating()
 
   constructor(private script: ScriptService, private router: Router, private ratingService: AdminCommentService) {
@@ -29,6 +26,7 @@ export class AdminRatingComponent implements OnInit {
     this.ratingService.getAll(0).subscribe((data) => {
       this.page = data
       this.ratings = this.page.content
+      // @ts-ignore
       this.showRate(this.ratings[0])
     })
   }
@@ -38,6 +36,7 @@ export class AdminRatingComponent implements OnInit {
       this.ratingService.getAll(page).subscribe((data) => {
         this.page = data
         this.ratings = this.page.content
+        // @ts-ignore
         this.showRate(this.ratings[0])
       })
     }
@@ -69,6 +68,7 @@ export class AdminRatingComponent implements OnInit {
     })
 
   }
+
   messageApproval(){
     Swal.fire({
       position: 'center',

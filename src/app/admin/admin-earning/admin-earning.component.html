@@ -83,9 +83,9 @@
               <tbody>
 
               <!-- Table row -->
-              <tr *ngFor="let r of reqRecharges,let i = index">
+              <tr *ngFor="let r of reqRecharges | paginate: {id: 'pagination1',itemsPerPage: 6, currentPage: g},let j = index">
                 <!-- Table data -->
-                <td>{{i + 1}}</td>
+                <td>{{j + 1}}</td>
                 <td>{{r.appUser.fullName}}</td>
                 <td>
                   <h6>{{r.createAt}}</h6>
@@ -98,9 +98,11 @@
                 </td>
                 <td>${{r.money}}</td>
                 <td>
-                  <a  (click)="reChargeUser(r.money,r.appUser.idUser,r.idRequest)" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top">
-                    Confirm
-                  </a>
+<!--                  <a  (click)="reChargeUser(r.money,r.appUser.idUser,r.idRequest)" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top">-->
+<!--                    Confirm-->
+<!--                  </a>-->
+                  <a style="color:blue;" href="#aboutModal"  data-bs-toggle="modal" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-target="#myModal" (click)="setInst(r)">Confirm</a>
+
                 </td>
               </tr>
 
@@ -110,28 +112,59 @@
           </div>
           <!-- Table END -->
         </div>
+
         <!-- Card body END -->
 
         <!-- Card footer START -->
         <div class="card-footer bg-transparent">
           <!-- Pagination START -->
           <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+            <pagination-controls id="pagination1" class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0" class="myPagination" (pageChange)="g = $event">
+            </pagination-controls>
             <!-- Content -->
-            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-            <!-- Pagination -->
-            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-              <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-              </ul>
-            </nav>
+<!--            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>-->
+<!--            &lt;!&ndash; Pagination &ndash;&gt;-->
+<!--            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">-->
+<!--              <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>-->
+<!--                <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>-->
+<!--              </ul>-->
+<!--            </nav>-->
           </div>
           <!-- Pagination END -->
         </div>
+
         <!-- Card header START -->
+      </div>
+      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title" id="myModalLabel">Thông Tin Nạp Tiền Tài Khoản</h4>
+            </div>
+            <div class="modal-body">
+              <h3 class="media-heading">Name User: {{profileBill?.appUser.fullName}} </h3>
+
+              <hr>
+
+              <p class="text-left"><strong>Date: {{profileBill?.createAt}} </strong><br></p>
+              <p class="text-left"><strong>PaymentMethod: {{profileBill?.paymentMethod}} </strong><br></p>
+              <p class="text-left"><strong>Amount: {{profileBill?.money}} </strong><br></p>
+              <br>
+              <a  (click)="reChargeUser(profileBill.money,profileBill.appUser.idUser,profileBill.idRequest)" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-dismiss="modal" > Confirm</a>
+              <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
+
+
+            </div>
+          </div>
+
+
+        </div>
+        <!-- Pagination END -->
       </div>
       <div><br></div>
         <div class="card bg-transparent border">
@@ -163,9 +196,9 @@
               <tbody>
 
               <!-- Table row -->
-              <tr *ngFor="let b of bill,let i = index">
+              <tr *ngFor="let b of bill | paginate: {id: 'pagination2',itemsPerPage:3, currentPage: p},let i = index ">
                 <!-- Table data -->
-                <td>{{i + 1}}</td>
+                <td>{{ i + 1}}</td>
 
                 <!-- Table data -->
                 <td>
@@ -213,18 +246,21 @@
         <div class="card-footer bg-transparent">
           <!-- Pagination START -->
           <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+
+            <pagination-controls id="pagination2" class="btn btn-sm btn-outline-primary" class="myPagination" (pageChange)="p = $event">
+            </pagination-controls>
             <!-- Content -->
-            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>
-            <!-- Pagination -->
-            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
-              <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-                <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>
-                <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>
-                <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>
-              </ul>
-            </nav>
+<!--            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>-->
+<!--            &lt;!&ndash; Pagination &ndash;&gt;-->
+<!--            <nav class="d-flex justify-content-center mb-0" aria-label="navigation">-->
+<!--              <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#" tabindex="-1"><i class="fas fa-angle-left"></i></a></li>-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#">1</a></li>-->
+<!--                <li class="page-item mb-0 active"><a class="page-link" href="#">2</a></li>-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#">3</a></li>-->
+<!--                <li class="page-item mb-0"><a class="page-link" href="#"><i class="fas fa-angle-right"></i></a></li>-->
+<!--              </ul>-->
+<!--            </nav>-->
           </div>
           <!-- Pagination END -->
         </div>
