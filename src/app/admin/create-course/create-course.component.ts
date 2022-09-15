@@ -7,6 +7,7 @@ import {finalize} from "rxjs";
 import {Instructor} from "../../model/Instructor";
 import {AdminInstructorService} from "../service/admin-instructor.service";
 import { Router } from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-create-course',
@@ -53,7 +54,10 @@ export class CreateCourseComponent implements OnInit, OnChanges {
               url => {
                 this.createForm.get('imgCourse')?.setValue(url)
                 this.createForm.get('instructor')?.setValue({'idInstructor':this.createForm.get('instructor')?.value})
-                this.courseService.save(this.createForm.value).subscribe( (data)=>{ this.router.navigate(["/admin/courseCategory"])})
+
+                this.courseService.save(this.createForm.value).subscribe( (data)=>{
+                  this.messageCreate()
+                  this.router.navigate(["/admin/courseCategory"])})
               })))
           ).subscribe((data) => {
 
@@ -62,5 +66,14 @@ export class CreateCourseComponent implements OnInit, OnChanges {
       }
     }
 
+  }
+  messageCreate (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your course has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }

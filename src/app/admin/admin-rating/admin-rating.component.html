@@ -1,4 +1,5 @@
 <main>
+<main>
 
   <!-- Page content START -->
   <div class="page-content">
@@ -72,9 +73,9 @@
               <!-- Table data -->
               <td>
                 <button  class="btn btn-sm btn-success mb-0" *ngIf="rt.statusRating==false"(click)="approval(rt.idRating,page.number)" >Approval</button>
-                <button  class="btn btn-sm btn-danger mb-0" *ngIf="rt.statusRating==true" (click)="disable(rt.idRating,page.number)">Disable</button>
-                <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" (click)="delete(rt.idRating,page.number)">Delete</button>
-                <a href="#" class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal" data-bs-target="#viewReview" (click)="showRate(rt)">View</a>
+                <button style="margin-left:10px " class="btn btn-sm btn-danger mb-0" *ngIf="rt.statusRating==true" (click)="disable(rt.idRating,page.number)">Disable</button>
+                <button style="margin-left:10px " class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" (click)="confirmDelete(rt.idRating,page.number)">Delete</button>
+                <a style="margin-left:5px " class="btn btn-sm btn-info-soft mb-0" data-bs-toggle="modal" data-bs-target="#viewReview" (click)="showRate(rt)">View</a>
               </td>
             </tr>
 

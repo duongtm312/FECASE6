@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {AppUser} from "../../model/AppUser";
 import {UserProfileService} from "../../user/service/user-profile.service";
 import {ScriptService} from "../../script.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-show-user',
@@ -40,6 +41,7 @@ export class ShowUserComponent implements OnInit, OnChanges {
   }
 
   disableUser(idUser: number) {
+    this.messageDisable()
     this.userProfileService.disableUser(idUser).subscribe((data) => {
       this.userProfileService.getProfiles(this.page).subscribe((data) => {
         this.page = data
@@ -54,6 +56,7 @@ export class ShowUserComponent implements OnInit, OnChanges {
 
   activatedUser(idUser: number) {
     this.userProfileService.activatedUser(idUser).subscribe(() => {
+      this.messageActivated()
       this.userProfileService.getProfiles(this.page).subscribe((data) => {
         this.page = data
         this.appUsers = this.page.content
@@ -75,6 +78,24 @@ export class ShowUserComponent implements OnInit, OnChanges {
         }
       }
       this.appUsers = usersSearch;
+    })
+  }
+  messageActivated (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your student has been activated ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  messageDisable (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your student has been disabled ',
+      showConfirmButton: false,
+      timer: 1500
     })
   }
 }

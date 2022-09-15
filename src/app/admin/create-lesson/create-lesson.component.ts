@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {finalize} from "rxjs";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {AdminLessonService} from "../service/admin-lesson.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-create-lesson',
@@ -53,6 +54,7 @@ export class CreateLessonComponent implements OnInit {
                 this.createForm.get('course')?.setValue({'idCourse': this.idCourse})
                 console.log(this.createForm.value)
                 this.lessonService.save(this.idCourse, this.createForm.value).subscribe((data) => {
+                  this.messageCreate()
                   this.router.navigate(["/admin/courseDetail/" + this.idCourse])
                 })
               })))
@@ -66,5 +68,14 @@ export class CreateLessonComponent implements OnInit {
 
   preview(file:any){
     document.getElementById('video')?.setAttribute("src", file);
+  }
+  messageCreate (){
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Your lesson has been saved',
+      showConfirmButton: false,
+      timer: 1500
+    })
   }
 }
