@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, ElementRef, OnChanges, OnInit, Pipe, QueryList, SimpleChanges, ViewChildren} from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {CourceService} from "../../user/service/cource.service";
@@ -9,13 +9,14 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Comment} from "../../model/Comment";
 import {Rating} from "../../model/Rating";
 import {LoginService} from "../../auth/service/login.service";
-import * as moment from "moment";
 
 @Component({
   selector: 'app-course-detail',
   templateUrl: './course-detail.component.html',
   styleUrls: ['./course-detail.component.css']
 })
+
+
 export class CourseDetailComponent implements OnInit, OnChanges {
   private stompClient: any;
   comments: Comment[] = []
@@ -29,9 +30,11 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   isUser: boolean = false
   proFile!: ChangeProfileUser
 
+
   constructor(private script: ScriptService, private route: ActivatedRoute,
               private courseService: CourceService, private router: Router,
               private userService: UserProfileService, private loginService: LoginService) {
+
   }
 
   numRating: number = 0
@@ -108,7 +111,8 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     this.userService.getProfileFull().subscribe(data => {
       this.proFile = data
     })
-    this.showTime()
+
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -285,14 +289,22 @@ export class CourseDetailComponent implements OnInit, OnChanges {
 
   }
 
+
   showTime() {
-    let dates = document.querySelectorAll(".a")
-    // for (let i = 0; i < dates.length; i++) {
-    //   let d = dates[i]
-    //   d.innerHTML = moment(d.innerHTML).fromNow()
-    // }
-    console.log(dates)
+    const el = document.querySelector("li.nav-item p.a");
+    console.log(el)
+    // let dates = document.querySelectorAll(".small >li > span")
+    // // for (let i = 0; i < dates.length; i++) {
+    // //   let d = dates[i]
+    // //   d.innerHTML = moment(d.innerHTML).fromNow()
+    // // }
+    // console.log(dates)
   }
+
+
+
+
+
 
 
 }

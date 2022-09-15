@@ -1078,7 +1078,7 @@
                                 <div class="bg-light p-3 rounded" >
                                   <div class="d-flex justify-content-left" >
                                     <div class="me-2">
-<!--                                      <h6 class="mb-1 lead fw-bold">Louis Ferguson</h6>-->
+
                                       <h4 class="mb-1 lead fw-bold" style="text-align: left">{{cmt.appUser.fullName}}</h4>
                                       <p class="h6 mb-0">{{cmt.contentCmt}}</p>
                                     </div>
@@ -1086,8 +1086,8 @@
                                   </div>
                                 </div>
                                 <!-- Comment react -->
-                                <ul class="nav nav-divider py-2 small">
-                                  <li class="nav-item"><p class="a">{{cmt.timeCmt}}</p></li>
+                                <ul  class="nav nav-divider py-2 small"  >
+                                  <li    class="nav-item"><p class="a">{{cmt.timeCmt | }}</p></li>
                                   <li class="nav-item" *ngIf="checkName(cmt.appUser.email)"> <a class="text-primary-hover" data-bs-toggle="modal" data-bs-target="#editCmt" (click)="setCmt(cmt)"  > Edit</a> </li>
                                   <li class="nav-item" *ngIf="checkName(cmt.appUser.email)"> <a class="text-primary-hover" (click)="delete(cmt.idComment)"  > Delete</a> </li>
                                 </ul>

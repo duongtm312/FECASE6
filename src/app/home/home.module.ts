@@ -9,12 +9,23 @@ import { NavbartopHomeComponent } from './navbartop-home/navbartop-home.componen
 import {ReactiveFormsModule} from "@angular/forms";
 
 
+
+
+
+
+
+
 @NgModule({
   declarations: [
     ShowhomeComponent,
     CourseDetailComponent,
     FindCourseComponent,
-    NavbartopHomeComponent
+    NavbartopHomeComponent,
+
+
+
+
+
   ],
     imports: [
         CommonModule,
