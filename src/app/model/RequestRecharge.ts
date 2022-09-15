@@ -5,7 +5,7 @@ export class RequestRecharge {
   idRequest!: number
   money!: number
   appUser!: ChangeProfileUser
-  createAt!: Date
+  createAt!: string | null
   paymentMethod!: string
   status!: boolean
 }

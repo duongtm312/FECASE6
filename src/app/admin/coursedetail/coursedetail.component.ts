@@ -147,4 +147,5 @@ export class CoursedetailComponent implements OnInit {
       }
     })
   }
+
 }

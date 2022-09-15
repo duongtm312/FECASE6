@@ -13,8 +13,7 @@ import {environment} from "../environments/environment";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {AuthInterceptor} from "./auth.interceptor";
-
-
+import {TimeAgoPipe} from "time-ago-pipe";
 
 
 @NgModule({
@@ -23,9 +22,6 @@ import {AuthInterceptor} from "./auth.interceptor";
     AuthComponent,
     UserLoginComponent,
     UserRegisterComponent,
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -34,8 +30,7 @@ import {AuthInterceptor} from "./auth.interceptor";
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
-    ReactiveFormsModule,
-
+    ReactiveFormsModule
   ],
   providers: [
     {

@@ -72,12 +72,14 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.idCourse = paramMap.get('idCourse');
       this.courseService.findById(this.idCourse).subscribe((data) => {
         this.course = data
-
         this.ratingCourse = data.numRating
-
       })
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
+        for (const cmt of data) {
+          cmt.timeCmt = this.transform(cmt.timeCmt)
+        }
         this.comments = data
+
       })
       this.courseService.checkBuyCourse(this.idCourse).subscribe((data)=>{
         this.checkBuyCourse = data
@@ -86,7 +88,10 @@ export class CourseDetailComponent implements OnInit, OnChanges {
         this.lessons = data
       })
       this.courseService.getAllRating(this.idCourse).subscribe((data) => {
-        console.log(data)
+        for (const cmt of data) {
+          cmt.timeRating = this.transform(cmt.timeRating)
+          console.log(cmt.timeRating)
+        }
         this.ratings = data
         this.numRating = data.length
         for (let i = 0; i < data.length; i++) {
@@ -183,6 +188,9 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.courseService.saveCmt(this.idCourse, this.commentForm.value).subscribe((data) => {
         this.commentForm.reset();
         this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
+          for (const cmt of data) {
+            cmt.timeCmt = this.transform(cmt.timeCmt)
+          }
           this.comments = data;
         })
       })
@@ -192,6 +200,9 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   delete(id: number) {
     this.courseService.deleteCmt(id).subscribe((data) => {
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
+        for (const cmt of data) {
+          cmt.timeCmt = this.transform(cmt.timeCmt)
+        }
         this.comments = data
       })
     })
@@ -216,6 +227,9 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   editCmt() {
     this.courseService.editCmt(this.idCmt, this.editForm.value).subscribe((data) => {
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
+        for (const cmt of data) {
+          cmt.timeCmt = this.transform(cmt.timeCmt)
+        }
         this.comments = data
       })
 
@@ -224,7 +238,6 @@ export class CourseDetailComponent implements OnInit, OnChanges {
 
   ratingForm: FormGroup = new FormGroup({
     contentRating: new FormControl(""),
-    timeRating: new FormControl(),
     numStar: new FormControl(),
     appUser: new FormGroup({
       idUser: new FormControl()
@@ -244,14 +257,17 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   saveRating() {
     this.courseService.saveRating(this.idCourse, this.ratingForm.value).subscribe((data) => {
       if (data != null) {
-        this.notiRating = "Rating success !"
+        this.messageRatingSuccess()
       } else {
-        this.notiRating = "Reviewed account!"
+        this.messageRatingFail()
       }
       this.ratingForm.reset()
       this.rate = data;
       this.numRate = 0
       this.courseService.getAllRating(this.idCourse).subscribe((data) => {
+        for (const cmt of data) {
+          cmt.timeRating = this.transform(cmt.timeRating)
+        }
         this.ratings = data
         this.numRating = data.length
         for (let i = 0; i < data.length; i++) {
@@ -288,6 +304,29 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       })
     })
   }
+
+  messageRatingSuccess() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Rating successful!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+    messageRatingFail(){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Reviewed account',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+
+    }
+
 
   checkName(name: any) {
 
@@ -360,5 +399,34 @@ export class CourseDetailComponent implements OnInit, OnChanges {
         this.buyCourse(this.idCourse)
       }
     })
+  }
+
+
+  transform(value: any, args?: any): any {
+    if (value) {
+      const seconds = Math.floor((+new Date() - +new Date(value)) / 1000);
+      if (seconds < 29) // less than 30 seconds ago will show as 'Just now'
+        return 'Just now';
+      const intervals: { [key: string]: number } = {
+        'year': 31536000,
+        'month': 2592000,
+        'week': 604800,
+        'day': 86400,
+        'hour': 3600,
+        'minute': 60,
+        'second': 1
+      };
+      let counter;
+      for (const i in intervals) {
+        counter = Math.floor(seconds / intervals[i]);
+        if (counter > 0)
+          if (counter === 1) {
+            return counter + ' ' + i + ' ago'; // singular (1 day ago)
+          } else {
+            return counter + ' ' + i + 's ago'; // plural (2 days ago)
+          }
+      }
+    }
+    return value;
   }
 }

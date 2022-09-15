@@ -14,6 +14,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { LearnLessonComponent } from './learn-lesson/learn-lesson.component';
 import { CertificateComponent } from './certificate/certificate.component';
 import { UserQuizComponent } from './user-quiz/user-quiz.component';
+import {NgxPaginationModule} from "ngx-pagination";
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { UserQuizComponent } from './user-quiz/user-quiz.component';
     imports: [
         CommonModule,
         UserRoutingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NgxPaginationModule
     ]
 })
 export class UserModule { }
