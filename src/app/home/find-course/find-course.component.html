@@ -50,8 +50,9 @@
             <div class="row g-3">
               <!-- Select items -->
               <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
-                <select formControlName="from"  class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
-                  <option selected value="0">0</option>
+                <select formControlName="from"  class="form-select form-select-sm js-choice"  aria-label=".form-select-sm example">
+                  <option value="0" selected>- From -</option>
+                  <option value="0">0</option>
                   <option value="50">50</option>
                   <option value="100">100</option>
                   <option value="150">150</option>
@@ -63,19 +64,20 @@
               <!-- Search item -->
               <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
                 <select formControlName="to" class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+                  <option value="400" selected>- To -</option>
                   <option value="100">100</option>
                   <option value="150">150</option>
                   <option value="200">200</option>
                   <option value="250">250</option>
                   <option value="300">300</option>
-                  <option selected value="400">400</option>
+                  <option value="400">400</option>
                 </select>
               </div>
 
               <!-- Search item -->
               <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
                 <select formControlName="rating" class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
-                  <option selected value="0">0 star</option>
+                  <option value="0" selected>- Star-</option>
                   <option value="1">1 star</option>
                   <option value="2">2 stars</option>
                   <option value="3">3 stars</option>
@@ -87,11 +89,13 @@
               <!-- Search item -->
               <div class="col-sm-6 col-md-3 pb-2 pb-md-0">
                 <select formControlName="nameInstructor" class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+                  <option value="" selected>- Instructor -</option>
                   <option *ngFor="let i of instructors" value="{{i.nameInstructor}}">{{i.nameInstructor}}</option>
                 </select>
               </div>
               <div class="col-sm-6 col-md-2 pb-2 pb-md-0">
                 <select formControlName="experience" class="form-select form-select-sm js-choice" aria-label=".form-select-sm example">
+                  <option value="0" selected>- Experion -</option>
                   <option value="0">No experience</option>
                   <option value="1">1 year</option>
                   <option value="2">2 years</option>
