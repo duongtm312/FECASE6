@@ -137,7 +137,7 @@
       <!-- Title -->
       <div class="row mb-3">
         <div class="col-12 d-sm-flex justify-content-between align-items-center">
-          <h1 class="h3 mb-2 mb-sm-0">All Course<span class="badge bg-orange bg-opacity-10 text-orange">{{page.totalElements}}</span></h1>
+          <h1 class="h3 mb-2 mb-sm-0">All Course<span class="badge bg-orange bg-opacity-10 text-orange">{{page?.totalElements}}</span></h1>
           <a href="/admin/createCourse" class="btn btn-sm btn-primary mb-0">Create a Course</a>
         </div>
       </div>
@@ -229,7 +229,7 @@
 
                 <!-- Table data -->
                 <td>
-                  <a [href]="'/admin/editCourse/'+c.idCourse" class="btn btn-sm btn-success me-1 mb-1 mb-md-0"(click)="clickMethod('Thành công')">Edit</a>
+                  <a [href]="'/admin/editCourse/'+c.idCourse" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">Edit</a>
                   <button *ngIf="c.statusCourse==true" class="btn btn-sm btn-danger mb-0" (click)="disable(c.idCourse,page.number)">Disable</button>
                   <button *ngIf="c.statusCourse==false" class="btn btn-sm btn-primary mb-0" (click)="activated(c.idCourse,page.number)">Activated</button>
                 </td>
@@ -248,7 +248,7 @@
           <!-- Pagination START -->
           <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
             <!-- Content -->
-            <p class="mb-0 text-center text-sm-start">Showing 1 to {{page.size}} of {{page.totalElements}} entries</p>
+            <p class="mb-0 text-center text-sm-start">Showing 1 to {{page?.size}} of {{page?.totalElements}} entries</p>
             <!-- Pagination -->
             <nav class="d-flex justify-content-center mb-0" aria-label="navigation">
               <ul class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
@@ -257,11 +257,11 @@
                 <li *ngIf="page.number!=0" class="page-item mb-0"><a class="page-link"
                                                                      (click)="getAll(page.number-1)">{{page.number}}</a>
                 </li>
-                <li class="page-item mb-0 active"><a class="page-link">{{page.number + 1}}</a></li>
+                <li class="page-item mb-0 active"><a class="page-link">{{page .number + 1}}</a></li>
                 <li *ngIf="page.number+2<=page.totalPages" class="page-item mb-0"><a class="page-link"
-                                                                                     (click)="getAll(page.number+1)">{{page.number + 2}}</a>
+                                                                                     (click)="getAll(page .number+1)">{{page .number + 2}}</a>
                 </li>
-                <li class="page-item mb-0"><a class="page-link" (click)="getAll(page.number+1)"><i
+                <li class="page-item mb-0"><a class="page-link" (click)="getAll(page .number+1)"><i
                   class="fas fa-angle-right"></i></a></li>
               </ul>
             </nav>

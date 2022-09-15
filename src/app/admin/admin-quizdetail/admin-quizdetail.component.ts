@@ -111,10 +111,5 @@ export class AdminQuizdetailComponent implements OnInit {
       }
     )
   }
-
-  clickMethod(fullName: string) {
-    if (confirm("Tạo " + fullName)) {
-      console.log("Tạo")
-    }
-  }
 }
+

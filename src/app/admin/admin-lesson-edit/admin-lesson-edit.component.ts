@@ -78,9 +78,5 @@ export class AdminLessonEditComponent implements OnInit {
 
   }
 
-  clickMethod(fullName: string) {
-    if (confirm("Sửa " + fullName)) {
-      console.log("Sửa")
-    }
-  }
+
 }

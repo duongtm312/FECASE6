@@ -66,12 +66,8 @@ export class CreateCourseComponent implements OnInit, OnChanges {
 
   }
 
-  clickMethod(fullName: string) {
-    // @ts-ignore
-    if (confirm("Tạo " + fullName)) {
-      console.log("Tạo")
-    }
-  }
+
+
 
 
 
