@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import {AdminBillService} from "../../admin/service/admin-bill.service";
 import {LoginService} from "../../auth/service/login.service";
 import {Bill} from "../../model/Bill";
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-payment',
@@ -13,11 +14,15 @@ import {Bill} from "../../model/Bill";
 })
 export class UserPaymentComponent implements OnInit {
   bills:Bill[] =[]
+  pipe = new DatePipe('en-US');
   constructor(private reqChargeService:ReqRechargeService,private billService:AdminBillService,private loginService:LoginService) { }
 
   ngOnInit(): void {
     this.billService.getAllByIdUser().subscribe((data)=>{
       this.bills = data
+      for (const b of data) {
+        b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+      }
       console.log(data)
     })
   }

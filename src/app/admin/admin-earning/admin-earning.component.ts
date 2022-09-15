@@ -6,6 +6,7 @@ import {Recharge} from "../../model/Recharge";
 import {ScriptService} from "../../script.service";
 import {AppUser} from "../../model/AppUser";
 import Swal from "sweetalert2";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-admin-earning',
@@ -22,6 +23,7 @@ bill:Bill[] =[]
   p: any;
   g: any;
   profileBill: any;
+  pipe = new DatePipe('en-US');
 
 
   constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService,private script:ScriptService) { }
@@ -29,6 +31,9 @@ bill:Bill[] =[]
   ngOnInit(): void {
     this.billService.getAll().subscribe((data)=>{
       this.bill = data
+      for (const b of data) {
+        b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+      }
       for (const b of data) {
         if(b.status == true){
           if(b.contentBill == "Recharge"){
@@ -44,6 +49,9 @@ bill:Bill[] =[]
     })
     this.reqRechargeService.getAll().subscribe((data)=>{
       this.reqRecharges = data
+      for (const b of data) {
+        b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+      }
     })
     this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
       console.log('script loaded ', data);

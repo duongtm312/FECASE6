@@ -3,7 +3,7 @@ import {AppUser} from "./AppUser";
 
 export class Bill {
   idBill!: number
-  createAt!: Date
+  createAt!: string | null
   course!: Course
   appUser!: AppUser
   totalBill!: number

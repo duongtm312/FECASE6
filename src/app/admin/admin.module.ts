@@ -24,6 +24,7 @@ import { AdminEarningComponent } from './admin-earning/admin-earning.component';
 import { AdminQuizdetailComponent } from './admin-quizdetail/admin-quizdetail.component';
 import { ShowUserComponent } from './show-user/show-user.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import {TimeAgoPipe} from "time-ago-pipe";
 @NgModule({
     declarations: [
         AdminDashbroadComponent,
@@ -40,12 +41,11 @@ import {NgxPaginationModule} from "ngx-pagination";
         AdminRatingComponent,
         AdminQuizdetailComponent,
         AdminRatingComponent,
-        ShowUserComponent
-
+        ShowUserComponent,
     ],
   exports: [
     NavbartopComponent,
-    NavbarleftComponent
+    NavbarleftComponent,
   ],
     imports: [
         CommonModule,
