@@ -2,15 +2,14 @@ import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {CourceService} from "../../user/service/cource.service";
-import * as http from "http";
 import {Stomp} from "@stomp/stompjs";
 import {UserProfileService} from "../../user/service/user-profile.service";
 import {ChangeProfileUser} from "../../model/ChangeProfileUser";
 import {FormControl, FormGroup} from "@angular/forms";
 import {Comment} from "../../model/Comment";
 import {Rating} from "../../model/Rating";
-import {AppUser} from "../../model/AppUser";
 import {LoginService} from "../../auth/service/login.service";
+import * as moment from "moment";
 
 @Component({
   selector: 'app-course-detail',
@@ -109,6 +108,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     this.userService.getProfileFull().subscribe(data => {
       this.proFile = data
     })
+    this.showTime()
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -167,7 +167,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
 
   commentForm: FormGroup = new FormGroup({
     contentCmt: new FormControl(""),
-    timeCmt: new FormControl(""),
+    timeCmt: new FormControl(),
   })
 
   saveCmt() {
@@ -283,6 +283,15 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       return true
     } else return false
 
+  }
+
+  showTime() {
+    let dates = document.querySelectorAll(".a")
+    // for (let i = 0; i < dates.length; i++) {
+    //   let d = dates[i]
+    //   d.innerHTML = moment(d.innerHTML).fromNow()
+    // }
+    console.log(dates)
   }
 
 
