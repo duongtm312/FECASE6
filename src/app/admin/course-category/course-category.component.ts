@@ -4,6 +4,7 @@ import {Course} from "../../model/Course";
 import {AdminCourseService} from "../service/admin-course.service";
 import {Page} from "../../model/Page";
 import {getAll} from "@angular/fire/remote-config";
+import {Rating} from "../../model/Rating";
 
 @Component({
   selector: 'app-course-category',
@@ -16,7 +17,7 @@ export class CourseCategoryComponent implements OnInit {
   }
 
   page!: Page
-  course: Course[] = []
+  courses: Rating[] = []
 
   ngOnInit(): void {
     this.script.load('bootstrap', 'tiny-slider',
@@ -24,7 +25,7 @@ export class CourseCategoryComponent implements OnInit {
     }).catch(error => console.log(error));
     this.courseService.getAll(0).subscribe((data) => {
       this.page = data
-      this.course = this.page.content
+      this.courses = this.page.content
     })
   }
 
@@ -32,7 +33,7 @@ export class CourseCategoryComponent implements OnInit {
     if (page >= 0 && page < this.page.totalPages) {
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
-        this.course = this.page.content
+        this.courses = this.page.content
       })
     }
   }
@@ -41,25 +42,36 @@ export class CourseCategoryComponent implements OnInit {
     return new Array(i);
   }
 
-  search(input: string) {
-    // this.courseService.search(input).subscribe((data) => {
-    //   this.course = data
-    // })
+  search(input: any) {
+    this.courseService.search(input).subscribe((data) => {
+      let courseSearch: Rating[] = []
+
+      for (const d of data) {
+        if (d.nameCourse.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
+          courseSearch.push()
+        }
+      }
+      this.courses =courseSearch ;
+    })
   }
-  disable(id:number,page:any){
+
+  disable(id: string, page: any){
     this.courseService.disable(id).subscribe(()=>{
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
-        this.course = this.page.content
+        this.courses = this.page.content
       })
     })
 
   }
-  activated(id:number,page:any){
+
+  activated(id: string, page: any){
     this.courseService.activated(id).subscribe(()=>{
       this.courseService.getAll(page).subscribe((data) => {
         this.page = data
-        this.course = this.page.content
+        this.courses = this.page.content
       })
     })
 

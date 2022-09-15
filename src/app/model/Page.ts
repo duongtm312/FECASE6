@@ -6,4 +6,9 @@ export class Page{
   number!:number
   totalElements!:number
   totalPages!:number
+  appUser: any;
+
+  push(d: any) {
+
+  }
 }

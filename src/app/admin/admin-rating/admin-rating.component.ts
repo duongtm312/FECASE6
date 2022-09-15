@@ -1,12 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ScriptService} from "../../script.service";
-import {AdminCourseService} from "../service/admin-course.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AdminCommentService} from "../service/admin-comment.service";
-import {AdminLessonService} from "../service/admin-lesson.service";
 import {Rating} from "../../model/Rating";
 import {Page} from "../../model/Page";
-import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-admin-rating',
@@ -15,8 +12,7 @@ import {AppUser} from "../../model/AppUser";
 })
 export class AdminRatingComponent implements OnInit {
   page!: Page
-  ratings: Rating[] = []
-  // @ts-ignore
+  ratings: any[] = []
   rate: Rating=new Rating()
 
   constructor(private script: ScriptService, private router: Router, private ratingService: AdminCommentService) {
@@ -29,6 +25,7 @@ export class AdminRatingComponent implements OnInit {
     this.ratingService.getAll(0).subscribe((data) => {
       this.page = data
       this.ratings = this.page.content
+      // @ts-ignore
       this.showRate(this.ratings[0])
     })
   }
@@ -38,6 +35,7 @@ export class AdminRatingComponent implements OnInit {
       this.ratingService.getAll(page).subscribe((data) => {
         this.page = data
         this.ratings = this.page.content
+        // @ts-ignore
         this.showRate(this.ratings[0])
       })
     }
@@ -67,19 +65,19 @@ export class AdminRatingComponent implements OnInit {
     })
 
   }
-  search(input:any){
-    this.ratingService.getAlls(this.page).subscribe((ratings)=>{
-      let rateSearch: Rating[] = []
-      for(const d of ratings){
+  search(input: any) {
+    this.ratingService.getAll(this.page).subscribe((data) => {
+      let usersSearch: Rating[] = []
+
+      // @ts-ignore
+      for (const d of data) {
         if (d.appUser.fullName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
           .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
             .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
-          rateSearch.push(d)
+          usersSearch.push(d)
         }
       }
-      this.ratings = rateSearch;
+      this.ratings = usersSearch;
     })
-
-      }
-
+  }
 }

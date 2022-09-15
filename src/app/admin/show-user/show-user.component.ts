@@ -20,7 +20,7 @@ export class ShowUserComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.userProfileService.getProfiles(this.page).subscribe((data) => {
+    this.userProfileService.getProfiles().subscribe((data) => {
       this.appUsers = data
 
     })
@@ -41,10 +41,10 @@ export class ShowUserComponent implements OnInit, OnChanges {
 
   disableUser(idUser: number) {
     this.userProfileService.disableUser(idUser).subscribe((data) => {
-      this.userProfileService.getProfiles(this.page).subscribe((data) => {
+      this.userProfileService.getProfiles().subscribe((data) => {
         this.page = data
         this.appUsers = this.page.content
-        this.userProfileService.getProfiles(this.page).subscribe((data) => {
+        this.userProfileService.getProfiles().subscribe((data) => {
           this.appUsers = data
         })
       })
@@ -54,10 +54,10 @@ export class ShowUserComponent implements OnInit, OnChanges {
 
   activatedUser(idUser: number) {
     this.userProfileService.activatedUser(idUser).subscribe(() => {
-      this.userProfileService.getProfiles(this.page).subscribe((data) => {
+      this.userProfileService.getProfiles().subscribe((data) => {
         this.page = data
         this.appUsers = this.page.content
-        this.userProfileService.getProfiles(this.page).subscribe((data) => {
+        this.userProfileService.getProfiles().subscribe((data) => {
           this.appUsers = data
         })
       })
@@ -65,7 +65,7 @@ export class ShowUserComponent implements OnInit, OnChanges {
   }
 
   search(input: any) {
-    this.userProfileService.getProfiles(this.page).subscribe((data) => {
+    this.userProfileService.getProfiles().subscribe((data) => {
       let usersSearch: AppUser[] = []
       for (const d of data) {
         if (d.fullName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
