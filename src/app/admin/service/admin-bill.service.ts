@@ -18,8 +18,8 @@ export class AdminBillService {
   getAllByIdCourse(idCourse:number):Observable<Bill[]>{
     return this.http.get<Bill[]>(API_URL+"/bill/billCourse/"+idCourse)
   }
-  getAllByIdUser(idUser:number):Observable<Bill[]>{
-    return this.http.get<Bill[]>(API_URL+"/bill/billCourse/"+idUser)
+  getAllByIdUser():Observable<Bill[]>{
+    return this.http.get<Bill[]>(API_URL+"/bill/billUser")
   }
   getTotalBillInMonth():Observable<TotalBillInMonth>{
     return this.http.get<TotalBillInMonth>(API_URL+"/bill/totalBillInMonth")

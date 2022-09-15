@@ -24,25 +24,21 @@ export class ShowhomeComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.instructorService.getAllUser().subscribe((data) => {
       this.instructors = data
-      console.log(data)
-      this.script.load('functions', 'purecounter_vanilla').then(data => {
-        console.log('script loaded ', data);
-      }).catch(error => console.log(error));
+
     })
     this.courseService.getCourseNew().subscribe((data) => {
       this.courseNew = data
-      data.nameCourse
     })
     this.courseService.getTrendingCourse().subscribe((data) => {
       this.course = data
-
+      this.script.load('functions','tiny-slider', 'glightbox', 'purecounter_vanilla').then(data => {
+      }).catch(error => console.log(error));
     })
 
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
-      console.log('script loaded ', data);
+    this.script.load('bootstrap').then(data => {
     }).catch(error => console.log(error));
   }
   counter(s: number) {
