@@ -38,7 +38,7 @@ export class UserPaymentComponent implements OnInit {
   }
   message(){
     Swal.fire({
-      title: 'Deposit request sent successfully',
+      title: 'Deposit request sent successfully! Please transfer money to our bank account',
       icon: 'success',
       showClass: {
         popup: 'animate__animated animate__fadeInDown'
@@ -47,6 +47,7 @@ export class UserPaymentComponent implements OnInit {
         popup: 'animate__animated animate__fadeOutUp'
       }
     })
+
   }
 
 }
