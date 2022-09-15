@@ -23,6 +23,6 @@ export class NavbarleftComponent implements OnInit {
   signOut(){
     this.loginService.setToken("");
     localStorage.setItem("userToken","")
-    this.router.navigate(["/login"])
+    this.router.navigate([""])
   }
 }

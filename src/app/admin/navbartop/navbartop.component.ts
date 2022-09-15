@@ -56,7 +56,7 @@ export class NavbartopComponent implements OnInit, OnChanges {
   signOut() {
     this.loginService.setToken("");
     localStorage.setItem("userToken", "")
-    this.router.navigate(["/login"])
+    this.router.navigate([""])
   }
   connect() {
     // đường dẫn đến server
