@@ -7,6 +7,9 @@ import {UserPaymentComponent} from "./user-payment/user-payment.component";
 import {UserEditComponent} from "./user-edit/user-edit.component";
 import {LearnLessonComponent} from "./learn-lesson/learn-lesson.component";
 import {UserQuizComponent} from "./user-quiz/user-quiz.component";
+import {CertificateComponent} from "./certificate/certificate.component";
+import {MyCertificateComponent} from "./my-certificate/my-certificate.component";
+import {LearnDetailComponent} from "./learn-detail/learn-detail.component";
 
 const routes: Routes = [
   {
@@ -31,6 +34,18 @@ const routes: Routes = [
       {
         path:"quiz/:idCourse",
         component:UserQuizComponent
+      },
+      {
+        path:"myCertificate",
+        component: MyCertificateComponent
+      },
+      {
+        path:"certificate/:idCourse",
+        component:CertificateComponent
+      },
+      {
+        path:"course-resume/:idCourse",
+        component:LearnDetailComponent
       }
     ]
   },

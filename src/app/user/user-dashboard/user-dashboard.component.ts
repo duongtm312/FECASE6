@@ -22,7 +22,6 @@ export class UserDashboardComponent implements OnInit {
       this.myCourse = data
     })
     this.myCourseService.checkExpire().subscribe()
-
   }
 
 }

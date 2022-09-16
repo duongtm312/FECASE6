@@ -7,6 +7,7 @@ import {data} from "jquery";
 import {Course} from "../../model/Course";
 import {AdminInstructorService} from "../../admin/service/admin-instructor.service";
 import {Instructor} from "../../model/Instructor";
+import {UserProfileService} from "../../user/service/user-profile.service";
 
 @Component({
   selector: 'app-showhome',
@@ -17,13 +18,18 @@ export class ShowhomeComponent implements OnInit, OnChanges {
   course: Course[] = []
   instructors: Instructor[] = []
   courseNew: any
-
-  constructor(private script: ScriptService, private loginService: LoginService, private router: Router, private courseService: CourceService, private instructorService: AdminInstructorService) {
+  profileFull:any
+  constructor(private script: ScriptService, private loginService: LoginService, private router: Router,
+              private courseService: CourceService, private instructorService: AdminInstructorService,
+              private userService:UserProfileService) {
   }
 
   ngOnInit(): void {
     this.courseService.getCourseNew().subscribe((data) => {
       this.courseNew = data
+    })
+    this.userService.getProfileFull().subscribe((data)=>{
+      this.profileFull = data
     })
     this.courseService.getTrendingCourse().subscribe((data) => {
       this.course = data
