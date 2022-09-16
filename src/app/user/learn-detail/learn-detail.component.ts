@@ -46,7 +46,6 @@ export class LearnDetailComponent implements OnInit {
         this.idMyCourse = data.idMyCourse
         this.completionProgress = data.lessonList.length
       })
-
     })
   }
   checkLessonLearn(nameLesson: any): boolean {

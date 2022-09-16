@@ -28,5 +28,8 @@ export class CertificateService {
   saveCer():Observable<any>{
     return this.http.get<any>(`${API_URL}/user/save-certificate`)
   }
+  findCer(idCourse:number):Observable<any>{
+    return this.http.get<any>(`${API_URL}/user/save-certificate/`+idCourse)
+  }
 
 }
