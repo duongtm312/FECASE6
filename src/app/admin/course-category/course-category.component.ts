@@ -24,15 +24,21 @@ export class CourseCategoryComponent implements OnInit {
     this.script.load('bootstrap', 'tiny-slider',
       'glightbox', 'purecounter_vanilla', 'functions').then(data => {
     }).catch(error => console.log(error));
-    this.courseService.getAll(0).subscribe((data) => {
+    this.courseService.getAllByName(0,"").subscribe((data) => {
       this.page = data
       this.course = this.page.content
     })
   }
 
-  getAll(page: number) {
+  getAll(page: number,s:string) {
+    if (this.page.totalPages==0){
+      this.courseService.getAllByName(0,"").subscribe((data) => {
+        this.page = data
+        this.course = this.page.content
+      })
+    }
     if (page >= 0 && page < this.page.totalPages) {
-      this.courseService.getAll(page).subscribe((data) => {
+      this.courseService.getAllByName(page,s).subscribe((data) => {
         this.page = data
         this.course = this.page.content
       })
@@ -42,31 +48,18 @@ export class CourseCategoryComponent implements OnInit {
   counter(i: number) {
     return new Array(i);
   }
-
-  search(input: string) {
-    // this.courseService.search(input).subscribe((data) => {
-    //   this.course = data
-    // })
-  }
-
-  disable(id: string, page: any){
+  disable(id: string){
     this.courseService.disable(id).subscribe(()=>{
       this.messageDisable()
-      this.courseService.getAll(page).subscribe((data) => {
-        this.page = data
-        this.course = this.page.content
-      })
+     this.getAll(this.page.number,"")
     })
 
   }
 
-  activated(id: string, page: any){
+  activated(id: string){
     this.courseService.activated(id).subscribe(()=>{
       this.messageActivated()
-      this.courseService.getAll(page).subscribe((data) => {
-        this.page = data
-        this.course = this.page.content
-      })
+      this.getAll(this.page.number,"")
     })
 
   }

@@ -11,6 +11,9 @@ const API_URL = `${environment.apiUrl}`;
 export class AdminCourseService {
 
   constructor(private http:HttpClient) { }
+  getAllByName(page:number,search:string): Observable<Page> {
+    return this.http.get<Page>(API_URL + '/admin/'+page+"/"+search);
+  }
   getAll(page:number): Observable<Page> {
     return this.http.get<Page>(API_URL + '/admin/'+page);
   }
