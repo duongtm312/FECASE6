@@ -49,7 +49,7 @@ export class AdminInstructorComponent implements OnInit {
     dateOfBirthInstructor: new FormControl("", [Validators.required]),
     phoneInstructor: new FormControl("", [Validators.required]),
     avatarInstructor: new FormControl("123"),
-    experience: new FormControl("", [Validators.required])
+    experience: new FormControl("1", [Validators.required])
 
   })
 

@@ -26,5 +26,7 @@ export class UserMycourseService {
   checkExpire():Observable<any>{
     return this.http.get<any>(API_URL + '/course/checkExpire');
   }
-
+  search(nameSearch:any) :Observable<MyCourse[]> {
+    return this.http.get<MyCourse[]>(API_URL + `/course/search/${nameSearch}`);
+  }
 }
