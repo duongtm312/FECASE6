@@ -23,7 +23,7 @@ export class AdminRatingComponent implements OnInit {
     this.script.load('bootstrap', 'tiny-slider',
       'glightbox', 'purecounter_vanilla', 'functions',).then(data => {
     }).catch(error => console.log(error));
-    this.ratingService.getAll(0).subscribe((data) => {
+    this.ratingService.getAllByNameCourse(0,"").subscribe((data) => {
       this.page = data
       this.ratings = this.page.content
       // @ts-ignore
@@ -31,9 +31,17 @@ export class AdminRatingComponent implements OnInit {
     })
   }
 
-  getAll(page: any) {
+  getAll(page: any,s:string) {
+    if (this.page.totalPages==0){
+      this.ratingService.getAllByNameCourse(0,'').subscribe((data) => {
+        this.page = data
+        this.ratings = this.page.content
+        // @ts-ignore
+        this.showRate(this.ratings[0])
+      })
+    }
     if (page >= 0 && page < this.page.totalPages) {
-      this.ratingService.getAll(page).subscribe((data) => {
+      this.ratingService.getAllByNameCourse(page,s).subscribe((data) => {
         this.page = data
         this.ratings = this.page.content
         // @ts-ignore
@@ -48,23 +56,23 @@ export class AdminRatingComponent implements OnInit {
   showRate(rate:Rating){
     this.rate=rate
   }
-  disable(id:number,page:any){
+  disable(id:number,page:any,s:string){
     this.ratingService.disable(id).subscribe(()=>{
       this.messageDisable()
-      this.getAll(page)
+      this.getAll(page,s)
     })
 
   }
-  approval(id:number,page:any){
+  approval(id:number,page:any,s:string){
     this.messageApproval()
     this.ratingService.approval(id).subscribe(()=>{
-      this.getAll(page)
+      this.getAll(page,s)
     })
 
   }
-  delete(id:number,page:any){
+  delete(id:number,page:any,s:string){
     this.ratingService.delete(id).subscribe(()=>{
-      this.getAll(page)
+      this.getAll(page,s)
     })
 
   }
@@ -87,7 +95,7 @@ export class AdminRatingComponent implements OnInit {
       timer: 1500
     })
   }
-  confirmDelete(id:number,page:any){
+  confirmDelete(id:number,page:any,s:string){
     Swal.fire({
       title: 'Do you want to delete rating?',
       showDenyButton: true,
@@ -95,7 +103,7 @@ export class AdminRatingComponent implements OnInit {
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        this.delete(id,page)
+        this.delete(id,page,s)
         Swal.fire('Rating has been deleted!', '', 'success')
       }
     })
