@@ -22,7 +22,11 @@
               </ul>
 
               <!-- button -->
-              <a [href]="'/user/learn/'+3" class="btn btn-primary-soft btn-sm mb-0">Resume course</a>
+              <a [href]="'/user/learn/'+course.idCourse" class="btn btn-primary-soft btn-sm mb-0">Resume course</a>
+              <a style="margin-left: 10px"  [href]="'/user/quiz/'+course.idCourse" class="btn btn-primary-soft btn-sm mb-0">Quizzes</a>
+              <a style="margin-left: 10px" *ngIf="checkScoreQuiz()"  [href]="'/user/certificate/'+course.idCourse" class="btn btn-primary-soft btn-sm mb-0">Get certificate</a>
+
+
             </div>
           </div>
         </div>
@@ -78,11 +82,75 @@
         </div>
 
       </div>
+
       <!-- Accordion END -->
     </div>
+
+  </div><div class="card border bg-transparent rounded-3 mt-4">
+    <!-- Card header START -->
+    <div class="card-header bg-transparent border-bottom">
+      <h3 class="mb-0">Quiz result</h3>
+    </div>
+    <!-- Card header END -->
+
+    <!-- Card body START -->
+    <div class="card-body">
+
+      <!-- Student list table START -->
+      <div class="table-responsive border-0">
+        <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+          <!-- Table head -->
+          <thead>
+          <tr>
+            <th scope="col" class="border-0 rounded-start">Student name</th>
+            <th scope="col" class="border-0">Course name</th>
+            <th scope="col" class="border-0">Date</th>
+            <th scope="col" class="border-0">Points</th>
+            <th scope="col" class="border-0 rounded-end">Action</th>
+          </tr>
+          </thead>
+
+          <!-- Table body START -->
+          <tbody>
+          <!-- Table item -->
+          <tr *ngFor="let s of scoreQuiz">
+            <!-- Table data -->
+            <td>
+              <div class="d-flex align-items-center">
+                <!-- Image -->
+                <div class="avatar avatar-sm me-2">
+                  <img src="{{s.appUser.avatarSrc}}" class="rounded" alt="">
+                </div>
+                <div>
+                  <!-- Title -->
+                  <h6 class="mb-0"><a >{{s.appUser.fullName}}</a></h6>
+                </div>
+              </div>
+            </td>
+
+            <!-- Table data -->
+            <td>
+              <h6 class="table-responsive-title mt-2 mt-md-0 mb-0"><a >{{course.nameCourse}}</a></h6>
+            </td>
+
+            <!-- Table data -->
+            <td>{{s.date}}</td>
+
+            <!-- Table data -->
+            <td>{{s.score}}</td>
+
+            <!-- Table data -->
+            <td>
+              <a  class="btn btn-success-soft btn-round mb-0" data-bs-toggle="tooltip" data-bs-placement="top" title="Message"><i class="far fa-envelope"></i></a>
+            </td>
+          </tr>
+          </tbody>
+          <!-- Table body END -->
+        </table>
+      </div>
+      <!-- Student list table END -->
+
+    </div>
+    <!-- Card body START -->
   </div>
-  <!-- Course item END -->
 
-  <!-- Course item START -->
-
-  <!-- Course item END -->
