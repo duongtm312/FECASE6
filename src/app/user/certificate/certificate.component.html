@@ -4,7 +4,14 @@
     <h3 class="mb-0">Create Certificate</h3>
   </div>
 </div>
-<div class="card-body">
+  <div class="card-header bg-transparent border-bottom">
+
+      <a class="button" *ngIf="checkCertificate" (click)="createCertificate()"> Create Certificate</a>
+      <a style="margin-left: 10px" (click)="generatePDF()" class="button">Download PDF file</a>
+      <a style="margin-left: 10px" (click)="generatePNG()" class="button">Download PNG file</a>
+
+  </div>
+<div class="card-body" id="contentToConvert">
 <div class="container pm-certificate-container">
   <div class="outer-border"></div>
   <div class="inner-border"></div>
