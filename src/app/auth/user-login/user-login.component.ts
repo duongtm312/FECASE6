@@ -35,4 +35,5 @@ export class UserLoginComponent implements OnInit {
       } else this.noti = "Login fail, check your user name and password or your account is lock! "
     })
   }
+
 }

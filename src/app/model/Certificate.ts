@@ -1,11 +1,14 @@
 import {AppUser} from "./AppUser";
+import {Course} from "./Course";
 
 export class Certificate {
   idCertificate!: number
 
-  nameCertificate!: string
+  course!:Course
 
   imageCertificate!: string
 
   AppUser!: AppUser
+
+  createAt!:Date
 }

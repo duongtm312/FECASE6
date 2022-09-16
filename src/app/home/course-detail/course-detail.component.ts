@@ -257,9 +257,9 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   saveRating() {
     this.courseService.saveRating(this.idCourse, this.ratingForm.value).subscribe((data) => {
       if (data != null) {
-        this.notiRating = "Rating success !"
+        this.messageRatingSuccess()
       } else {
-        this.notiRating = "Reviewed account!"
+        this.messageRatingFail()
       }
       this.ratingForm.reset()
       this.rate = data;
@@ -304,6 +304,29 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       })
     })
   }
+
+  messageRatingSuccess() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Rating successful!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+    messageRatingFail(){
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: 'Reviewed account!',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+
+    }
+
 
   checkName(name: any) {
 
@@ -377,6 +400,8 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       }
     })
   }
+
+
   transform(value: any, args?: any): any {
     if (value) {
       const seconds = Math.floor((+new Date() - +new Date(value)) / 1000);

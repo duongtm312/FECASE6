@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CertificateService} from "../service/certificate.service";
+import {Certificate} from "../../model/Certificate";
 
 @Component({
   selector: 'app-my-certificate',
@@ -6,10 +8,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-certificate.component.css']
 })
 export class MyCertificateComponent implements OnInit {
-
-  constructor() { }
+  certificates: Certificate[]=[]
+  constructor(private certificateService:CertificateService) { }
 
   ngOnInit(): void {
+    this.certificateService.findByIdUser().subscribe((data)=>{
+      this.certificates = data
+    })
   }
 
 }

@@ -10,12 +10,23 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {NgxPaginationModule} from "ngx-pagination";
 
 
+
+
+
+
+
+
 @NgModule({
   declarations: [
     ShowhomeComponent,
     CourseDetailComponent,
     FindCourseComponent,
-    NavbartopHomeComponent
+    NavbartopHomeComponent,
+
+
+
+
+
   ],
     imports: [
         CommonModule,
