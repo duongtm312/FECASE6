@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {Rating} from "../../model/Rating";
 import {environment} from "../../../environments/environment";
 import {AppUser} from "../../model/AppUser";
@@ -34,6 +34,7 @@ export class LoginService {
   getUserToken(): UserToken{
     return JSON.parse(<string>localStorage.getItem("userToken"));
   }
+
 
 }
 

@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {UserProfileService} from "../service/user-profile.service";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -10,11 +11,12 @@ import {Router} from "@angular/router";
   styleUrls: ['./user-edit.component.css']
 })
 export class UserEditComponent implements OnInit {
-notiPass:any
-  notiProfile:any
+  notiPass: any
+  notiProfile: any
   changeProfileUser: any
-  editAvatarForm:any
-  constructor(private profileService: UserProfileService,private router:Router) {
+  editAvatarForm: any
+
+  constructor(private profileService: UserProfileService, private router: Router) {
   }
 
   editProfileForm = new FormGroup({
@@ -27,6 +29,7 @@ notiPass:any
     description: new FormControl()
 
   })
+
   ngOnInit(): void {
     this.profileService.getProfileFull().subscribe(data => {
       this.changeProfileUser = data
@@ -42,39 +45,87 @@ notiPass:any
       })
       this.editAvatarForm = new FormGroup(
         {
-          avatarSrcc : new FormControl(data.avatarSrc)
+          avatarSrcc: new FormControl(data.avatarSrc)
         }
       )
     })
   }
-  editProfile(){
-    this.profileService.saveProfile(this.editProfileForm.value).subscribe(data=>{
-      if(data != null){
-        this.notiProfile = "Change profile succes !"
-      } else {this.notiProfile = "Change profile fail ! "}
+
+  editProfile() {
+    this.profileService.saveProfile(this.editProfileForm.value).subscribe(data => {
+      if (data != null) {
+        this.messageEditProSuccess()
+      } else {
+        this.messageEditProFail()
+      }
     })
     this.router.navigate(["user/edit"])
   }
 
   editPassForm = new FormGroup(
     {
-      oldPassword : new FormControl(),
-    newPassword: new FormControl(),
-    confirmNewPassword: new FormControl()
+      oldPassword: new FormControl("", Validators.required),
+      newPassword: new FormControl("", [Validators.required, Validators.minLength(6)]),
+      confirmNewPassword: new FormControl("", [Validators.required])
     }
   )
-  editPassword(){
-  this.profileService.savePassword(this.editPassForm.value).subscribe(data=>{
-    if(data != null){
-      this.notiPass = "Change password succes !"
-    } else {this.notiPass = "Change password fail ! "}
-  })
+
+  editPassword() {
+    this.profileService.savePassword(this.editPassForm.value).subscribe(data => {
+      if (data != null) {
+        this.messagePassSuccess()
+      } else {
+        this.messagePassFail()
+      }
+    })
 
   }
 
-  editAvatar(file: any){
+  editAvatar(file: any) {
     console.log(file)
 
   }
+
+  messageEditProSuccess() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Edit profile successful!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  messageEditProFail() {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Change profile fail ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  messagePassSuccess() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Change password succes !',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  messagePassFail() {
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'Change password fail ! ',
+      showConfirmButton: false,
+      timer: 1500
+    })
+
+  }
+
 
 }

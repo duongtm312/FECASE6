@@ -319,7 +319,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: 'Reviewed account',
+        title: 'Reviewed account!',
         showConfirmButton: false,
         timer: 1500
       })
