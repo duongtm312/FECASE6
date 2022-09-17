@@ -30,7 +30,7 @@ export class AdminInstructorComponent implements OnInit {
     this.instructorService.getAllPageByName(0,"").subscribe((data) => {
       this.page = data
       this.instructor = this.page.content
-      this.setInst(new Instructor(1,"","",new Date(),"","",1))
+      this.setInst(new Instructor(1,"","",new Date(),"","",1, ""))
     })
   }
 

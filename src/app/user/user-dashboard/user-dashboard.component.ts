@@ -31,7 +31,6 @@ export class UserDashboardComponent implements OnInit {
     let searchMyCourse : MyCourse[] = []
     this.myCourseService.getAllMyCourse().subscribe((data) =>{
       for (const d of data){
-        console.log(d.course.nameCourse)
         if (d.course.nameCourse.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
           .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
             .replace(/đ/g, 'd').replace(/Đ/g, 'D'))){
