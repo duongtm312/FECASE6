@@ -14,7 +14,6 @@ export class NavbartopComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getProfile().subscribe((data) => {
       this.appUser = data
-      console.log(data)
       }
     )
   }

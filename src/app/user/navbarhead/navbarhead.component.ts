@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {ScriptService} from "../../script.service";
 import {LoginService} from "../../auth/service/login.service";
 import {Router} from "@angular/router";
-import {UserProfileService} from "../service/user-profile.service";
-import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-navbarhead',
