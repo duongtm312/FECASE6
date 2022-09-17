@@ -2,7 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {UserMycourseService} from "../service/user-mycourse.service";
 import {MyCourse} from "../../model/MyCourse";
 import {AdminLessonService} from "../../admin/service/admin-lesson.service";
-
+import {
+  logExperimentalWarnings
+} from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
+import {ScoreQuizService} from "../../admin/service/score-quiz.service";
+import {ScoreQuiz} from "../../model/ScoreQuiz";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -11,18 +15,16 @@ import {AdminLessonService} from "../../admin/service/admin-lesson.service";
 })
 export class UserDashboardComponent implements OnInit {
   myCourse: MyCourse[] = []
-
-
-  constructor(private myCourseService: UserMycourseService, private lessonService: AdminLessonService) {
+  scoreQuiz: ScoreQuiz[] =[]
+  constructor(private myCourseService: UserMycourseService, private scoreQuizService:ScoreQuizService, private lessonService: AdminLessonService) {
   }
 
   ngOnInit(): void {
     this.myCourseService.getAllMyCourse().subscribe((data) => {
       this.myCourse = data
     })
-    this.myCourseService.checkExpire().subscribe((data) =>{
-      this.myCourse = data
-    })
+    this.myCourseService.checkExpire().subscribe()
+
   }
 
   search(input: any){

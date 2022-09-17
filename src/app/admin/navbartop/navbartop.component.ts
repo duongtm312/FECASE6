@@ -6,6 +6,7 @@ import {NotificationService} from "../service/notification.service";
 import {Notification} from "../../model/Notification";
 import {Stomp} from "@stomp/stompjs";
 import {TimeAgoPipe} from "time-ago-pipe";
+import {UserProfileService} from "../../user/service/user-profile.service";
 @Component({
   selector: 'app-navbartop',
   templateUrl: './navbartop.component.html',
@@ -15,10 +16,15 @@ export class NavbartopComponent  implements OnInit, OnChanges {
   private stompClient: any;
   statusNoti: boolean = false
   notification: Notification[] = []
-  constructor(private script: ScriptService, private loginService: LoginService, private router: Router, private notificationService: NotificationService) {
+  profile:any
+  constructor(private script: ScriptService, private loginService: LoginService, private router: Router,
+              private notificationService: NotificationService,private userService:UserProfileService) {
   }
 
   ngOnInit(): void {
+    this.userService.getProfileFull().subscribe((data)=>{
+      this.profile = data
+    })
     this.getAll()
     this.connect()
   }
