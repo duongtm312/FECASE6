@@ -3,6 +3,11 @@ import {UserProfileService} from "../service/user-profile.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
+import {finalize, Observable} from "rxjs";
+import {LoginService} from "../../auth/service/login.service";
+import {ChangeProfileUser} from "../../model/ChangeProfileUser";
+import {ChangeAvatar} from "../../model/ChangeAvatar";
 
 
 @Component({
@@ -15,8 +20,14 @@ export class UserEditComponent implements OnInit {
   notiProfile: any
   changeProfileUser: any
   editAvatarForm: any
+  private downloadURL: Observable<any> | undefined;
+  fb: string = "";
+  // user: ChangeAvatar = new ChangeAvatar("")
+  user: ChangeProfileUser = new ChangeProfileUser("","","","","",'',"","")
 
-  constructor(private profileService: UserProfileService, private router: Router) {
+
+
+  constructor(private profileService: UserProfileService, private router: Router, private storage: AngularFireStorage, private loginService: LoginService) {
   }
 
   editProfileForm = new FormGroup({
@@ -35,17 +46,17 @@ export class UserEditComponent implements OnInit {
       this.changeProfileUser = data
       console.log(data.avatarSrc)
       this.editProfileForm = new FormGroup({
-        userName: new FormControl(data.userName),
-        fullName: new FormControl(data.fullName),
-        email: new FormControl(data.email),
-        address: new FormControl(data.address),
-        dateOfBirth: new FormControl(data.dateOfBirth),
-        phone: new FormControl(data.phone),
-        description: new FormControl(data.address)
+        userName: new FormControl(data.userName, [Validators.required]),
+        fullName: new FormControl(data.fullName, Validators.required),
+        email: new FormControl(data.email, [Validators.required]),
+        address: new FormControl(data.address, [Validators.required]),
+        dateOfBirth: new FormControl(data.dateOfBirth, [Validators.required]),
+        phone: new FormControl(data.phone, [Validators.required]),
+        description: new FormControl(data.description)
       })
       this.editAvatarForm = new FormGroup(
         {
-          avatarSrcc: new FormControl(data.avatarSrc)
+          avatarSrcc: new FormControl(data.avatarSrc, [Validators.required])
         }
       )
     })
@@ -81,9 +92,44 @@ export class UserEditComponent implements OnInit {
 
   }
 
-  editAvatar(file: any) {
-    console.log(file)
+  editAvatar(event: Event) {
+    var n = Date.now();
+    // @ts-ignore
+    const file = event.target.files[0];
+    const filePath = `RoomsImages/${n}`;
+    const fileRef = this.storage.ref(filePath);
+    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    task
+      .snapshotChanges()
+      .pipe(
+        finalize(() => {
+          this.downloadURL = fileRef.getDownloadURL();
+          this.downloadURL.subscribe(url => {
+            if (url) {
+              this.fb = url;
+            }
+            console.log(this.fb);
+          });
+        })
+      )
+      .subscribe(url => {
+        if (url) {
+          console.log("hmmmm")
+          console.log(url);
+        }
+      });
+  }
 
+  editAvatarProfile() {
+    let edit = {
+      avatar: this.fb
+    }
+    console.log(edit)
+    this.profileService.saveAvatar(edit).subscribe((data) => {
+      this.messageEditAvatar()
+      this.showUser()
+
+    })
   }
 
   messageEditProSuccess() {
@@ -91,6 +137,15 @@ export class UserEditComponent implements OnInit {
       position: 'center',
       icon: 'success',
       title: 'Edit profile successful!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+  messageEditAvatar() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Edit Avatar successful!',
       showConfirmButton: false,
       timer: 1500
     })
@@ -126,6 +181,11 @@ export class UserEditComponent implements OnInit {
     })
 
   }
-
-
+  showUser() {
+    let id = this.loginService.getUserToken().idUser
+    this.profileService.getProfileFull().subscribe((data) => {
+      console.log(data)
+      this.user = data;
+    })
+  }
 }
