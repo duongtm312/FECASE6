@@ -40,6 +40,7 @@ export class LearnLessonComponent implements OnInit {
       console.log(this.idCourse)
       this.courseService.findById(this.idCourse).subscribe((data) => {
         this.course = data
+
       })
       this.lessonService.getAllById(this.idCourse).subscribe((data) => {
         this.lesson = data

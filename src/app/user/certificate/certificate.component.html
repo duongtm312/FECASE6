@@ -1,29 +1,97 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html><head>
-  <meta content="text/html; charset=ISO-8859-1" http-equiv="content-type">
-  <title>COURSE TITLE</title>
-</head><body>
-<img alt="GTAA Logo" src="http://torontopearson.com/images/logo_topnav_gtaa.gif"><br>
-<h2><span style="font-family: Trebuchet MS;">
-Congratulations. </span></h2>
-<h2><span style="font-family: Trebuchet MS;"></span></h2>
-<span style="font-family: Trebuchet MS;">You have successfully completed the Introduction to IRROPS course. <br>
-Please fill out your name:<br>
-</span>
-<h4><span style="font-family: Trebuchet MS;"><span style="font-family: Trebuchet MS;">Name:</span></span></h4>
-<h2><span style="font-family: Trebuchet MS;"></span></h2>
-<span style="font-family: Trebuchet MS;"><input name="Name"><br>
-</span>
-<h4><span style="font-family: Trebuchet MS;">Instructions</span></h4>
-<h4><span style="font-family: Trebuchet MS;"></span></h4>
-<span style="font-family: Trebuchet MS;">Please either print a copy of this form (<span style="font-weight: bold;">CTRL+P</span> - Print current page), or email this form </span><span style="font-family: Trebuchet MS;">(<span style="font-weight: bold;">CTRL+S</span> - Save the current page and then attach it as an email)</span><span style="font-family: Trebuchet MS;">
-to the GTAA manager responsible for your training. By providing this
-form to the GTAA, you are confirming that you have successfully
-completed Introduction to IRROPS Course.<br>
-<br>
-Confirmation Code: <span style="font-weight: bold;">IRROPS2018</span><br>
-<br>
-</span><br>
-<h1>
-</h1>
-</body></html>
+<div class="card bg-transparent border rounded-3">
+<div class="card-header bg-transparent border-bottom">
+  <div class="col-4">
+    <h3 class="mb-0">Create Certificate</h3>
+  </div>
+</div>
+  <div class="card-header bg-transparent border-bottom">
+
+      <a class="button" *ngIf="checkCertificate" (click)="createCertificate()"> Create Certificate</a>
+      <a style="margin-left: 10px" (click)="generatePDF()" class="button">Download PDF file</a>
+      <a style="margin-left: 10px" (click)="generatePNG()" class="button">Download PNG file</a>
+
+  </div>
+<div class="card-body" id="contentToConvert">
+<div class="container pm-certificate-container">
+  <div class="outer-border"></div>
+  <div class="inner-border"></div>
+
+  <div class="pm-certificate-border col-xs-12">
+    <div class="row pm-certificate-header">
+      <div class="pm-certificate-title cursive col-xs-12 text-center">
+        <h2> CERTIFICATE OF COMPLETION </h2>
+      </div>
+    </div>
+
+    <div class="row pm-certificate-body">
+      <div class="pm-certificate-block">
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+            <div class="pm-certificate-name underline margin-0 col-xs-8 text-center">
+              <span class="pm-name-text bold">Bùi Công Anh</span>
+            </div>
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+            <div class="pm-earned col-xs-8 text-center">
+              <span class="pm-earned-text padding-0 block cursive">has completed the course</span>
+              <span class="pm-credits-text block bold sans">{{course.nameCourse}}</span>
+            </div>
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+            <div class="col-xs-12"></div>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+            <div class="pm-course-title col-xs-8 text-center">
+              <span class="pm-earned-text block cursive">With score</span>
+            </div>
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+          </div>
+        </div>
+
+        <div class="col-xs-12">
+          <div class="row">
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+            <div class="pm-course-title underline col-xs-8 text-center">
+              <span class="pm-credits-text block bold sans">{{hightScore}}/10</span>
+            </div>
+            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12">
+        <div class="row">
+          <div class="pm-certificate-footer">
+            <div class="col-xs-4 pm-certified col-xs-4 text-center">
+              <span class="pm-credits-text block sans">Eduport Center - Hoi Xuan Group</span>
+              <span class="pm-empty-space block underline"></span>
+              <span class="bold block"></span>
+            </div>
+            <div class="col-xs-4">
+              <!-- LEAVE EMPTY -->
+            </div>
+            <div class="col-xs-4 pm-certified col-xs-4 text-center">
+              <span class="pm-credits-text block sans">Date Completed</span>
+              <span class="pm-empty-space block underline"> {{date}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+</div>
+
+</div>
+

@@ -16,4 +16,8 @@ export class ScoreQuizService {
   save(score:any):Observable<ScoreQuiz>{
     return this.http.post<ScoreQuiz>(API_URL+"/scorequiz/save",score)
   }
+
+  getAllUser(idQuiz:number):Observable<ScoreQuiz[]>{
+    return this.http.get<ScoreQuiz[]>(API_URL+"/scorequiz/allUser/"+idQuiz)
+  }
 }

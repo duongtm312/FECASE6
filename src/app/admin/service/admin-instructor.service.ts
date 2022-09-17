@@ -17,6 +17,9 @@ export class AdminInstructorService {
   getAllPage(page:any):Observable<Page> {
     return this.http.get<Page>(API_URL + '/admin/instructor/'+page);
   }
+  getAllPageByName(page:any,search:string):Observable<Page> {
+    return this.http.get<Page>(API_URL + '/admin/instructor/'+page+'/'+search);
+  }
   save(instructor:any):Observable<Instructor> {
     return this.http.post<Instructor>(API_URL + '/admin/instructor/save',instructor);
   }

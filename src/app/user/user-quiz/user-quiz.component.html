@@ -108,7 +108,7 @@
                     <p>Total Correct Answered : {{correctAnswer}} </p>
                     <p>Total Wrong Answered :  {{inCorrectAnswer}}</p>
                     <p>Your Score : {{points}} Points </p>
-                    <a type="button" href="/user" class="btn btn-success next-btn mb-0">Back to home</a>
+                    <a type="button" [href]="'/user/course-resume/'+course.idCourse" class="btn btn-success next-btn mb-0">Back to course</a>
                   </div>
                 </div>
               </ng-container>

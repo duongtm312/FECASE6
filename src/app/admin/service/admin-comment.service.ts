@@ -24,6 +24,9 @@ export class AdminCommentService {
   getAll(page:any):Observable<Page>{
     return this.http.get<Page>(API_URL+"/admin/allRating/"+page)
   }
+  getAllByNameCourse(page:any,name:string):Observable<Page>{
+    return this.http.get<Page>(API_URL+"/admin/allRating/"+page+'/'+name)
+  }
   disable(id:number):Observable<Rating>{
     return  this.http.get<Rating>(API_URL+"/admin/rating/disable/"+id)
   }

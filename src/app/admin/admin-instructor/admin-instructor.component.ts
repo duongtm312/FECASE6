@@ -27,18 +27,30 @@ export class AdminInstructorComponent implements OnInit {
     this.script.load('bootstrap', 'tiny-slider',
       'glightbox', 'purecounter_vanilla', 'functions').then(data => {
     }).catch(error => console.log(error));
-    this.instructorService.getAllPage(0).subscribe((data) => {
+    this.instructorService.getAllPageByName(0,"").subscribe((data) => {
       this.page = data
       this.instructor = this.page.content
-      this.setInst(this.instructor[0])
+      this.setInst(new Instructor(1,"","",new Date(),"","",1))
     })
   }
 
-  getAll(page: number) {
+  getAll(page: number,search:string) {
+    if (this.page.totalPages==0){
+      this.instructorService.getAllPageByName(0,"").subscribe((data) => {
+        if (data!=null){
+          this.page = data
+          this.instructor = this.page.content
+        }
+
+      })
+    }
     if (page >= 0 && page < this.page.totalPages) {
-      this.instructorService.getAllPage(page).subscribe((data) => {
-        this.page = data
-        this.instructor = this.page.content
+      this.instructorService.getAllPageByName(page,search).subscribe((data) => {
+        if (data!=null){
+          this.page = data
+          this.instructor = this.page.content
+        }
+
       })
     }
   }
@@ -66,16 +78,12 @@ export class AdminInstructorComponent implements OnInit {
     })
   }
 
-  editInstructor(file: any) {
+  editInstructor(file: any,s:string) {
     if (this.editForm.valid) {
       if (file[0] == undefined) {
         this.instructorService.save(this.editForm.value).subscribe((data) => {
           this.messageEdit()
-          this.instructorService.getAllPage(0).subscribe((data) => {
-            this.page = data
-            this.instructor = this.page.content
-            this.setInst(this.instructor[0])
-          })
+         this.getAll(this.page.number,s)
         })
       }
       for (let f of file) {
@@ -88,11 +96,7 @@ export class AdminInstructorComponent implements OnInit {
                 this.editForm.get('avatarInstructor')?.setValue(url)
                 this.instructorService.save(this.editForm.value).subscribe((data) => {
                   this.messageEdit()
-                  this.instructorService.getAllPage(0).subscribe((data) => {
-                    this.page = data
-                    this.instructor = this.page.content
-                    this.setInst(this.instructor[0])
-                  })
+                  this.getAll(this.page.number,s)
                 })
               })))
           ).subscribe((data) => {
@@ -105,7 +109,7 @@ export class AdminInstructorComponent implements OnInit {
 
   }
 
-  createInstructor(fileCreate: any) {
+  createInstructor(fileCreate: any,s:string) {
     if (this.createForm.valid) {
       for (let file of fileCreate) {
         console.log(file)
@@ -119,11 +123,7 @@ export class AdminInstructorComponent implements OnInit {
                 console.log(this.createForm.value)
                 this.instructorService.save(this.createForm.value).subscribe((data) => {
                   this.messageCreate();
-                  this.instructorService.getAllPage(0).subscribe((data) => {
-                    this.page = data
-                    this.instructor = this.page.content
-                    this.setInst(this.instructor[0])
-                  })
+                  this.getAll(this.page.number,s)
                 })
               })))
           ).subscribe((data) => {

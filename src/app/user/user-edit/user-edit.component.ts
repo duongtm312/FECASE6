@@ -3,6 +3,8 @@ import {UserProfileService} from "../service/user-profile.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {finalize} from "rxjs";
+import {AngularFireStorage} from "@angular/fire/compat/storage";
 
 
 @Component({
@@ -16,7 +18,7 @@ export class UserEditComponent implements OnInit {
   changeProfileUser: any
   editAvatarForm: any
 
-  constructor(private profileService: UserProfileService, private router: Router) {
+  constructor(private profileService: UserProfileService, private router: Router, private storage: AngularFireStorage) {
   }
 
   editProfileForm = new FormGroup({
@@ -81,8 +83,13 @@ export class UserEditComponent implements OnInit {
 
   }
 
+  onUploadAvatar($event: any) {
+    // @ts-ignore
+    document.getElementById("avatar avatar-xl").hidden = true;
+    this.editAvatarForm.avatar = $event;
+  }
+
   editAvatar(file: any) {
-    console.log(file)
 
   }
 

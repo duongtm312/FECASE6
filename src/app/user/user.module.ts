@@ -15,6 +15,8 @@ import { LearnLessonComponent } from './learn-lesson/learn-lesson.component';
 import { CertificateComponent } from './certificate/certificate.component';
 import { UserQuizComponent } from './user-quiz/user-quiz.component';
 import {NgxPaginationModule} from "ngx-pagination";
+import { MyCertificateComponent } from './my-certificate/my-certificate.component';
+import { LearnDetailComponent } from './learn-detail/learn-detail.component';
 
 
 @NgModule({
@@ -29,7 +31,9 @@ import {NgxPaginationModule} from "ngx-pagination";
         UserEditComponent,
         LearnLessonComponent,
         CertificateComponent,
-      UserQuizComponent
+      UserQuizComponent,
+      MyCertificateComponent,
+      LearnDetailComponent
     ],
   exports: [
     NavbartopComponent,
