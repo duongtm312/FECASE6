@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {LoginService} from "../../auth/service/login.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
+import {UserProfileService} from "../../user/service/user-profile.service";
 
 @Component({
   selector: 'app-navbartop-home',
@@ -9,11 +10,16 @@ import Swal from "sweetalert2";
   styleUrls: ['./navbartop-home.component.css']
 })
 export class NavbartopHomeComponent implements OnInit {
-
-  constructor(private loginService: LoginService, private router: Router) {
+profile:any
+  constructor(private loginService: LoginService, private router: Router,
+              private userService:UserProfileService) {
   }
 
   ngOnInit(): void {
+    this.userService.getProfileFull().subscribe((data)=>{
+      this.profile = data
+
+    })
   }
 
   signOut() {

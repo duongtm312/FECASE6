@@ -62,19 +62,16 @@
         </div>
 
         <!-- Select option -->
-        <div class="col-md-3">
-          <!-- Short by filter -->
-          <form>
-            <select class="form-select js-choice border-0 z-index-9 bg-transparent" aria-label=".form-select-sm">
-              <option value="">Sort by</option>
-              <option (click)="sortByExpire()">Expire</option>
-              <option>Newest</option>
-              <option>Most popular</option>
-              <option>Most Viewed</option>
-            </select>
-          </form>
+        <div class="dropdown">
+          <button class="nut_dropdown">Sort by:<span class="text-theme">Expire</span> &nbsp;&nbsp;</button>
+          <div class="noidung_dropdown">
+            <a (click)="findExpire()">By Expire</a>
+            <a (click)="findExpired()">By Expired</a>
+          </div>
         </div>
       </div>
+
+
       <!-- Search and select END -->
 
       <!-- Course list table START -->

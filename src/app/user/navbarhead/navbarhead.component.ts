@@ -3,7 +3,6 @@ import {ScriptService} from "../../script.service";
 import {LoginService} from "../../auth/service/login.service";
 import {Router} from "@angular/router";
 import {UserProfileService} from "../service/user-profile.service";
-import {AppUser} from "../../model/AppUser";
 
 @Component({
   selector: 'app-navbarhead',
@@ -11,10 +10,15 @@ import {AppUser} from "../../model/AppUser";
   styleUrls: ['./navbarhead.component.css']
 })
 export class NavbarheadComponent implements OnInit {
-
-  constructor(private script: ScriptService,private loginService:LoginService,private router:Router) { }
+profile:any
+  constructor(private script: ScriptService,private loginService:LoginService,
+              private router:Router,private userService:UserProfileService) { }
 
   ngOnInit(): void {
+    this.userService.getProfileFull().subscribe((data)=>{
+      this.profile = data
+
+    })
   }
   signOut(){
     this.loginService.setToken("");

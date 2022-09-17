@@ -16,7 +16,7 @@ import {ScoreQuiz} from "../../model/ScoreQuiz";
 export class UserDashboardComponent implements OnInit {
   myCourse: MyCourse[] = []
   scoreQuiz: ScoreQuiz[] =[]
-  constructor(private myCourseService: UserMycourseService, private scoreQuizService:ScoreQuizService) {
+  constructor(private myCourseService: UserMycourseService, private scoreQuizService:ScoreQuizService, private lessonService: AdminLessonService) {
   }
 
   ngOnInit(): void {
@@ -41,12 +41,22 @@ export class UserDashboardComponent implements OnInit {
       this.myCourse = searchMyCourse
     })
   }
-  sortByExpire(){
-    this.myCourseService.checkExpire().subscribe((data) =>{
+
+  findExpired(){
+    this.myCourseService.findExpired().subscribe((data) =>{
       console.log(data)
       this.myCourse = data
     })
   }
+
+  findExpire(){
+    this.myCourseService.findExpire().subscribe((data) =>{
+      console.log(data)
+      this.myCourse = data
+    })
+  }
+
+
 
 
 }
