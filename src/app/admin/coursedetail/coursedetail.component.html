@@ -424,7 +424,8 @@
             <div class="col-12">
               <label class="form-label">Time Quiz</label>
               <input class="form-control" type="number" formControlName="timeQuiz">
-              <p *ngIf="editFormQuiz.get('timeQuiz')?.errors && editFormQuiz.get('timeQuiz')?.touched" style="color: red">Not required</p>
+              <p *ngIf="editFormQuiz.get('timeQuiz')?.errors?.['required'] && editFormQuiz.get('timeQuiz')?.touched" style="color: red">Not required</p>
+              <p *ngIf="editFormQuiz.get('timeQuiz')?.errors?.['min'] && editFormQuiz.get('timeQuiz')?.touched" style="color: red">Time must be greater than 0</p>
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success my-0" data-bs-dismiss="modal" >Save Quiz</button>

@@ -8,8 +8,7 @@
       <div class="row">
         <div class="col-12 text-center">
           <!-- Title -->
-          <h1 class="text-white">Submit a new Course</h1>
-          <p class="text-white mb-0">Read our <a href="#" class="text-white"><u>"Before you create a course"</u></a> article before submitting!</p>
+          <h1 class="text-white">Edit Course</h1>
         </div>
       </div>
     </div>
@@ -24,7 +23,6 @@
       <div class="row">
         <div class="col-md-8 mx-auto text-center">
           <!-- Content -->
-          <p class="text-center">Use this interface to add a new Course to the portal. Once you are done adding the item it will be reviewed for quality. If approved, your course will appear for sale and you will be informed by email that your course has been accepted.</p>
         </div>
       </div>
 
@@ -56,37 +54,42 @@
                     </div>
                     <!-- Course title -->
                     <div class="col-12">
-                      <label class="form-label">Course Name</label>
+                      <label class="form-label">Course Name <a style="color:red;">*</a></label>
                       <input class="form-control" type="text" placeholder="Enter course title" formControlName="nameCourse">
                       <p *ngIf="editForm.get('nameCourse')?.errors && editForm.get('nameCourse')?.touched" style="color: red">Not required</p>
                     </div>
 
                     <!-- Short description -->
                     <div class="col-12">
-                      <label class="form-label">Short description</label>
+                      <label class="form-label">Short description <a style="color:red;">*</a></label>
                       <textarea class="form-control" rows="2" placeholder="Enter keywords" formControlName="shortDescription"></textarea>
                       <p *ngIf="editForm.get('shortDescription')?.errors && editForm.get('shortDescription')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course Img -->
                     <div class="col-md-6">
-                      <label class="form-label">Course Image</label>
+                      <label class="form-label">Course Image <a style="color:red;">*</a></label>
                       <input type="file" #uploadFile1 class="form-control" placeholder="Enter course image" >
                     </div>
                     <!-- Course price -->
                     <div class="col-md-6">
-                      <label class="form-label">Course price</label>
+                      <label class="form-label">Course price ($) <a style="color:red;">*</a></label>
                       <input type="number" class="form-control" placeholder="Enter course price" formControlName="priceCourse">
-                      <p *ngIf="editForm.get('priceCourse')?.errors && editForm.get('priceCourse')?.touched" style="color: red">Not required</p>
+                      <p *ngIf="editForm.get('priceCourse')?.errors?.['required'] && editForm.get('priceCourse')?.touched" style="color: red">Not required</p>
+                      <p *ngIf="editForm.get('priceCourse')?.errors?.['min'] && editForm.get('priceCourse')?.touched"  style="color: red">Course's price must be greater than 0 </p>
+
                     </div>
                     <!-- Course time -->
                     <div class="col-md-6">
-                      <label class="form-label">Course time</label>
-                      <input class="form-control" type="text" placeholder="Enter course time" formControlName="timeCourse">
-                      <p *ngIf="editForm.get('timeCourse')?.errors && editForm.get('timeCourse')?.touched" style="color: red">Not required</p>
+                      <label class="form-label">Course time <a style="color:red;">*</a></label>
+                      <input class="form-control" type="number" placeholder="Enter course time" formControlName="timeCourse">
+                      <p *ngIf="editForm.get('timeCourse')?.errors?.['required'] && editForm.get('timeCourse')?.touched" style="color: red">Not required</p>
+                      <p *ngIf="editForm.get('timeCourse')?.errors?.['min'] && editForm.get('timeCourse')?.touched"  style="color: red">Course duration must be greater than 0 </p>
+
+
                     </div>
                     <!--                    CourseInstructor-->
                     <div class="col-md-6" >
-                      <label class="form-label">Course Instructor</label >
+                      <label class="form-label">Course Instructor <a style="color:red;">*</a></label >
                       <select class="form-select js-choice border-1 z-index-9 bg-transparent" aria-label=".form-select-sm" data-search-enabled="true" formControlName="instructor" >
                         <option *ngFor="let i of instructor" [value]="i.idInstructor">{{i.nameInstructor}}</option>
                       </select>
@@ -94,7 +97,7 @@
 
                     <!-- Course description -->
                     <div class="col-12">
-                      <label class="form-label">Add description</label>
+                      <label class="form-label">Add description <a style="color:red;">*</a></label>
                       <!-- Editor toolbar -->
                       <div>
                         <textarea  class="form-control" rows="3" formControlName="descriptionCourse"></textarea>
@@ -106,8 +109,9 @@
 
                     <!-- Step 1 button -->
                     <div class="d-flex justify-content-end mt-3">
+
+                      <a class="btn btn-secondary next-btn mb-0" href="/admin/courseCategory">Back</a>
                       <button class="btn btn-primary next-btn mb-0" type="submit">Save</button>
-                      <a class="btn btn-danger next-btn mb-0" href="/admin/courseCategory">Back</a>
                     </div>
 
                   </div>
