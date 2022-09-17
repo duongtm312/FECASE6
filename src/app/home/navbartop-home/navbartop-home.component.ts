@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {LoginService} from "../../auth/service/login.service";
 import {Router} from "@angular/router";
 import Swal from "sweetalert2";
@@ -11,6 +11,7 @@ import {UserProfileService} from "../../user/service/user-profile.service";
 })
 export class NavbartopHomeComponent implements OnInit {
 profile:any
+  avatar:any
   constructor(private loginService: LoginService, private router: Router,
               private userService:UserProfileService) {
   }
@@ -54,7 +55,6 @@ profile:any
       }
     })
   }
-
 
 
 }
