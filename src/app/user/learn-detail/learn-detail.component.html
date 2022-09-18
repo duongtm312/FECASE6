@@ -23,7 +23,7 @@
 
               <!-- button -->
               <a [href]="'/user/learn/'+course.idCourse" class="btn btn-primary-soft btn-sm mb-0">Resume course</a>
-              <a style="margin-left: 10px"  [href]="'/user/quiz/'+course.idCourse" class="btn btn-primary-soft btn-sm mb-0">Quizzes</a>
+              <a style="margin-left: 10px" *ngIf="myCourse.completionProgress == 100"  [href]="'/user/quiz/'+course.idCourse" class="btn btn-primary-soft btn-sm mb-0">Quizzes</a>
               <a style="margin-left: 10px" *ngIf="checkScoreQuiz()"  [href]="'/user/certificate/'+course.idCourse" class="btn btn-primary-soft btn-sm mb-0">Get certificate</a>
 
 
