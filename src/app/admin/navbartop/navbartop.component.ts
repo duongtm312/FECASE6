@@ -53,6 +53,7 @@ export class NavbartopComponent  implements OnInit, OnChanges {
     let notis: Notification[] = [noti]
     this.notificationService.doneNotification(notis).subscribe(() => {
       this.getAll()
+      this.router.navigate(["/admin/"+noti.type])
     })
   }
 

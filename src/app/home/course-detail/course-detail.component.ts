@@ -142,7 +142,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.courseService.buyCourse(idCourse).subscribe((data) => {
         if (data != null) {
           this.messageBuySuccess()
-          this.sendNotification()
+          this.sendNotification('Bought the course','earning')
         } else {
           this.messageBuyFail()
         }
@@ -164,17 +164,19 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     });
   }
 
-  sendNotification() {
+  sendNotification(titel:string,type:string) {
     this.stompClient.send(
       '/app/notification.send',
       {},
       // Dữ liệu được gửi đi
       JSON.stringify({
         'idNotification': 0,
-        'title': 'Bought the course',
+        'title': titel,
         'timeNotification': new Date(),
         'appUser': this.proFile,
-        'status': false
+        'status': false,
+        'sendTo': 'admin',
+        'type':type
       })
     );
   }
@@ -258,6 +260,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     this.courseService.saveRating(this.idCourse, this.ratingForm.value).subscribe((data) => {
       if (data != null) {
         this.messageRatingSuccess()
+        this.sendNotification('Rating the course','allRating')
       } else {
         this.messageRatingFail()
       }

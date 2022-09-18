@@ -6,6 +6,9 @@ import {AdminBillService} from "../../admin/service/admin-bill.service";
 import {LoginService} from "../../auth/service/login.service";
 import {Bill} from "../../model/Bill";
 import { DatePipe } from '@angular/common';
+import {Stomp} from "@stomp/stompjs";
+import {ChangeProfileUser} from "../../model/ChangeProfileUser";
+import {UserProfileService} from "../service/user-profile.service";
 
 @Component({
   selector: 'app-user-payment',
@@ -15,7 +18,9 @@ import { DatePipe } from '@angular/common';
 export class UserPaymentComponent implements OnInit {
   bills:Bill[] =[]
   pipe = new DatePipe('en-US');
-  constructor(private reqChargeService:ReqRechargeService,private billService:AdminBillService,private loginService:LoginService) { }
+  private stompClient:any
+  proFile!: ChangeProfileUser
+  constructor(private reqChargeService:ReqRechargeService, private userService: UserProfileService,private billService:AdminBillService,private loginService:LoginService) { }
 
   ngOnInit(): void {
     this.billService.getAllByIdUser().subscribe((data)=>{
@@ -25,6 +30,10 @@ export class UserPaymentComponent implements OnInit {
       }
       console.log(data)
     })
+    this.userService.getProfileFull().subscribe(data => {
+      this.proFile = data
+    })
+    this.connect()
   }
   rechargeForm = new FormGroup({
     money: new FormControl("",[Validators.min(20),Validators.required])
@@ -32,6 +41,7 @@ export class UserPaymentComponent implements OnInit {
   p: any
   reqRecharge(){
         this.reqChargeService.reqRecharge(this.rechargeForm.value).subscribe(()=>{
+          this.sendNotification('Request Recharge','earning')
           this.rechargeForm.reset()
           this.message()
         })
@@ -49,5 +59,34 @@ export class UserPaymentComponent implements OnInit {
     })
 
   }
+  connect() {
+    // đường dẫn đến server
+    const socket = new WebSocket('ws://localhost:8081/socket/websocket');
+    this.stompClient = Stomp.over(socket);
+    const _this = this;
+    this.stompClient.connect({}, function (frame: any) {
+      console.log('Connected: ' + frame);
 
+      // là chờ xèm thằng server gửi về.
+      // _this.stompClient.subscribe('/notification/admin', function (hello: any) {
+      // });
+    });
+  }
+
+  sendNotification(titel:string,type:string) {
+    this.stompClient.send(
+      '/app/notification.send',
+      {},
+      // Dữ liệu được gửi đi
+      JSON.stringify({
+        'idNotification': 0,
+        'title': titel,
+        'timeNotification': new Date(),
+        'appUser': this.proFile,
+        'status': false,
+        'sendTo': 'admin',
+        'type':type
+      })
+    );
+  }
 }
