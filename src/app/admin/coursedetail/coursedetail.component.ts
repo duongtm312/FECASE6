@@ -42,7 +42,7 @@ export class CoursedetailComponent implements OnInit {
           idQuiz: new FormControl(this.course.quiz.idQuiz),
           nameQuiz: new FormControl(this.course.quiz.nameQuiz,[Validators.required]),
           numberOfQuiz: new FormControl(this.course.quiz.numberOfQuiz),
-          timeQuiz: new FormControl(this.course.quiz.timeQuiz,[Validators.required])
+          timeQuiz: new FormControl(this.course.quiz.timeQuiz,[Validators.required,Validators.min(1)])
         })
       })
       this.ratingService.getAllById(this.idCourse).subscribe((data)=>{

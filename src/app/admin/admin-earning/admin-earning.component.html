@@ -101,7 +101,7 @@
 <!--                  <a  (click)="reChargeUser(r.money,r.appUser.idUser,r.idRequest)" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top">-->
 <!--                    Confirm-->
 <!--                  </a>-->
-                  <a style="color:blue;" href="#aboutModal"  data-bs-toggle="modal" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-target="#myModal" (click)="setInst(r)">Confirm</a>
+                  <a style="color:blue;" href="#aboutModal"  data-bs-toggle="modal" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-target="#myModal" (click)="setInst(r)">Check</a>
 
                 </td>
               </tr>
@@ -144,10 +144,10 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title" id="myModalLabel">Thông Tin Nạp Tiền Tài Khoản</h4>
+              <h3 class="modal-title" id="myModalLabel">Request information</h3>
             </div>
             <div class="modal-body">
-              <h3 class="media-heading">Name User: {{profileBill?.appUser.fullName}} </h3>
+              <h6 class="media-heading">User name: {{profileBill?.appUser.fullName}} </h6>
 
               <hr>
 
@@ -155,10 +155,10 @@
               <p class="text-left"><strong>PaymentMethod: {{profileBill?.paymentMethod}} </strong><br></p>
               <p class="text-left"><strong>Amount: {{profileBill?.money}} </strong><br></p>
               <br>
-              <a  (click)="reChargeUser(profileBill.money,profileBill.appUser.idUser,profileBill.idRequest)" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-dismiss="modal" > Confirm</a>
+              <div class="modal-footer">
               <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
-
-
+              <a  (click)="reChargeUser(profileBill.money,profileBill.appUser.idUser,profileBill.idRequest)" class="btn btn-success-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-dismiss="modal" > Confirm</a>
+              </div>
             </div>
           </div>
 

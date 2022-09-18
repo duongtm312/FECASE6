@@ -8,8 +8,7 @@
       <div class="row">
         <div class="col-12 text-center">
           <!-- Title -->
-          <h1 class="text-white">Submit a new Lesson</h1>
-          <p class="text-white mb-0">Read our <a href="#" class="text-white"><u>"Before you create a course"</u></a> article before submitting!</p>
+          <h1 class="text-white">Edit Lesson</h1>
         </div>
       </div>
     </div>
@@ -24,7 +23,6 @@
       <div class="row">
         <div class="col-md-8 mx-auto text-center">
           <!-- Content -->
-          <p class="text-center">Use this interface to add a new Course to the portal. Once you are done adding the item it will be reviewed for quality. If approved, your course will appear for sale and you will be informed by email that your course has been accepted.</p>
         </div>
       </div>
 
@@ -44,7 +42,7 @@
                 <!-- Step 1 content START -->
                 <div id="step-1" role="tabpanel" class="content " >
                   <!-- Title -->
-                  <h4>Course details</h4>
+                  <h4>Lesson details </h4>
 
                   <hr> <!-- Divider -->
 
@@ -52,29 +50,29 @@
                   <div class="row g-4">
                     <!-- Course title -->
                     <div class="col-12" hidden>
-                      <label class="form-label">Lesson Name</label>
+                      <label class="form-label">Lesson Name </label>
                       <input class="form-control" placeholder="Enter lesson title" formControlName="idLesson">
                     </div>
                     <div class="col-12">
-                      <label class="form-label">Lesson Name</label>
+                      <label class="form-label">Lesson Name <a style="color:red;">*</a></label>
                       <input class="form-control" placeholder="Enter lesson title" formControlName="nameLesson">
                       <p *ngIf="editForm.get('nameLesson')?.errors && editForm.get('nameLesson')?.touched" style="color: red">Not required</p>
                     </div>
 
                     <!-- Short description -->
                     <div class="col-12">
-                      <label class="form-label">Lesson description</label>
+                      <label class="form-label">Lesson description <a style="color:red;">*</a></label>
                       <textarea class="form-control" rows="2" placeholder="Enter keywords" formControlName="contentLesson"></textarea>
                       <p *ngIf="editForm.get('contentLesson')?.errors && editForm.get('contentLesson')?.touched" style="color: red">Not required</p>
                     </div>
                     <!-- Course Img -->
                     <div class="col-md-6">
-                      <label class="form-label">Lesson Video</label>
+                      <label class="form-label">Lesson Video <a style="color:red;">*</a></label>
                       <input type="file" #uploadFile1 class="form-control" placeholder="Enter lesson video" >
                     </div>
                     <!-- Course price -->
                     <div class="col-md-6">
-                      <label class="form-label">Time Lesson</label>
+                      <label class="form-label">Time Lesson <a style="color:red;">*</a></label>
                       <input type="text" class="form-control" placeholder="Enter time lesson" formControlName="timeLesson">
                       <p *ngIf="editForm.get('timeLesson')?.errors && editForm.get('timeLesson')?.touched" style="color: red">Not required</p>
                     </div>
@@ -83,8 +81,9 @@
 
                   <!-- Step 1 button -->
                   <div class="d-flex justify-content-end mt-3">
+                    <a class="btn btn-secondary next-btn mb-0" [href]="'/admin/courseDetail/'+idCourse">Back</a>
                     <button class="btn btn-primary next-btn mb-0" type="submit">Save</button>
-                    <a class="btn btn-danger next-btn mb-0" [href]="'/admin/courseDetail/'+idCourse">Back</a>
+
                   </div>
 
                 </div>
