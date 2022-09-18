@@ -14,6 +14,7 @@ import {LoginService} from "../../auth/service/login.service";
 import Swal from "sweetalert2";
 import {Lesson} from "../../model/Lesson";
 import {LessonService} from "../../user/service/lessonService";
+import {UserMycourseService} from "../../user/service/user-mycourse.service";
 
 @Component({
   selector: 'app-course-detail',
@@ -35,11 +36,12 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   lessons: Lesson[]=[]
   checkBuyCourse:any
   checkRated : any
+  checkTimeCourse: any
 
   constructor(private script: ScriptService, private route: ActivatedRoute,
               private courseService: CourceService, private router: Router,
               private userService: UserProfileService, private loginService: LoginService,
-              private lessonService: LessonService) {
+              private lessonService: LessonService,private myCourseService:UserMycourseService) {
   }
 
   numRating: number = 0
@@ -89,6 +91,11 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       })
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
         this.lessons = data
+      })
+      this.myCourseService.getMyCourseLearn(this.idCourse).subscribe((data)=>{
+        console.log(data.course.nameCourse)
+        if (data.statusMyCourse) this.checkTimeCourse = true
+        else this.checkTimeCourse = false
       })
       this.courseService.getAllRating(this.idCourse).subscribe((data) => {
         for (const cmt of data) {
@@ -145,15 +152,27 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.confirmLogIn()
     }else
       if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_USER")) {
-      this.courseService.buyCourse(idCourse).subscribe((data) => {
-        if (data != null) {
-          this.messageBuySuccess()
-          this.sendNotification('Bought the course','earning')
-        } else {
-          this.messageBuyFail()
-        }
-      })
+        if (!this.checkTimeCourse){
+          this.courseService.buyCourse(idCourse).subscribe((data) => {
+            if (data != null) {
+              this.checkTimeCourse = true
+              this.messageBuySuccess()
+              this.sendNotification('Bought the course','earning')
+            } else {
+              this.messageBuyFail()
+            }
+          })
+        } else this.messageTimeCourse()
+
     }
+  }
+  messageTimeCourse(){
+    Swal.fire({
+      position: 'center',
+      icon: 'error',
+      title: 'The course has not expired, cannot be purchased',
+      showConfirmButton: true,
+    })
   }
 
   connect() {
