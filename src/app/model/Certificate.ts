@@ -10,5 +10,5 @@ export class Certificate {
 
   AppUser!: AppUser
 
-  createAt!:Date
+  createAt!:string | null
 }

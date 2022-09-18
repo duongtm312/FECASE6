@@ -12,6 +12,7 @@ import {QuizService} from "../service/quiz.service";
 import {Bill} from "../../model/Bill";
 import {AdminBillService} from "../service/admin-bill.service";
 import Swal from 'sweetalert2';
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-coursedetail',
@@ -26,6 +27,7 @@ export class CoursedetailComponent implements OnInit {
   totalCourseEarning:any
   enrollment:any
   editFormQuiz: any
+  pipe = new DatePipe('en-US');
   constructor(private script: ScriptService, private courseService: AdminCourseService,private route: ActivatedRoute,private ratingService:AdminCommentService,private lessonService:AdminLessonService,private router: Router,private billService:AdminBillService,private quizService: QuizService) {
   }
 

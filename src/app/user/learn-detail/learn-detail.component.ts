@@ -7,6 +7,7 @@ import {UserMycourseService} from "../service/user-mycourse.service";
 import {QuizService} from "../../admin/service/quiz.service";
 import {ScoreQuizService} from "../../admin/service/score-quiz.service";
 import {ScoreQuiz} from "../../model/ScoreQuiz";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-learn-detail',
@@ -22,6 +23,7 @@ export class LearnDetailComponent implements OnInit {
   completionProgress:any
   idQuiz:any
   scoreQuiz: ScoreQuiz[] = []
+  pipe = new DatePipe('en-US');
   constructor(private courseService:CourceService,private lessonService:LessonService,
               private route: ActivatedRoute, private myCourseService:UserMycourseService,
               private scoreQuizService: ScoreQuizService) { }
@@ -33,8 +35,10 @@ export class LearnDetailComponent implements OnInit {
         this.course = data
         this.idQuiz = data.quiz.idQuiz
         this.scoreQuizService.getAllUser(this.idQuiz).subscribe((data)=>{
+          for (const b of data) {
+            b.date = this.pipe.transform(b.date,'yyyy-MM-dd')
+          }
           this.scoreQuiz = data
-          console.log(data)
         })
 
       })

@@ -30,10 +30,10 @@ bill:Bill[] =[]
 
   ngOnInit(): void {
     this.billService.getAll().subscribe((data)=>{
-      this.bill = data
       for (const b of data) {
         b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
       }
+      this.bill = data
       for (const b of data) {
         if(b.status == true){
           if(b.contentBill == "Recharge"){

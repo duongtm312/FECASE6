@@ -96,8 +96,67 @@
   <!-- Card body START -->
 </div>
 <!-- Payment method END -->
+<div class="card bg-transparent border">
 
+  <div class="card-header bg-light border-bottom">
+    <h5 class="mb-0">Request sent</h5>
+  </div>
+<div class="card-body pb-0">
+  <!-- Table START -->
+  <div class="table-responsive border-0">
+    <table class="table table-dark-gray align-middle p-4 mb-0 table-hover">
+      <!-- Table head -->
+      <thead>
+      <tr>
+        <th scope="col" class="border-0 rounded-start">#</th>
+        <th scope="col" class="border-0">Date</th>
+        <th scope="col" class="border-0">Payment Method</th>
+        <th scope="col" class="border-0">Amount</th>
+        <th scope="col" class="border-0 rounded-end">Action</th>
+      </tr>
+      </thead>
 
+      <!-- Table body START -->
+      <tbody>
+
+      <!-- Table row -->
+      <tr *ngFor="let r of reqRecharges | paginate: {id: 'pagination1',itemsPerPage: 6, currentPage: g},let j = index">
+        <!-- Table data -->
+        <td>{{j + 1}}</td>
+        <td>
+          <h6>{{r.createAt}}</h6>
+          <!--                  <img src="assets/images/client/mastercard.svg" class="h-50px" alt="">-->
+        </td>
+
+        <!-- Table data -->
+        <td>{{r.paymentMethod}}
+
+        </td>
+        <td>${{r.money}}</td>
+        <td>
+          <!--                  <a  (click)="reChargeUser(r.money,r.appUser.idUser,r.idRequest)" class="btn btn-primary-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top">-->
+          <!--                    Confirm-->
+          <!--                  </a>-->
+          <a  class="btn btn-danger-soft me-1 mb-1 mb-md-0" (click)="confirm(r.idRequest)"  >Cancel</a>
+
+        </td>
+      </tr>
+
+      </tbody>
+      <!-- Table body END -->
+    </table>
+  </div>
+  <!-- Table END -->
+</div>
+  <div class="card-footer bg-transparent">
+    <!-- Pagination START -->
+    <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
+      <pagination-controls id="pagination1" class="pagination pagination-sm pagination-primary-soft d-inline-block d-md-flex rounded mb-0" class="myPagination" (pageChange)="g = $event">
+      </pagination-controls>
+    </div>
+    <!-- Pagination END -->
+  </div>
+</div>
 <!-- Billing history START -->
 <div class="card bg-transparent border rounded-3">
   <!-- Card header START -->

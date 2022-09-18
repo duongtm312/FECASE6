@@ -34,6 +34,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   proFile!: ChangeProfileUser
   lessons: Lesson[]=[]
   checkBuyCourse:any
+  checkRated : any
 
   constructor(private script: ScriptService, private route: ActivatedRoute,
               private courseService: CourceService, private router: Router,
@@ -72,6 +73,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.idCourse = paramMap.get('idCourse');
       this.courseService.findById(this.idCourse).subscribe((data) => {
         this.course = data
+
         this.ratingCourse = data.numRating
       })
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
@@ -82,6 +84,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
 
       })
       this.courseService.checkBuyCourse(this.idCourse).subscribe((data)=>{
+        console.log(data)
         this.checkBuyCourse = data
       })
       this.lessonService.getAllById(this.idCourse).subscribe((data)=>{
@@ -90,7 +93,6 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.courseService.getAllRating(this.idCourse).subscribe((data) => {
         for (const cmt of data) {
           cmt.timeRating = this.transform(cmt.timeRating)
-          console.log(cmt.timeRating)
         }
         this.ratings = data
         this.numRating = data.length
@@ -125,6 +127,10 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     })
     this.userService.getProfileFull().subscribe(data => {
       this.proFile = data
+    })
+    this.courseService.checkRated(this.idCourse).subscribe((data) =>{
+      console.log(data)
+      this.checkRated = data
     })
   }
 
@@ -255,6 +261,8 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     this.numRate = rate
     this.ratingForm.controls["numStar"]?.setValue(rate)
   }
+
+
 
   saveRating() {
     this.courseService.saveRating(this.idCourse, this.ratingForm.value).subscribe((data) => {
