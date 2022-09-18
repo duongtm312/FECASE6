@@ -393,7 +393,7 @@
                   <!-- Student review END -->
 
                   <!-- Leave Review START -->
-                  <div class="mt-2" *ngIf="checkLogIn() && checkBuyCourse" >
+                  <div class="mt-2" *ngIf="checkLogIn() && checkBuyCourse && checkRated" >
                     <h5 class="mb-4">Leave a Review</h5>
                     <form class="row g-3" [formGroup]="ratingForm" (ngSubmit)="saveRating()">
                       <!-- Name -->
@@ -954,11 +954,11 @@ Footer START -->
           <div class="col-6 col-md-4">
             <h5 class="mb-2 mb-md-4">Founder</h5>
             <ul class="nav flex-column">
-              <li class="nav-item"><a class="nav-link" href="#">Bùi Công Anh</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Trần Minh Dương</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Nguyễn Thu Hồi</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Nguyễn Công Nghiệp</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Hoàng Trần Duy Long</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Bui Cong Anh</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Tran Minh Duong</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Nguyen Thu Hoi</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Nguyen Cong Nghiep</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Hoang Tran Duy Long</a></li>
             </ul>
           </div>
         </div>
