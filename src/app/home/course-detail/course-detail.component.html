@@ -76,6 +76,7 @@
                 <div class="tab-pane fade show active" id="course-pills-1" role="tabpanel" aria-labelledby="course-pills-tab-1">
                   <!-- Course detail START -->
                   <h5 class="mb-3">Course Description</h5>
+                  <br>
                   <p class="mb-3">{{course.descriptionCourse}}</p>
 <!--                  <p class="mb-3">Welcome to the <strong> {{course.nameCourse}}</strong></p>-->
 <!--                  <p class="mb-3">In this practical hands-on training, you’re going to learn to become a digital marketing expert with this <strong> ultimate course bundle that includes 12 digital marketing courses in 1!</strong></p>-->
@@ -159,7 +160,7 @@
                         <div class="card-body">
                           <!-- Title -->
                           <h3 class="card-title mb-0">{{course.instructor.nameInstructor}}</h3>
-                          <p class="mb-2">{{course.instructor.phoneInstructor}}</p>
+                          <p class="mb-2"><span style="color: #066ac9">Phone number:</span> {{course.instructor.phoneInstructor}}</p>
                           <!-- Social button -->
 <!--                          <ul class="list-inline mb-3">-->
 <!--                            <li class="list-inline-item me-3">-->
@@ -373,7 +374,7 @@
                         <!-- Info -->
 
                         <p class="mb-2">{{r?.contentRating}}</p>
-                        <p>{{r.timeRating}}</p>
+                        <p>{{r?.timeRating}}</p>
                         <!-- Like and dislike button -->
                       </div>
                     </div>
@@ -436,7 +437,8 @@
                           <div class="card-body">
                             <!-- Title -->
                             <h3 class="card-title mb-0">{{course.nameCourse}}</h3>
-                            <p class="mb-2">{{course.descriptionCourse}}</p>
+                            <br>
+<!--                            <p class="mb-2">{{course.shortDescription}}</p>-->
                             <!-- Social button -->
 
 
