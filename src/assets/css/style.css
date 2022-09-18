@@ -19472,8 +19472,8 @@ section {
 }
 
 .bg-grad {
-  background: -webkit-gradient(linear, left bottom, left top, from(#f28e26), to(#fd644f));
-  background: linear-gradient(360deg, #f28e26 0%, #fd644f 100%);
+  background: -webkit-gradient(linear, left bottom, left top, from(#F4AA01), to(#F1A76B));
+  background: linear-gradient(360deg, #F4AA01 0%, #F1A76B 100%);
 }
 
 .bg-grad-pink {
