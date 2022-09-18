@@ -9,7 +9,6 @@ import { DatePipe } from '@angular/common';
 import {Stomp} from "@stomp/stompjs";
 import {ChangeProfileUser} from "../../model/ChangeProfileUser";
 import {UserProfileService} from "../service/user-profile.service";
-
 @Component({
   selector: 'app-user-payment',
   templateUrl: './user-payment.component.html',

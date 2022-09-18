@@ -73,6 +73,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
       this.idCourse = paramMap.get('idCourse');
       this.courseService.findById(this.idCourse).subscribe((data) => {
         this.course = data
+
         this.ratingCourse = data.numRating
       })
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
