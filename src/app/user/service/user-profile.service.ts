@@ -7,6 +7,7 @@ import {ChangeProfileUser} from "../../model/ChangeProfileUser";
 import {ChangePassword} from "../../model/ChangePassword";
 import {ChangeAvatar} from "../../model/ChangeAvatar";
 import {Page} from "../../model/Page";
+import {Wallet} from "../../model/Wallet";
 const API_URL = `${environment.apiUrl}`;
 
 @Injectable({
@@ -49,5 +50,8 @@ export class UserProfileService {
 
   activatedUser(idUser:any):Observable<AppUser>{
     return this.http.get<AppUser>(`${API_URL}/admin/activatedUser/${idUser}`)
+  }
+  findWallet(): Observable<Wallet> {
+    return this.http.get<Wallet>(`${API_URL}/wallet`);
   }
 }

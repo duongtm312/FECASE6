@@ -12,6 +12,7 @@ import {UserProfileService} from "../../user/service/user-profile.service";
 export class NavbartopHomeComponent implements OnInit {
 profile:any
   avatar:any
+  wallet:any
   constructor(private loginService: LoginService, private router: Router,
               private userService:UserProfileService) {
   }
@@ -19,7 +20,9 @@ profile:any
   ngOnInit(): void {
     this.userService.getProfileFull().subscribe((data)=>{
       this.profile = data
-
+    })
+    this.userService.findWallet().subscribe((data)=>{
+      this.wallet = data
     })
   }
 

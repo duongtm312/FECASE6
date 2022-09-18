@@ -16,6 +16,7 @@ export class NavbarheadComponent implements OnInit {
   profile:any
   statusNoti:boolean=false
   notification: Notification[] = []
+  wallet:any
   private stompClient: any;
   constructor(private script: ScriptService,private loginService:LoginService,
               private router:Router,private userService:UserProfileService,private notificationService: NotificationService) { }
@@ -25,7 +26,9 @@ export class NavbarheadComponent implements OnInit {
       this.profile = data
       this.getAll()
       this.connect()
-
+    })
+    this.userService.findWallet().subscribe((data)=>{
+      this.wallet=data
     })
 
 

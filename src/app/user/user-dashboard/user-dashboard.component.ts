@@ -7,6 +7,7 @@ import {
 } from "@angular-devkit/build-angular/src/builders/browser-esbuild/experimental-warnings";
 import {ScoreQuizService} from "../../admin/service/score-quiz.service";
 import {ScoreQuiz} from "../../model/ScoreQuiz";
+import {CertificateService} from "../service/certificate.service";
 
 @Component({
   selector: 'app-user-dashboard',
@@ -16,7 +17,10 @@ import {ScoreQuiz} from "../../model/ScoreQuiz";
 export class UserDashboardComponent implements OnInit {
   myCourse: MyCourse[] = []
   scoreQuiz: ScoreQuiz[] =[]
-  constructor(private myCourseService: UserMycourseService, private scoreQuizService:ScoreQuizService, private lessonService: AdminLessonService) {
+  g:any
+  checkCer:any
+  constructor(private myCourseService: UserMycourseService, private scoreQuizService:ScoreQuizService,
+              private lessonService: AdminLessonService,private cerService:CertificateService) {
   }
 
   ngOnInit(): void {
@@ -24,7 +28,6 @@ export class UserDashboardComponent implements OnInit {
       this.myCourse = data
     })
     this.myCourseService.checkExpire().subscribe()
-
   }
 
   search(input: any){

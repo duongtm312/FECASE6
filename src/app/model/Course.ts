@@ -1,5 +1,6 @@
 import {Instructor} from "./Instructor";
 import {Quiz} from "./Quiz";
+import {Certificate} from "./Certificate";
 
 export class Course{
   idCourse!:number
@@ -16,6 +17,7 @@ export class Course{
   numRating!:number
   quiz!:Quiz
   numLesson!:number
+
 
 
   constructor(idCourse: number, nameCourse: string, priceCourse: number, imgCourse: string, enrolled: number, descriptionCourse: string, timeCourse: number, instructor: Instructor, quantity: number, statusCourse: boolean, numRating: number, quiz: Quiz) {
