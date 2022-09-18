@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 import {Stomp} from "@stomp/stompjs";
 import {ChangeProfileUser} from "../../model/ChangeProfileUser";
 import {UserProfileService} from "../service/user-profile.service";
+import {RequestRecharge} from "../../model/RequestRecharge";
 @Component({
   selector: 'app-user-payment',
   templateUrl: './user-payment.component.html',
@@ -19,6 +20,8 @@ export class UserPaymentComponent implements OnInit {
   pipe = new DatePipe('en-US');
   private stompClient:any
   proFile!: ChangeProfileUser
+  reqRecharges: RequestRecharge[] =[]
+  g: any;
   constructor(private reqChargeService:ReqRechargeService, private userService: UserProfileService,private billService:AdminBillService,private loginService:LoginService) { }
 
   ngOnInit(): void {
@@ -33,6 +36,12 @@ export class UserPaymentComponent implements OnInit {
       this.proFile = data
     })
     this.connect()
+    this.reqChargeService.getAllbyUser().subscribe((data)=>{
+      for (const b of data) {
+        b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+      }
+      this.reqRecharges = data
+    })
   }
   rechargeForm = new FormGroup({
     money: new FormControl("",[Validators.min(20),Validators.required])
@@ -43,6 +52,12 @@ export class UserPaymentComponent implements OnInit {
           this.sendNotification('Request Recharge','earning')
           this.rechargeForm.reset()
           this.message()
+          this.reqChargeService.getAllbyUser().subscribe((data)=>{
+            for (const b of data) {
+              b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+            }
+            this.reqRecharges = data
+          })
         })
   }
   message(){
@@ -56,7 +71,6 @@ export class UserPaymentComponent implements OnInit {
         popup: 'animate__animated animate__fadeOutUp'
       }
     })
-
   }
   connect() {
     // đường dẫn đến server
@@ -88,4 +102,40 @@ export class UserPaymentComponent implements OnInit {
       })
     );
   }
+  deleteReq(idRed:any){
+    this.reqChargeService.delete(idRed).subscribe(()=>{
+      this.messageDeleteReq()
+      this.reqChargeService.getAllbyUser().subscribe((data)=>{
+        for (const b of data) {
+          b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+        }
+        this.reqRecharges = data
+      })
+    })
+  }
+  confirm(idRed:any){
+    Swal.fire({
+      title: 'Are you sure you want to cancel the request?',
+      showCancelButton: true,
+      confirmButtonText: 'Sure',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.deleteReq(idRed)
+      }
+    })
+  }
+  messageDeleteReq(){
+    Swal.fire({
+      title: 'Cancel request successfully',
+      icon: 'success',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+  }
+
 }
