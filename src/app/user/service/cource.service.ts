@@ -67,6 +67,12 @@ export class CourceService {
     return this.http.get<any>(`${API_URL}/course/checkBuy/`+idCourse)
   }
 
+  checkRated(rating: Rating):Observable<Rating>{
+    return this.http.post<Rating>(`${API_URL}/user/findRated`,rating)
+  }
+
+
+
 
 
 

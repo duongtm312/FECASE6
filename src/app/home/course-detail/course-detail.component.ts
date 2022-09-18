@@ -34,6 +34,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   proFile!: ChangeProfileUser
   lessons: Lesson[]=[]
   checkBuyCourse:any
+  checkRated : boolean = false;
 
   constructor(private script: ScriptService, private route: ActivatedRoute,
               private courseService: CourceService, private router: Router,
@@ -252,6 +253,16 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   setNumRate(rate: number) {
     this.numRate = rate
     this.ratingForm.controls["numStar"]?.setValue(rate)
+  }
+  checkRating(){
+    this.courseService.checkRated(this.idCourse).subscribe((data) =>{
+      console.log(data)
+      if (data !=null){
+        this.checkRated = false
+      }else {
+        this.checkRated = true
+
+      }    })
   }
 
   saveRating() {
