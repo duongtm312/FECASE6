@@ -62,7 +62,7 @@ bill:Bill[] =[]
   reChargeUser(money:any,idUser:any,idReq:any){
     let recharge:Recharge = new Recharge(money,idUser,idReq)
     this.messageComfig()
-    this.sendNotification(' has approved your deposit',' reCharge',this.profileBill.appUser)
+    this.sendNotification(' has approved your deposit',' payment',this.profileBill.appUser)
     this.reqRechargeService.reCharge(recharge).subscribe((data)=>{
       this.reqRechargeService.getAll().subscribe((data)=>{
         this.reqRecharges = data
