@@ -7,6 +7,7 @@ import {ScriptService} from "../../script.service";
 import {AppUser} from "../../model/AppUser";
 import Swal from "sweetalert2";
 import {DatePipe} from "@angular/common";
+import {Stomp} from "@stomp/stompjs";
 
 @Component({
   selector: 'app-admin-earning',
@@ -24,16 +25,15 @@ bill:Bill[] =[]
   g: any;
   profileBill: any;
   pipe = new DatePipe('en-US');
-
-
+  stompClient:any
   constructor(private billService:AdminBillService,private reqRechargeService:ReqRechargeService,private script:ScriptService) { }
 
   ngOnInit(): void {
     this.billService.getAll().subscribe((data)=>{
-      this.bill = data
       for (const b of data) {
         b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
       }
+      this.bill = data
       for (const b of data) {
         if(b.status == true){
           if(b.contentBill == "Recharge"){
@@ -56,11 +56,13 @@ bill:Bill[] =[]
     this.script.load('bootstrap', 'tiny-slider', 'glightbox', 'purecounter_vanilla', 'functions').then(data => {
       console.log('script loaded ', data);
     }).catch(error => console.log(error));
+    this.connect()
   }
 
   reChargeUser(money:any,idUser:any,idReq:any){
     let recharge:Recharge = new Recharge(money,idUser,idReq)
     this.messageComfig()
+    this.sendNotification(' has approved your deposit',' payment',this.profileBill.appUser)
     this.reqRechargeService.reCharge(recharge).subscribe((data)=>{
       this.reqRechargeService.getAll().subscribe((data)=>{
         this.reqRecharges = data
@@ -87,4 +89,35 @@ bill:Bill[] =[]
     })
   }
 
+  connect() {
+    // đường dẫn đến server
+    const socket = new WebSocket('ws://localhost:8081/socket/websocket');
+    this.stompClient = Stomp.over(socket);
+    const _this = this;
+    this.stompClient.connect({}, function (frame: any) {
+      console.log('Connected: ' + frame);
+
+      // // là chờ xèm thằng server gửi về.
+      // _this.stompClient.subscribe('/notification/admin', function (hello: any) {
+      //   _this.getAll();
+      // });
+
+    });
+  }
+  sendNotification(titel:string,type:string,appUser:any) {
+    this.stompClient.send(
+      '/app/notification.send',
+      {},
+      // Dữ liệu được gửi đi
+      JSON.stringify({
+        'idNotification': 0,
+        'title': titel,
+        'timeNotification': new Date(),
+        'appUser': appUser,
+        'status': false,
+        'sendTo': 'user',
+        'type':type
+      })
+    );
+  }
 }

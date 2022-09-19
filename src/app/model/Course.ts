@@ -15,6 +15,7 @@ export class Course{
   statusCourse!:boolean
   numRating!:number
   quiz!:Quiz
+  numLesson!:number
 
 
   constructor(idCourse: number, nameCourse: string, priceCourse: number, imgCourse: string, enrolled: number, descriptionCourse: string, timeCourse: number, instructor: Instructor, quantity: number, statusCourse: boolean, numRating: number, quiz: Quiz) {

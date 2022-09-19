@@ -45,7 +45,7 @@ idCourse:any
         this.scoreQuizService.getAllUser(this.idQuiz).subscribe((data) => {
           this.scoreQuiz = data
           let max:number = data[0]?.score
-          let date:Date = data[0]?.date
+          let date:string | null | undefined = data[0]?.date
           for (let i = 0; i < data.length; i++) {
             if(data[i].score > max){
               max = data[i].score

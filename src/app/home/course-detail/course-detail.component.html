@@ -76,7 +76,6 @@
                 <div class="tab-pane fade show active" id="course-pills-1" role="tabpanel" aria-labelledby="course-pills-tab-1">
                   <!-- Course detail START -->
                   <h5 class="mb-3">Course Description</h5>
-                  <br>
                   <p class="mb-3">{{course.descriptionCourse}}</p>
 <!--                  <p class="mb-3">Welcome to the <strong> {{course.nameCourse}}</strong></p>-->
 <!--                  <p class="mb-3">In this practical hands-on training, you’re going to learn to become a digital marketing expert with this <strong> ultimate course bundle that includes 12 digital marketing courses in 1!</strong></p>-->
@@ -160,53 +159,21 @@
                         <div class="card-body">
                           <!-- Title -->
                           <h3 class="card-title mb-0">{{course.instructor.nameInstructor}}</h3>
-                          <p class="mb-2"><span style="color: #066ac9">Phone number:</span> {{course.instructor.phoneInstructor}}</p>
-                          <!-- Social button -->
-<!--                          <ul class="list-inline mb-3">-->
-<!--                            <li class="list-inline-item me-3">-->
-<!--                              <a href="#" class="fs-5 text-twitter"><i class="fab fa-twitter-square"></i></a>-->
-<!--                            </li>-->
-<!--                            <li class="list-inline-item me-3">-->
-<!--                              <a href="#" class="fs-5 text-instagram"><i class="fab fa-instagram-square"></i></a>-->
-<!--                            </li>-->
-<!--                            <li class="list-inline-item me-3">-->
-<!--                              <a href="#" class="fs-5 text-facebook"><i class="fab fa-facebook-square"></i></a>-->
-<!--                            </li>-->
-<!--                            <li class="list-inline-item me-3">-->
-<!--                              <a href="#" class="fs-5 text-linkedin"><i class="fab fa-linkedin"></i></a>-->
-<!--                            </li>-->
-<!--                            <li class="list-inline-item">-->
-<!--                              <a href="#" class="fs-5 text-youtube"><i class="fab fa-youtube-square"></i></a>-->
-<!--                            </li>-->
-<!--                          </ul>-->
+                          <p class="mb-2">{{course.instructor.phoneInstructor}}</p>
 
-                          <!-- Info -->
-<!--                          <ul class="list-inline">-->
-<!--                            <li class="list-inline-item">-->
-<!--                              <div class="d-flex align-items-center me-3 mb-2">-->
-<!--                                <span class="icon-md bg-orange bg-opacity-10 text-orange rounded-circle"><i class="fas fa-user-graduate"></i></span>-->
-<!--                                <span class="h6 fw-light mb-0 ms-2">9.1k</span>-->
-<!--                              </div>-->
-<!--                            </li>-->
-<!--                            <li class="list-inline-item">-->
-<!--                              <div class="d-flex align-items-center me-3 mb-2">-->
-<!--                                <span class="icon-md bg-warning bg-opacity-15 text-warning rounded-circle"><i class="fas fa-star"></i></span>-->
-<!--                                <span class="h6 fw-light mb-0 ms-2">4.5</span>-->
-<!--                              </div>-->
-<!--                            </li>-->
-<!--                            <li class="list-inline-item">-->
-<!--                              <div class="d-flex align-items-center me-3 mb-2">-->
-<!--                                <span class="icon-md bg-danger bg-opacity-10 text-danger rounded-circle"><i class="fas fa-play"></i></span>-->
-<!--                                <span class="h6 fw-light mb-0 ms-2">29 Courses</span>-->
-<!--                              </div>-->
-<!--                            </li>-->
-<!--                            <li class="list-inline-item">-->
-<!--                              <div class="d-flex align-items-center me-3 mb-2">-->
-<!--                                <span class="icon-md bg-info bg-opacity-10 text-info rounded-circle"><i class="fas fa-comment-dots"></i></span>-->
-<!--                                <span class="h6 fw-light mb-0 ms-2">205</span>-->
-<!--                              </div>-->
-<!--                            </li>-->
-<!--                          </ul>-->
+                          <ul class="list-inline">
+
+                            <li class="list-inline-item">
+                              <div class="d-flex align-items-center me-3 mb-2">
+                                <span class="icon-md bg-warning bg-opacity-15 text-warning rounded-circle"><i class="fas fa-star"></i></span>
+                                <span class="h6 fw-light mb-0 ms-2">{{course.instructor.experience}} years experinces</span>
+                              </div>
+                            </li>
+                              <li *ngFor='let s of counter(course.instructor.experience) ;let i = index' class="list-inline-item me-0 small" ><i
+                                class="fas fa-star text-warning"></i></li>
+
+
+                          </ul>
                         </div>
                       </div>
                     </div>
@@ -374,7 +341,7 @@
                         <!-- Info -->
 
                         <p class="mb-2">{{r?.contentRating}}</p>
-                        <p>{{r?.timeRating}}</p>
+                        <p>{{r.timeRating}}</p>
                         <!-- Like and dislike button -->
                       </div>
                     </div>
@@ -437,8 +404,7 @@
                           <div class="card-body">
                             <!-- Title -->
                             <h3 class="card-title mb-0">{{course.nameCourse}}</h3>
-                            <br>
-<!--                            <p class="mb-2">{{course.shortDescription}}</p>-->
+                            <p class="mb-2">{{course.descriptionCourse}}</p>
                             <!-- Social button -->
 
 

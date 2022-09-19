@@ -1,14 +1,12 @@
 <div class="card bg-transparent border rounded-3">
 <div class="card-header bg-transparent border-bottom">
-  <div class="col-4">
-    <h3 class="mb-0">Create Certificate</h3>
-  </div>
+    <h3 class="mb-0">Certificate of {{course.nameCourse}} Course</h3>
 </div>
   <div class="card-header bg-transparent border-bottom">
 
-      <a class="button" *ngIf="checkCertificate" (click)="createCertificate()"> Create Certificate</a>
-      <a style="margin-left: 10px" (click)="generatePDF()" class="button">Download PDF file</a>
-      <a style="margin-left: 10px" (click)="generatePNG()" class="button">Download PNG file</a>
+      <a class="btn btn-primary-soft btn-sm mb-0" *ngIf="checkCertificate" (click)="createCertificate()"> Create Certificate</a>
+      <a class="btn btn-primary-soft btn-sm mb-0" style="margin-left: 10px" (click)="generatePDF()" >Download PDF file</a>
+      <a class="btn btn-primary-soft btn-sm mb-0" style="margin-left: 10px" (click)="generatePNG()" >Download PNG file</a>
 
   </div>
 <div class="card-body" id="contentToConvert">
@@ -92,6 +90,12 @@
   </div>
 </div>
 </div>
+  <div class="d-flex justify-content-end mt-3 bg-transparent border" >
+    <a class="btn btn-primary  next-btn mb-0" href="/user/myCertificate" style="margin-right: 20px">My certificate</a>
+    <a class="btn btn-primary next-btn mb-0" [href]="'/user/course-resume/'+idCourse" type="submit">Back course</a>
+  </div>
 
 </div>
+
+
 

@@ -21,4 +21,10 @@ export class ReqRechargeService {
   reqRecharge(money:any):Observable<any>{
     return this.http.post<any>(API_URL+"/wallet/reqRecharge",money)
   }
+  getAllbyUser():Observable<RequestRecharge[]>{
+    return this.http.get<RequestRecharge[]>(API_URL+"/admin/reqRechardUser")
+  }
+  delete(idReq:number):Observable<any>{
+    return this.http.get<any>(API_URL+"/admin/deleteReq/"+idReq)
+  }
 }

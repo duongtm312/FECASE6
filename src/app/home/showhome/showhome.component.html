@@ -114,7 +114,7 @@
             <div class="d-flex justify-content-between">
               <!-- Avatar -->
               <div class="avatar">
-                <img class="avatar-img rounded-circle shadow" src="{{courseNew.imgCourse}}" alt="avatar">
+                <img class="avatar-img rounded-circle shadow"  src="{{courseNew.imgCourse}}" alt="avatar">
               </div>
               <!-- Info -->
               <div class="text-start ms-3">
@@ -216,7 +216,7 @@
           <div class="card shadow-hover overflow-hidden bg-transparent">
             <div class="position-relative">
               <!-- Image -->
-              <img class="card-img-top" src="{{c.imgCourse}}" alt="Card image">
+              <img class="card-img-top" style="height:252px;width: 370px" src="{{c.imgCourse}}" alt="Card image">
               <!-- Overlay -->
               <div class="bg-overlay bg-dark opacity-4"></div>
               <div class="card-img-overlay d-flex align-items-start flex-column">
@@ -322,7 +322,7 @@
         <div class="col-6 col-md-4">
           <div class="row g-4">
             <!-- Image -->
-            <div class="col-10 col-lg-6">
+            <div class="col-10 col-lg-6" >
               <img class="rounded-4" src="assets/images/about/img_6.png" alt="">
             </div>
             <!-- Image -->
@@ -651,8 +651,6 @@
                 <ul class="list-inline mb-0">
                   <li *ngFor='let s of counter(i.experience) ;let i = index' class="list-inline-item me-0 small"><i
                     class="fas fa-star text-warning"></i></li>
-                  <li *ngFor="let s of counter(5-i.experience);let i = index" class="list-inline-item me-0 small"><i
-                    class="far fa-star text-warning"></i></li>
                 </ul>
               </div>
             </div>
@@ -671,13 +669,15 @@
 
   Action box START -->
   <br>
+  <br>
+  <br>
   <section class="py-0 pt-lg-5">
     <div class="container">
       <div class="row">
         <div class="col-12 position-relative z-index-1">
           <!-- Image -->
           <div class="d-none d-lg-block position-absolute bottom-0 start-0 ms-3 ms-xl-5">
-            <img src="assets/images/element/01.png" alt="">
+            <img src="assets/images/element/japanstudent-rgr.png" alt="" style="margin-left: -150px; width: 700px;">
           </div>
           <!-- Pencil and cap SVG -->
           <div class="position-absolute top-0 end-0 mt-n4 me-5">
@@ -827,7 +827,7 @@
       <div class="container px-0">
         <div class="d-md-flex justify-content-between align-items-center py-3 text-center text-md-left">
           <!-- copyright text -->
-          <div class="text-muted text-primary-hover"> Copyrights <a href="#" class="text-reset">©2022 Eduport
+          <div class="text-muted text-primary-hover" style="margin-left: 400px"> Copyrights <a href="#" class="text-reset">©2022 Eduport
             Japanese</a>. All rights reserved.
           </div>
           <!-- copyright links-->

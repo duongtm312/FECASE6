@@ -16,11 +16,13 @@
               <div class="col-sm-6 col-lg-4" *ngFor="let c of certificates">
                 <div class="card shadow h-100">
                   <!-- Image -->
+                  <a [href]="'/user/certificate/'+c.course.idCourse">
                   <img src="{{c.imageCertificate}}}" class="card-img-top" alt="course image">
+                  </a>
                   <div class="card-body pb-0">
                     <!-- Badge and favorite -->
                     <!-- Title -->
-                    <h5 class="card-title fw-normal"><a href="#">{{c.course.nameCourse}}</a></h5>
+                    <h3 class="card-title fw-normal"><a [href]="'/user/course-resume/'+c.course.idCourse">{{c.course.nameCourse}}</a></h3>
                     <!-- Rating star -->
                   </div>
                   <!-- Card footer -->

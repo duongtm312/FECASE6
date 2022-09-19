@@ -6,5 +6,5 @@ export class ScoreQuiz{
   quiz!:Quiz
   appUser!:AppUser
   score!:number
-  date!:Date
+  date!:string | null
 }

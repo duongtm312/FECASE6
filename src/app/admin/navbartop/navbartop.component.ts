@@ -36,7 +36,7 @@ export class NavbartopComponent  implements OnInit, OnChanges {
   }
 
   getAll() {
-    this.notificationService.getAll().subscribe((data) => {
+    this.notificationService.getAll('admin').subscribe((data) => {
       this.notification = data
       for (const n of data) {
         n.timeNotification = this.transform(n.timeNotification)
@@ -53,6 +53,7 @@ export class NavbartopComponent  implements OnInit, OnChanges {
     let notis: Notification[] = [noti]
     this.notificationService.doneNotification(notis).subscribe(() => {
       this.getAll()
+      this.router.navigate(["/admin/"+noti.type])
     })
   }
 

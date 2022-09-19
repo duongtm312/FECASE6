@@ -10,6 +10,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ScoreQuizService} from "../service/score-quiz.service";
 import {ScoreQuiz} from "../../model/ScoreQuiz";
 import Swal from "sweetalert2";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-admin-quizdetail',
@@ -25,6 +26,7 @@ export class AdminQuizdetailComponent implements OnInit {
   editForm: any
   deleQues!: Question
   scoreQuiz: ScoreQuiz[] = []
+  pipe = new DatePipe('en-US');
 
   constructor(private script: ScriptService, private router: Router, private route: ActivatedRoute, private courseService: AdminCourseService,
               private questionService: QuestionService, private quizService: QuizService, private scoreQuizService: ScoreQuizService) {
@@ -46,6 +48,9 @@ export class AdminQuizdetailComponent implements OnInit {
           this.deleQues = this.ques
         })
         this.scoreQuizService.getAllById(this.idQuiz).subscribe(data => {
+          for (const b of data) {
+            b.date = this.pipe.transform(b.date,'yyyy-MM-dd')
+          }
           this.scoreQuiz = data
         })
       })
