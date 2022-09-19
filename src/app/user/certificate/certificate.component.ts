@@ -30,6 +30,7 @@ idCourse:any
   checkCertificate:any
   dateCreate:any
   pipe = new DatePipe('en-US')
+  nameCertificate:any
   constructor(private route: ActivatedRoute, private myCourseService:UserMycourseService,
               private scoreQuizService: ScoreQuizService,private courseService:CourceService,
               private storage: AngularFireStorage,private cerService:CertificateService) { }
@@ -52,6 +53,7 @@ idCourse:any
               date = data[i].date
             }
           }
+          this.nameCertificate = data[0]?.appUser.fullName
           this.hightScore = max
           this.dateCreate = date
           this.date = this.pipe.transform(date,'yyyy-MM-dd')

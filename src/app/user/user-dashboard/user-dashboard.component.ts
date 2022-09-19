@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewChecked, AfterViewInit, Component, OnInit} from '@angular/core';
 import {UserMycourseService} from "../service/user-mycourse.service";
 import {MyCourse} from "../../model/MyCourse";
 import {AdminLessonService} from "../../admin/service/admin-lesson.service";
@@ -14,29 +14,50 @@ import {CertificateService} from "../service/certificate.service";
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
-export class UserDashboardComponent implements OnInit {
+export class UserDashboardComponent implements OnInit, AfterViewInit {
   myCourse: MyCourse[] = []
-  scoreQuiz: ScoreQuiz[] =[]
-  g:any
-  checkCer:any
-  constructor(private myCourseService: UserMycourseService, private scoreQuizService:ScoreQuizService,
-              private lessonService: AdminLessonService,private cerService:CertificateService) {
+  g: any
+  totalCourse: any
+  completeLesson: any
+  certificate:any
+
+  constructor(private myCourseService: UserMycourseService, private scoreQuizService: ScoreQuizService,
+              private lessonService: AdminLessonService, private cerService: CertificateService) {
   }
 
   ngOnInit(): void {
     this.myCourseService.getAllMyCourse().subscribe((data) => {
       this.myCourse = data
+      console.log("init")
+      console.log(this.totalCourse)
+      this.totalCourse.setAttribute("data-purecounter-end", data.length.toString())
+      let complete:number = 0
+      for (const mc of data) {
+        complete += mc.lessonList.length
+      }
+      this.completeLesson.setAttribute("data-purecounter-end", complete.toString())
+
     })
     this.myCourseService.checkExpire().subscribe()
   }
 
-  search(input: any){
-    let searchMyCourse : MyCourse[] = []
-    this.myCourseService.getAllMyCourse().subscribe((data) =>{
-      for (const d of data){
+  ngAfterViewInit(): void {
+
+    this.totalCourse = document.getElementById("totalCourse")
+    console.log("view")
+    console.log(this.totalCourse)
+    this.completeLesson =  document.getElementById("completeLesson")
+
+  }
+
+
+  search(input: any) {
+    let searchMyCourse: MyCourse[] = []
+    this.myCourseService.getAllMyCourse().subscribe((data) => {
+      for (const d of data) {
         if (d.course.nameCourse.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
           .replace(/đ/g, 'd').replace(/Đ/g, 'D').includes(input.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))){
+            .replace(/đ/g, 'd').replace(/Đ/g, 'D'))) {
           searchMyCourse.push(d)
         }
       }
@@ -44,21 +65,19 @@ export class UserDashboardComponent implements OnInit {
     })
   }
 
-  findExpired(){
-    this.myCourseService.findExpired().subscribe((data) =>{
+  findExpired() {
+    this.myCourseService.findExpired().subscribe((data) => {
       console.log(data)
       this.myCourse = data
     })
   }
 
-  findExpire(){
-    this.myCourseService.findExpire().subscribe((data) =>{
+  findExpire() {
+    this.myCourseService.findExpire().subscribe((data) => {
       console.log(data)
       this.myCourse = data
     })
   }
-
-
 
 
 }
