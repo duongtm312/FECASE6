@@ -14,13 +14,15 @@ import {CertificateService} from "../service/certificate.service";
   templateUrl: './user-dashboard.component.html',
   styleUrls: ['./user-dashboard.component.css']
 })
-export class UserDashboardComponent implements OnInit, AfterViewInit {
+export class UserDashboardComponent implements OnInit {
   myCourse: MyCourse[] = []
   g: any
   totalCourse: any
   completeLesson: any
   certificate:any
-
+  num:any
+  comp:any
+  numcer:any
   constructor(private myCourseService: UserMycourseService, private scoreQuizService: ScoreQuizService,
               private lessonService: AdminLessonService, private cerService: CertificateService) {
   }
@@ -28,27 +30,23 @@ export class UserDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.myCourseService.getAllMyCourse().subscribe((data) => {
       this.myCourse = data
-      console.log("init")
-      console.log(this.totalCourse)
-      this.totalCourse.setAttribute("data-purecounter-end", data.length.toString())
+      this.num =data.length
       let complete:number = 0
+      let certi:number = 0
       for (const mc of data) {
         complete += mc.lessonList.length
+        if (mc.certificate != null){
+          certi++
+        }
       }
-      this.completeLesson.setAttribute("data-purecounter-end", complete.toString())
+     this.comp=complete.toString()
+      this.numcer = certi
 
     })
     this.myCourseService.checkExpire().subscribe()
   }
 
-  ngAfterViewInit(): void {
 
-    this.totalCourse = document.getElementById("totalCourse")
-    console.log("view")
-    console.log(this.totalCourse)
-    this.completeLesson =  document.getElementById("completeLesson")
-
-  }
 
 
   search(input: any) {

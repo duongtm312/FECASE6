@@ -29,7 +29,9 @@ profile:any
   signOut() {
     this.loginService.setToken("");
     localStorage.setItem("userToken", "")
+    window.location.reload()
     this.router.navigate([""])
+
   }
   checkLogIn(){
     if (this.loginService.getToken() == ""){
@@ -54,9 +56,15 @@ profile:any
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+
         this.router.navigate(["/login"])
+
       }
     })
+  }
+  checkAdmin (){
+  if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_ADMIN")) return false
+    else return true
   }
 
 
