@@ -11,7 +11,7 @@
         <!-- ChangeProfileUser picture -->
         <form [formGroup]="editAvatarForm" (ngSubmit)="editAvatarProfile()">
         <div class="col-12 justify-content-center align-items-center">
-          <label class="form-label">ChangeProfileUser picture</label>
+<!--          <label class="form-label">Change avatar</label>-->
 
           <div class="d-flex align-items-center">
             <label class="position-relative me-4" for="uploadfile-1" title="Replace this pic">
@@ -31,6 +31,7 @@
 
           </div>
         </div>
+          <br>
         </form>
       <form class="row g-4" [formGroup]="editProfileForm" (ngSubmit)="editProfile()">
         <!-- Full name -->
@@ -38,13 +39,13 @@
           <label class="form-label">Full name <span style="color: red">*</span></label>
             <input type="text" class="form-control"  placeholder="Full Name" formControlName="fullName">
 
-            <p style="color: red" *ngIf="!editProfileForm.get('fullName')?.valid" >Not required</p>
+            <p style="color: red" *ngIf="!editProfileForm.get('fullName')?.valid" >Can't be blank !</p>
         </div>
         <div class="col-12">
-          <label class="form-label">Birth Day<span style="color: red">*</span></label>
+          <label class="form-label">Birth Day <span style="color: red">*</span></label>
             <input type="date" class="form-control"  placeholder="Birth Day" formControlName="dateOfBirth">
 
-            <p style="color: red" *ngIf="!editProfileForm.get('dateOfBirth')?.valid">Not required</p>
+            <p style="color: red" *ngIf="!editProfileForm.get('dateOfBirth')?.valid">Can't be blank !</p>
         </div>
 
         <!-- Username -->
@@ -53,7 +54,7 @@
 
             <input type="text" class="form-control" placeholder="User Name" formControlName="userName">
 
-            <p style="color: red" *ngIf="!editProfileForm.get('userName')?.valid">at least 6 characters</p>
+            <p style="color: red" *ngIf="!editProfileForm.get('userName')?.valid">* Can't be less than 6 characters!</p>
 
         </div>
 
@@ -62,23 +63,23 @@
           <label class="form-label">Email <span style="color: red">*</span></label>
 
           <input class="form-control" type="email" formControlName="email"  placeholder="Email">
-          <p style="color: red" *ngIf="!editProfileForm.get('email')?.valid">Not required</p>
+          <p style="color: red" *ngIf="!editProfileForm.get('email')?.valid">* Can't be blank !</p>
         </div>
 
         <!-- Phone number -->
         <div class="col-md-6">
-          <label class="form-label">Phone number<span style="color: red">*</span></label>
+          <label class="form-label">Phone number <span style="color: red">*</span></label>
           <input type="text" class="form-control" formControlName="phone" placeholder="Phone number">
 
-          <p style="color: red" *ngIf="!editProfileForm.get('phone')?.valid">Not required</p>
+          <p style="color: red" *ngIf="!editProfileForm.get('phone')?.valid">* Can't be blank !</p>
         </div>
 
         <!-- Location -->
         <div class="col-md-6">
-          <label class="form-label">Location<span style="color: red">*</span></label>
+          <label class="form-label">Location <span style="color: red">*</span></label>
           <input class="form-control" type="text" formControlName="address" placeholder="Address">
 
-          <p style="color: red" *ngIf="!editProfileForm.get('address')?.valid">Not required</p>
+          <p style="color: red" *ngIf="!editProfileForm.get('address')?.valid">* Can't be blank !</p>
         </div>
 
         <!-- About me -->
@@ -106,6 +107,8 @@
     <!-- Card body END -->
   </div>
   <!-- Edit profile END -->
+<br>
+<br>
 
   <div class="row g-4 mt-3">
 
@@ -116,7 +119,7 @@
 
         <!-- Card header -->
         <div class="card-header bg-transparent border-bottom">
-          <h5 class="card-header-title mb-0">Update password</h5>
+          <h5 class="card-header-title mb-0">Update Password</h5>
 
         </div>
         <!-- Card body START -->
