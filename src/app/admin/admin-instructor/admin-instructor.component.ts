@@ -61,7 +61,8 @@ export class AdminInstructorComponent implements OnInit {
     dateOfBirthInstructor: new FormControl("", [Validators.required]),
     phoneInstructor: new FormControl("", [Validators.required]),
     avatarInstructor: new FormControl("123"),
-    experience: new FormControl("", [Validators.required])
+    experience: new FormControl("", [Validators.required]),
+    description: new FormControl("", [Validators.required])
 
   })
 
@@ -73,7 +74,8 @@ export class AdminInstructorComponent implements OnInit {
       dateOfBirthInstructor: new FormControl(instructor.dateOfBirthInstructor,[Validators.required]),
       phoneInstructor: new FormControl(instructor.phoneInstructor,[Validators.required]),
       avatarInstructor: new FormControl(instructor.avatarInstructor),
-      experience: new FormControl(instructor.experience,[Validators.required])
+      experience: new FormControl(instructor.experience,[Validators.required]),
+      description: new FormControl("", [Validators.required])
 
     })
   }

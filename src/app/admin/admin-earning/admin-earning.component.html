@@ -157,7 +157,9 @@
               <br>
               <div class="modal-footer">
               <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
-              <a  (click)="reChargeUser(profileBill.money,profileBill.appUser.idUser,profileBill.idRequest)" class="btn btn-success-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-dismiss="modal" > Confirm</a>
+                <a  class="btn btn-danger-soft me-1 mb-1 mb-md-0" data-bs-dismiss="modal" (click)="confirm(profileBill.idRequest)" >Cancel</a>
+
+                <a  (click)="reChargeUser(profileBill.money,profileBill.appUser.idUser,profileBill.idRequest)" class="btn btn-success-soft me-1 mb-1 mb-md-0" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-dismiss="modal" > Confirm</a>
               </div>
             </div>
           </div>
@@ -247,7 +249,7 @@
           <!-- Pagination START -->
           <div class="d-sm-flex justify-content-sm-between align-items-sm-center">
 
-            <pagination-controls id="pagination2" class="btn btn-sm btn-outline-primary" class="myPagination" (pageChange)="p = $event">
+            <pagination-controls id="pagination2" class="btn btn-sm btn-outline-primary" class="myPagination" (pageChange)="p = $event" >
             </pagination-controls>
             <!-- Content -->
 <!--            <p class="mb-0 text-center text-sm-start">Showing 1 to 8 of 20 entries</p>-->

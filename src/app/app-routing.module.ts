@@ -4,6 +4,8 @@ import {UserLoginComponent} from "./auth/user-login/user-login.component";
 import {UserRegisterComponent} from "./auth/user-register/user-register.component";
 import {CoursedetailComponent} from "./admin/coursedetail/coursedetail.component";
 import {CourseDetailComponent} from "./home/course-detail/course-detail.component";
+import {AdminGuard} from "./admin/admin.guard";
+import {UserGuard} from "./user/user.guard";
 
 const routes: Routes = [
   {
@@ -11,11 +13,11 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(module => module.HomeModule)
   },
   {
-    path: 'admin',
+    path: 'admin', canActivate: [AdminGuard],
     loadChildren: () => import('./admin/admin.module').then(module => module.AdminModule)
   },
   {
-    path: 'user',
+    path: 'user',canActivate: [UserGuard],
     loadChildren: () => import('./user/user.module').then(module => module.UserModule)
   },
   {path:"login",

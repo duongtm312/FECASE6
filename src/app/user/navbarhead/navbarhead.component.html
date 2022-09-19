@@ -10,7 +10,8 @@
       <!-- Logo END -->
 
       <!-- Responsive navbar toggler -->
-      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+              aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-animation">
 					<span></span>
 					<span></span>
@@ -27,18 +28,22 @@
           <!-- Notification dropdown START -->
           <li class="nav-item ms-2 ms-md-3 dropdown">
             <!-- Notification button -->
-            <a class="btn btn-light btn-round mb-0" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+            <a class="btn btn-light btn-round mb-0" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false" data-bs-auto-close="outside">
               <i class="bi bi-bell fa-fw"></i>
             </a>
             <!-- Notification dote -->
             <span *ngIf="statusNoti" class="notif-badge animation-blink"></span>
 
             <!-- Notification dropdown menu START -->
-            <div class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0">
+            <div
+              class="dropdown-menu dropdown-animation dropdown-menu-end dropdown-menu-size-md p-0 shadow-lg border-0">
               <div class="card bg-transparent">
-                <div class="card-header bg-transparent border-bottom py-4 d-flex justify-content-between align-items-center">
-                  <h6 class="m-0">Notifications <span class="badge bg-danger bg-opacity-10 text-danger ms-2">{{notification.length}} new</span></h6>
-                  <a class="small" (click)="doneAll()" >Clear all</a>
+                <div
+                  class="card-header bg-transparent border-bottom py-4 d-flex justify-content-between align-items-center">
+                  <h6 class="m-0">Notifications <span
+                    class="badge bg-danger bg-opacity-10 text-danger ms-2">{{notification.length}} new</span></h6>
+                  <a class="small" (click)="doneAll()">Clear all</a>
                 </div>
                 <div class="card-body p-0">
                   <ul class="list-group list-unstyled list-group-flush">
@@ -75,7 +80,8 @@
       </div>
       <!-- ChangeProfileUser START -->
       <div class="dropdown ms-1 ms-lg-0">
-        <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside" data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="avatar avatar-sm p-0" href="#" id="profileDropdown" role="button" data-bs-auto-close="outside"
+           data-bs-display="static" data-bs-toggle="dropdown" aria-expanded="false">
           <img class="avatar-img rounded-circle" src="{{profile.avatarSrc}}" alt="avatar">
         </a>
         <ul class="dropdown-menu dropdown-animation dropdown-menu-end shadow pt-3" aria-labelledby="profileDropdown">
@@ -91,23 +97,29 @@
                 <p class="small m-0">{{profile.email}}</p>
               </div>
             </div>
-            <hr>
           </li>
-          <!-- Links -->
-          <li><a class="dropdown-item" href="/user"><i class="bi bi-person fa-fw me-2"></i>Dash Board</a></li>
-<!--          <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a></li>-->
-<!--          <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li>-->
-          <li><a class="dropdown-item bg-danger-soft-hover" (click)="signOut()"><i class="bi bi-power fa-fw me-2"></i>Sign Out</a></li>
-          <li> <hr class="dropdown-divider"></li>
-          <!-- Dark mode switch START -->
+          <hr>
           <li>
-            <div class="modeswitch-wrap" id="darkModeSwitch">
-              <div class="modeswitch-item">
-                <div class="modeswitch-icon"></div>
-              </div>
-              <span>Dark mode</span>
-            </div>
+            <i style="color: green ;font-size: 20px;margin-left: 20px" class="bi bi-cash-coin"> </i><strong
+            style="margin-left: 10px;margin-bottom: 10px">  {{wallet?.money}} $</strong>
+
           </li>
+          <li><a class="dropdown-item" href="/user/payment"><i class="bi bi-currency-dollar fa-fw me-2"></i>Recharge</a>
+          </li>
+          <hr>
+          <!-- Links -->
+          <li>
+            <a class="dropdown-item" href="/user"><i class="bi bi-person fa-fw me-2"></i>Dash Board</a>
+          </li>
+          <!--          <li><a class="dropdown-item" href="#"><i class="bi bi-gear fa-fw me-2"></i>Account Settings</a></li>-->
+          <!--          <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle fa-fw me-2"></i>Help</a></li>-->
+          <li>
+            <a class="dropdown-item bg-danger-soft-hover" (click)="signOut()"><i class="bi bi-power fa-fw me-2"></i>Sign
+              Out</a>
+          </li>
+
+          <!-- Dark mode switch START -->
+
           <!-- Dark mode switch END -->
         </ul>
       </div>

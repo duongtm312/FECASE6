@@ -33,7 +33,9 @@ export class FindCourseComponent implements OnInit {
     rating: new FormControl("0"),
   })
   p: any;
-
+  counter(s: number) {
+    return new Array(s);
+  }
   findCourse(){
     console.log(this.findForm.value)
     this.courseService.getAllCourseByCriteria(this.findForm.value).subscribe((data)=>{

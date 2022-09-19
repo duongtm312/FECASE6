@@ -108,7 +108,7 @@
 
                 <!-- Table data -->
                 <td>
-                  <a [href]="'/admin/editCourse/'+c.idCourse" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">Edit</a>
+                  <a [href]="'/admin/editCourse/'+c.idCourse" *ngIf="!c.statusCourse" class="btn btn-sm btn-success me-1 mb-1 mb-md-0">Edit</a>
                   <button *ngIf="c.statusCourse==true" class="btn btn-sm btn-danger mb-0" (click)="disable(c.idCourse)">Disable</button>
                   <button *ngIf="c.statusCourse==false" class="btn btn-sm btn-primary mb-0" (click)="activated(c.idCourse)">Activated</button>
                 </td>

@@ -67,13 +67,13 @@ export class UserQuizComponent implements OnInit {
   }
 
   startCounter() {
-    this.interval$ = interval(1000)
+      this.interval$ = interval(1000)
       .subscribe(val => {
         this.time--;
         if (this.time === 0) {
           this.saveScore()
           this.isQuizCompleted = true
-          this.interval$.unsubscribe()
+
         }
       });
   }
@@ -95,5 +95,6 @@ export class UserQuizComponent implements OnInit {
         this.check = false
       })
     }
+    clearInterval(this.interval$)
   }
 }

@@ -4,7 +4,7 @@
 </div>
   <div class="card-header bg-transparent border-bottom">
 
-      <a class="btn btn-primary-soft btn-sm mb-0" *ngIf="checkCertificate" (click)="createCertificate()"> Create Certificate</a>
+      <a class="btn btn-primary-soft btn-sm mb-0" *ngIf="checkCertificate" (click)="createCertificate()"> Save Certificate</a>
       <a class="btn btn-primary-soft btn-sm mb-0" style="margin-left: 10px" (click)="generatePDF()" >Download PDF file</a>
       <a class="btn btn-primary-soft btn-sm mb-0" style="margin-left: 10px" (click)="generatePNG()" >Download PNG file</a>
 
@@ -27,7 +27,7 @@
           <div class="row">
             <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
             <div class="pm-certificate-name underline margin-0 col-xs-8 text-center">
-              <span class="pm-name-text bold">Bùi Công Anh</span>
+              <span class="pm-name-text bold">{{nameCertificate}}</span>
             </div>
             <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
           </div>
