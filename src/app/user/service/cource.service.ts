@@ -43,6 +43,7 @@ export class CourceService {
   }
 
   editCmt(idCmt:number, comment: Comment):Observable<Comment>{
+    console.log(comment)
     return this.http.post<Comment>(`${API_URL}/comment/editCmt/`+idCmt, comment)
   }
 

@@ -59,7 +59,6 @@ export class CourseDetailComponent implements OnInit, OnChanges {
   numRate: number = 0
   editForm: FormGroup = new FormGroup({
     contentCmt: new FormControl(""),
-    timeCmt: new FormControl(),
     appUser: new FormGroup({
       idUser: new FormControl()
     }),
@@ -240,7 +239,6 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     this.idCmt = comment.idComment
     this.editForm = new FormGroup({
       contentCmt: new FormControl(comment.contentCmt),
-      timeCmt: new FormControl(comment.timeCmt),
       appUser: new FormGroup({
         idUser: new FormControl(comment.appUser.idUser)
       }),
@@ -253,6 +251,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
 
   editCmt() {
     this.courseService.editCmt(this.idCmt, this.editForm.value).subscribe((data) => {
+      console.log(data)
       this.courseService.getAllCmt(this.idCourse).subscribe((data) => {
         for (const cmt of data) {
           cmt.timeCmt = this.transform(cmt.timeCmt)

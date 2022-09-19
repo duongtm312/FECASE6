@@ -24,8 +24,12 @@
       <div class="row mb-3">
         <div class="col-12 d-sm-flex justify-content-between align-items-center">
           <h1 class="h3 mb-2 mb-sm-0">Course Details</h1>
-          <a [href]="'/admin/createLesson/'+idCourse" class="btn btn-sm btn-primary mb-0">Create Lesson</a>
+          <div>
+            <a href="/admin/courseCategory"  style="margin-right: 10px;margin-top: 6px" class="btn btn-sm btn-secondary">Back</a>
+          <a [href]="'/admin/createLesson/'+idCourse" *ngIf="!course.statusCourse" class="btn btn-sm btn-primary mb-0">Create Lesson</a>
+          </div>
         </div>
+
       </div>
 
       <div class="row g-4">
@@ -51,7 +55,7 @@
                 <!-- Course info and avatar -->
                 <div class="col-md-6">
                   <!-- Info -->
-                  <p class="mb-3">{{course.descriptionCourse}}</p>
+                  <p class="mb-3">{{course.shortDescription}}</p>
 
                   <!-- Price -->
                   <h5 class="mb-3">{{course.priceCourse}}$</h5>
@@ -78,13 +82,13 @@
                 <div class="col-md-6">
                   <ul class="list-group list-group-borderless">
                     <li class="list-group-item">
-                      <span>release date:</span>
-                      <span class="h6 mb-0">{{course.timeCourse}}</span>
+                      <span>Duration:</span>
+                      <span class="h6 mb-0">{{course.timeCourse}} month</span>
                     </li>
 
                     <li class="list-group-item">
                       <span>Total Hour:</span>
-                      <span class="h6 mb-0">4h 50m</span>
+                      <span class="h6 mb-0">{{course?.timeCourse}}</span>
                     </li>
 
                     <li class="list-group-item">
@@ -102,19 +106,19 @@
                 <!-- Information item -->
                 <div class="col-md-6">
                   <ul class="list-group list-group-borderless">
-                    <li class="list-group-item">
-                      <span>Skills:</span>
-                      <span class="h6 mb-0">All level</span>
-                    </li>
+<!--                    <li class="list-group-item">-->
+<!--                      <span>Skills:</span>-->
+<!--                      <span class="h6 mb-0">All level</span>-->
+<!--                    </li>-->
 
                     <li class="list-group-item">
                       <span>Total Lecture:</span>
-                      <span class="h6 mb-0">30</span>
+                      <span class="h6 mb-0">{{course.numLesson}}</span>
                     </li>
 
                     <li class="list-group-item">
                       <span>Language:</span>
-                      <span class="h6 mb-0">English</span>
+                      <span class="h6 mb-0">Japanese</span>
                     </li>
 
                     <li class="list-group-item">
@@ -228,8 +232,8 @@
                       <h6 class="mb-0">{{l.timeLesson}}</h6>
                     </td>
                     <td>
-                      <a  class="btn btn-sm btn-info-soft mb-0" [href]="'/admin/editLesson/'+l.idLesson">Edit</a>
-                      <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" (click)="confirmDelete(l.idLesson)">Delete</button>
+                      <a  class="btn btn-sm btn-info-soft mb-0" *ngIf="!course.statusCourse" [href]="'/admin/editLesson/'+l.idLesson">Edit</a>
+                      <button class="btn btn-sm btn-danger-soft me-1 mb-1 mb-md-0" *ngIf="!course.statusCourse" (click)="confirmDelete(l.idLesson)">Delete</button>
                     </td>
                   </tr>
 
@@ -283,7 +287,7 @@
                       <h6 class="mb-0">{{course.quiz.timeQuiz}}'</h6>
                     </td>
                     <td class="text-center text-sm-start">
-                      <a  class="btn btn-sm btn-primary-soft mb-0" data-bs-toggle="modal" data-bs-target="#setQuiz">Setting Quiz</a>
+                      <a *ngIf="!course.statusCourse"  class="btn btn-sm btn-primary-soft mb-0" data-bs-toggle="modal" data-bs-target="#setQuiz">Setting Quiz</a>
                     </td>
 
                   </tr>

@@ -64,9 +64,9 @@
           <!-- Short by filter -->
           <form>
             <div class="dropdown ">
-              <button style="margin-left: 80px"  class="btn btn-primary dropdown-toggle">Check Status</button>
-              <div class="noidung_dropdown">
-                <a (click)="findExpire()">Active</a>
+              <button style="margin-left: 70px;margin-top: 5px"  class="btn btn-primary dropdown-toggle">Check Status</button>
+              <div style="margin-left: 70px"  class="noidung_dropdown">
+                <a  (click)="findExpire()">Active</a>
                 <a (click)="findExpired()">Inactive</a>
               </div>
             </div>
@@ -86,10 +86,11 @@
           <thead>
           <tr>
             <th scope="col" class="border-0 rounded-start">Course Title</th>
-            <th scope="col" class="border-0">Total Lectures</th>
-            <th scope="col" class="border-0">Completed Lecture</th>
+            <th scope="col" class="border-0">Lectures</th>
+            <th scope="col" class="border-0">Completed</th>
             <th scope="col" class="border-0">Status</th>
-            <th scope="col" class="border-0 rounded-end">Action</th>
+            <th scope="col" class="border-0 ">Action</th>
+            <th scope="col" class="border-0 rounded-end "></th>
 
           </tr>
           </thead>
@@ -138,10 +139,14 @@
             <!-- Table data -->
             <td>
 
-              <a *ngIf="c.statusMyCourse==true"  [href]="'/user/course-resume/'+c.course.idCourse" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"><i class="bi bi-play-circle me-1"></i>Continue</a>
+              <a *ngIf="c.statusMyCourse==true && c.course.statusCourse"  [href]="'/user/course-resume/'+c.course.idCourse" class="btn btn-sm btn-primary-soft me-1 mb-1 mb-md-0"><i class="bi bi-play-circle me-1"></i>Continue</a>
+              <a *ngIf="!c.course.statusCourse" scope="col" class="border-0" style="width: 101px;color: red;margin-top: 1px"> Upgrading </a>
+              <a *ngIf="c.statusMyCourse==false" [href]="'/course-detail-home/'+c.course.idCourse"  class="btn btn-sm btn-success-soft me-1 mb-1 mb-md-0" style="margin-top: 10px" > Buy again </a>
+            </td>
+            <td>
               <a *ngIf="c.statusMyCourse==true && c.completionProgress == 100" ><i style="font-size: 28px;position: relative;top: 6px;color: green" class="bi bi-bookmark-check"></i> </a>
               <a *ngIf="c.certificate != null"> <i style="font-size: 28px;position: relative;top: 6px;color: green" class="fas fa-medal fa-fw"></i></a>
-              <a *ngIf="c.statusMyCourse==false" [href]="'/course-detail-home/'+c.course.idCourse"  class="btn btn-sm btn-success-soft me-1 mb-1 mb-md-0" style="margin-top: 10px" > Buy again </a>
+
             </td>
           </tr>
           </tbody>

@@ -34,16 +34,13 @@
               <!-- Title -->
               <div class="card-header bg-light rounded-0">
                 <h1 class="mt-2 fs-5">{{course.nameCourse}}</h1>
-                <h6 class="mb-0 fw-normal"><a href="#">{{course.instructor.nameInstructor}}</a></h6>
-                <h5>{{completionProgress}} / {{totalLesson}}</h5>
+                <br>
+                <h6 class="mb-0 fw-normal">Instructor: {{course.instructor.nameInstructor}}</h6>
+                <br><h6>Lesson progress: {{completionProgress}} / {{totalLesson}}</h6>
               </div>
 
               <!-- Course content START -->
               <div class="card-body">
-                <div class="d-sm-flex justify-content-sm-between">
-                  <h5>{{course.shortDescription}}</h5>
-                  <!-- Button -->
-                </div>
                 <hr> <!-- Divider -->
                 <!-- Course START -->
                 <div class="row" *ngFor="let l of lesson, let i = index">

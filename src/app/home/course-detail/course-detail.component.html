@@ -143,7 +143,7 @@
                           <!-- Course lecture -->
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="position-relative d-flex align-items-center">
-                              <a href="#"
+                              <a
                                  class="btn btn-danger-soft btn-round btn-sm mb-0 stretched-link position-static">
                                 <i class="fas fa-play me-0"></i>
                               </a>
@@ -577,6 +577,8 @@
                   </div>
                 </div>
                 <div class="modal-footer">
+                  <button type="button" class="btn btn-danger-soft my-0" data-bs-dismiss="modal">Close</button>
+
                   <button type="submit" class="btn btn-success my-0" data-bs-dismiss="modal">Save</button>
                 </div>
               </form>
@@ -618,7 +620,7 @@
                         <!--                        <span class="text-decoration-line-through mb-0 me-2">$350</span>-->
                         <!--                        <span class="badge bg-orange text-white mb-0">60% off</span>-->
                       </div>
-                      <p class="mb-0 text-danger"><i class="fas fa-stopwatch me-2"></i>5 days left at this price</p>
+
                     </div>
 
                     <!-- Share button with dropdown -->
@@ -654,18 +656,18 @@
                     <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-book-open text-primary"></i>Lectures</span>
                     <span>{{lessons.length}}</span>
                   </li>
-                  <!--                  <li class="list-group-item d-flex justify-content-between align-items-center">-->
-                  <!--                    <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-clock text-primary"></i>Duration</span>-->
-                  <!--                    <span>4h 50m</span>-->
-                  <!--                  </li>-->
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-clock text-primary"></i>Duration</span>
+                                      <span>{{course.timeCourse}} month</span>
+                                    </li>
                   <!--                  <li class="list-group-item d-flex justify-content-between align-items-center">-->
                   <!--                    <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-signal text-primary"></i>Skills</span>-->
                   <!--                    <span>Beginner</span>-->
                   <!--                  </li>-->
-                  <!--                  <li class="list-group-item d-flex justify-content-between align-items-center">-->
-                  <!--                    <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-globe text-primary"></i>Language</span>-->
-                  <!--                    <span>English</span>-->
-                  <!--                  </li>-->
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                      <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-globe text-primary"></i>Language</span>
+                                      <span>Japanese</span>
+                                    </li>
                   <!--                  <li class="list-group-item d-flex justify-content-between align-items-center">-->
                   <!--                    <span class="h6 fw-light mb-0"><i class="fas fa-fw fa-user-clock text-primary"></i>Deadline</span>-->
                   <!--                    <span>Nov 30 2021</span>-->

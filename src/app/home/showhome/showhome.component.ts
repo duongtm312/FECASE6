@@ -19,6 +19,8 @@ export class ShowhomeComponent implements OnInit, OnChanges {
   instructors: Instructor[] = []
   courseNew: any
   profileFull:any
+  totalStudent:any
+  totalCourse:any
   constructor(private script: ScriptService, private loginService: LoginService, private router: Router,
               private courseService: CourceService, private instructorService: AdminInstructorService,
               private userService:UserProfileService) {
@@ -28,16 +30,22 @@ export class ShowhomeComponent implements OnInit, OnChanges {
     this.courseService.getCourseNew().subscribe((data) => {
       this.courseNew = data
     })
-    this.userService.getProfileFull().subscribe((data)=>{
+    this.userService.getProfileFull().subscribe((data) => {
       this.profileFull = data
     })
     this.courseService.getTrendingCourse().subscribe((data) => {
       this.course = data
       this.instructorService.getAllUser().subscribe((data) => {
         this.instructors = data
-        this.script.load('functions','tiny-slider', 'glightbox', 'purecounter_vanilla').then(data => {
+        this.script.load('functions', 'tiny-slider', 'glightbox', 'purecounter_vanilla').then(data => {
         }).catch(error => console.log(error));
       })
+    })
+    this.courseService.getAll().subscribe((data) => {
+      this.totalCourse = data.length
+    })
+    this.userService.getProfiles(1).subscribe((data)=>{
+      this.totalStudent = data.length
     })
   }
 

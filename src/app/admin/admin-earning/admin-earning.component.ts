@@ -120,4 +120,39 @@ bill:Bill[] =[]
       })
     );
   }
+  deleteReq(idRed:any){
+    this.reqRechargeService.delete(idRed).subscribe(()=>{
+      this.messageDeleteReq()
+      this.reqRechargeService.getAll().subscribe((data)=>{
+        for (const b of data) {
+          b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+        }
+        this.reqRecharges = data
+      })
+    })
+  }
+  confirm(idRed:any){
+    Swal.fire({
+      title: 'Are you sure you want to cancel the request?',
+      showCancelButton: true,
+      confirmButtonText: 'Sure',
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        this.deleteReq(idRed)
+      }
+    })
+  }
+  messageDeleteReq(){
+    Swal.fire({
+      title: 'Cancel request successfully',
+      icon: 'success',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      }
+    })
+  }
 }

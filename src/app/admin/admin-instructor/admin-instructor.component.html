@@ -196,6 +196,11 @@
               <p *ngIf="editForm.get('experience')?.errors && editForm.get('experience')?.touched" style="color: red">Not required</p>
             </div>
               <div class="col-12" >
+                <label class="form-label">Description</label>
+                <textarea class="form-control" type="text" placeholder="Enter description" formControlName="description"></textarea>
+                <p *ngIf="editForm.get('description')?.errors && editForm.get('description')?.touched" style="color: red">Not required</p>
+              </div>
+              <div class="col-12" >
                 <label class="form-label">Instructor Avatar</label>
                 <input class="form-control" type="file" #uploadFile1  formControlName="avatarInstructor">
               </div>
@@ -251,6 +256,12 @@
                   <label class="form-label">Instructor Experience</label>
                   <input class="form-control" type="text" placeholder="Enter Instructor experience" formControlName="experience">
                   <p *ngIf="createForm.get('experience')?.errors && createForm.get('experience')?.touched" style="color: red">Not required</p>
+                </div>
+                <div class="col-12" >
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" type="text" placeholder="Enter description" formControlName="description"></textarea>
+                  <p *ngIf="createForm.get('description')?.errors && createForm.get('description')?.touched" style="color: red">Not required</p>
+
                 </div>
                 <div class="col-12" >
                   <label class="form-label">Instructor Avatar</label>

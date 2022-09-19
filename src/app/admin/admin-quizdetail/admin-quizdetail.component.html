@@ -14,7 +14,9 @@
         <div class="col-md-10">
           <!-- Title -->
           <h3 class="card-title mb-0"><a>{{course.quiz.nameQuiz}}</a></h3>
-          <a  class="btn btn-sm btn-success mb-0" data-bs-toggle="modal" data-bs-target="#addQuiz">Add New Question</a>
+          <a [href]="'/admin/courseDetail/'+course.idCourse"  class="btn btn-sm btn-secondary mb-0">Back</a>
+
+          <a *ngIf="!course.statusCourse" style="margin-left: 10px" class="btn btn-sm btn-success mb-0" data-bs-toggle="modal" data-bs-target="#addQuiz">Add New Question</a>
         </div>
       </div>
     </div>
@@ -46,8 +48,8 @@
               <p *ngIf="q.d!=q.answer" class="mb-3"><b class="text-dark">D: </b>{{q.d}}</p>
 
               <!-- Button -->
-              <a class="btn btn-sm btn-success-soft mb-0" data-bs-toggle="modal" data-bs-target="#editQuestion" (click)="setQues(q)">Edit</a>
-              <button class="btn btn-danger-soft btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#deleteQuestion" (click)="setDeleQues(q)">Delete</button>
+              <a class="btn btn-sm btn-success-soft mb-0" data-bs-toggle="modal" data-bs-target="#editQuestion" *ngIf="!course.statusCourse" (click)="setQues(q)">Edit</a>
+              <button class="btn btn-danger-soft btn-sm mb-0" data-bs-toggle="modal" data-bs-target="#deleteQuestion" *ngIf="!course.statusCourse" (click)="setDeleQues(q)">Delete</button>
             </div>
           </div>
         </div>
