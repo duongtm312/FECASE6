@@ -65,8 +65,15 @@ bill:Bill[] =[]
     this.sendNotification(' has approved your deposit',' payment',this.profileBill.appUser)
     this.reqRechargeService.reCharge(recharge).subscribe((data)=>{
       this.reqRechargeService.getAll().subscribe((data)=>{
+        for (const b of data) {
+          b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+        }
         this.reqRecharges = data
         this.billService.getAll().subscribe((data)=>{
+
+          for (const b of data) {
+            b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+          }
           this.bill = data
         })
       })
@@ -129,6 +136,13 @@ bill:Bill[] =[]
         }
         this.reqRecharges = data
       })
+      this.billService.getAll().subscribe((data)=>{
+
+        for (const b of data) {
+          b.createAt = this.pipe.transform(b.createAt,'yyyy-MM-dd')
+        }
+        this.bill = data
+      })
     })
   }
   confirm(idRed:any){
@@ -139,6 +153,7 @@ bill:Bill[] =[]
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
+        this.sendNotification(' has declined your deposit',' payment',this.profileBill.appUser)
         this.deleteReq(idRed)
       }
     })

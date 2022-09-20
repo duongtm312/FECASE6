@@ -52,6 +52,7 @@ export class NavbarheadComponent implements OnInit {
     this.notificationService.doneNotificationUser(notis).subscribe(() => {
       this.getAll()
       this.router.navigate(["/user/"+noti.type])
+      window.location.reload()
     })
   }
   doneAll() {

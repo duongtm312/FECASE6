@@ -103,7 +103,7 @@ export class UserPaymentComponent implements OnInit {
     );
   }
   deleteReq(idRed:any){
-    this.reqChargeService.delete(idRed).subscribe(()=>{
+    this.reqChargeService.deleteUser(idRed).subscribe(()=>{
       this.messageDeleteReq()
       this.reqChargeService.getAllbyUser().subscribe((data)=>{
         for (const b of data) {

@@ -7,7 +7,7 @@
         <img class="light-mode-item navbar-brand-item" src="assets/images/logo.svg" alt="logo">
         <img class="dark-mode-item navbar-brand-item" src="assets/images/logo-light.svg" alt="logo">
       </a>
-      <a href="/user" *ngIf="!checkLogIn()" class="navbar-brand" style="margin-left: 20px;margin-top: 3px"><i
+      <a href="/user" *ngIf="!checkLogIn() && checkRole()" class="navbar-brand" style="margin-left: 20px;margin-top: 3px"><i
         class="bi bi-book"></i> Learn course</a>
 
       <!-- Logo END -->

@@ -48,6 +48,10 @@ profile:any
       this.router.navigate(["/user"])
     }
   }
+  checkRole (){
+    if (this.loginService.getUserToken().roles[0].nameRole.includes("ROLE_ADMIN")) return false
+    else return true
+  }
   confirmLogIn(){
     Swal.fire({
       title: 'You are not sign in. Are you want to sign in?',

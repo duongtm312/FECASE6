@@ -27,4 +27,7 @@ export class ReqRechargeService {
   delete(idReq:number):Observable<any>{
     return this.http.get<any>(API_URL+"/admin/deleteReq/"+idReq)
   }
+  deleteUser(idReq:number):Observable<any>{
+    return this.http.get<any>(API_URL+"/admin/deleteRedUser/"+idReq)
+  }
 }

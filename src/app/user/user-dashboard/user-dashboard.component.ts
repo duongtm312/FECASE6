@@ -65,14 +65,12 @@ export class UserDashboardComponent implements OnInit {
 
   findExpired() {
     this.myCourseService.findExpired().subscribe((data) => {
-      console.log(data)
       this.myCourse = data
     })
   }
 
   findExpire() {
     this.myCourseService.findExpire().subscribe((data) => {
-      console.log(data)
       this.myCourse = data
     })
   }
