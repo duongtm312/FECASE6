@@ -394,7 +394,7 @@ export class CourseDetailComponent implements OnInit, OnChanges {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: 'buy successful course',
+      title: 'Buy successful course',
       showConfirmButton: false,
       timer: 1500
     })

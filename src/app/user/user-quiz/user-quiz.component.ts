@@ -25,8 +25,8 @@ export class UserQuizComponent implements OnInit {
   interval$: any;
   answer: string = ""
   check: boolean = true
-  correctAnswer=0;
-  inCorrectAnswer=0;
+  correctAnswer = 0;
+  inCorrectAnswer = 0;
 
   constructor(private script: ScriptService, private router: Router, private route: ActivatedRoute,
               private courseService: CourceService, private questionService: QuestionService, private scoreQuizService: ScoreQuizService) {
@@ -52,9 +52,9 @@ export class UserQuizComponent implements OnInit {
 
   nextQuestion() {
     if (this.answer == this.questionList[this.currentQuestion].answer) {
-      this.points=this.points+10/this.questionList.length
+      this.points = this.points + 10 / this.questionList.length
       this.correctAnswer++
-    }else {
+    } else {
       this.inCorrectAnswer++
     }
     if (this.currentQuestion + 1 < this.questionList.length) {
@@ -67,15 +67,17 @@ export class UserQuizComponent implements OnInit {
   }
 
   startCounter() {
-      this.interval$ = interval(1000)
-      .subscribe(val => {
-        this.time--;
-        if (this.time === 0) {
-          this.saveScore()
-          this.isQuizCompleted = true
+    let _this = this
+    this.interval$ = setInterval(function () {
+      _this.time--;
+      if (_this.time === 0) {
+        _this.saveScore()
+        _this.isQuizCompleted = true
+        clearInterval(_this.interval$)
+      }
+    },1000)
 
-        }
-      });
+
   }
 
   setAnswer(answer: string) {
