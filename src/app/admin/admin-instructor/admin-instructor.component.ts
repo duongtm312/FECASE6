@@ -75,7 +75,7 @@ export class AdminInstructorComponent implements OnInit {
       phoneInstructor: new FormControl(instructor.phoneInstructor,[Validators.required]),
       avatarInstructor: new FormControl(instructor.avatarInstructor),
       experience: new FormControl(instructor.experience,[Validators.required]),
-      description: new FormControl("", [Validators.required])
+      description: new FormControl(instructor.instructorDescribe, [Validators.required])
 
     })
   }
